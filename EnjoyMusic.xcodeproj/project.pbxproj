@@ -37,6 +37,7 @@
 		21707DA722E9BA2F00F292B3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA322E9BA2F00F292B3 /* PromiseKit.framework */; };
 		21707DA822E9BA2F00F292B3 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA422E9BA2F00F292B3 /* Kingfisher.framework */; };
 		21707DA922E9BA2F00F292B3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA522E9BA2F00F292B3 /* RxCocoa.framework */; };
+		21707DAC22E9BB4F00F292B3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 21707DAB22E9BB4E00F292B3 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		21707DA322E9BA2F00F292B3 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		21707DA422E9BA2F00F292B3 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		21707DA522E9BA2F00F292B3 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		21707DAB22E9BB4E00F292B3 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 		21707D1522E711C000F292B3 = {
 			isa = PBXGroup;
 			children = (
+				21707DAB22E9BB4E00F292B3 /* .gitignore */,
 				21707D6A22E9AB6C00F292B3 /* Cartfile */,
 				21707D2022E711C000F292B3 /* EnjoyMusic */,
 				21707D3C22E9AA6C00F292B3 /* MusicUIKit */,
@@ -503,6 +506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21707DAC22E9BB4F00F292B3 /* .gitignore in Resources */,
 				21707D2F22E711C100F292B3 /* LaunchScreen.storyboard in Resources */,
 				21707D2C22E711C100F292B3 /* Assets.xcassets in Resources */,
 				21707D6B22E9AB6D00F292B3 /* Cartfile in Resources */,
