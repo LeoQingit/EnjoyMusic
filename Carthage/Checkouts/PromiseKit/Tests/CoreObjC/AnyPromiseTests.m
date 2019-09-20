@@ -189,22 +189,13 @@ static inline AnyPromise *fulfillLater() {
     }).then(^{
         XCTAssertEqual(x, 1);
         x++;
-    }).then(^{
-        XCTAssertEqual(x, 2);
-        x++;
-    }).then(^{
-        XCTAssertEqual(x, 3);
-        x++;
-    }).then(^{
-        XCTAssertEqual(x, 4);
-        x++;
-
+        
         [ex1 fulfill];
     });
     
     [self waitForExpectationsWithTimeout:1 handler:nil];
     
-    XCTAssertEqual(x, 5);
+    XCTAssertEqual(x, 2);
 }
 
 - (void)test_10_then_returns_resolved_promise {
@@ -755,22 +746,6 @@ static inline AnyPromise *fulfillLater() {
     });
     
     [self waitForExpectationsWithTimeout:1 handler:nil];
-}
-
-- (void)test_61_wait_for_value {    
-    id o = [AnyPromise promiseWithResolverBlock:^(PMKResolver resolve) {
-        resolve(@1);
-    }].wait;
-    
-    XCTAssertEqualObjects(o, @1);
-}
-
-- (void)test_62_wait_for_error {
-    NSError* err = [AnyPromise promiseWithResolverBlock:^(PMKResolver resolve) {
-        resolve([NSError errorWithDomain:@"a" code:123 userInfo:nil]);
-    }].wait;
-    
-    XCTAssertEqual(err.code, 123);
 }
 
 - (void)test_properties {

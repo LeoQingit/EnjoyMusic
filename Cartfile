@@ -1,4 +1,4 @@
 
-github "mxcl/PromiseKit" 
-github "onevcat/Kingfisher"
-github "ReactiveX/RxSwift"
+github "mxcl/PromiseKit" "6.4.0"
+github "onevcat/Kingfisher" "4.9.0"
+github "ReactiveX/RxSwift" "4.3.0"

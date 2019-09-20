@@ -1,7 +1,5 @@
 import Foundation
-#if !PMKCocoaPods
 import PromiseKit
-#endif
 import HomeKit
 
 @available(iOS 8.0, tvOS 10.0, *)

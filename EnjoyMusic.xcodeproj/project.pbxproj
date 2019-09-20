@@ -33,10 +33,6 @@
 		21707D9E22E9B1D700F292B3 /* NSManangedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21707D6C22E9B1CD00F292B3 /* NSManangedObjectContext+Extensions.swift */; };
 		21707D9F22E9B1D700F292B3 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21707D7922E9B1D100F292B3 /* Utilities.swift */; };
 		21707DA022E9B32B00F292B3 /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21707D8722E9B1D500F292B3 /* Managed.swift */; };
-		21707DA622E9BA2F00F292B3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA222E9BA2F00F292B3 /* RxSwift.framework */; };
-		21707DA722E9BA2F00F292B3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA322E9BA2F00F292B3 /* PromiseKit.framework */; };
-		21707DA822E9BA2F00F292B3 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA422E9BA2F00F292B3 /* Kingfisher.framework */; };
-		21707DA922E9BA2F00F292B3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21707DA522E9BA2F00F292B3 /* RxCocoa.framework */; };
 		21707DAC22E9BB4F00F292B3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 21707DAB22E9BB4E00F292B3 /* .gitignore */; };
 		21707DAD22EA92AD00F292B3 /* DataUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21707D9322E9B1D700F292B3 /* DataUploader.swift */; };
 		21707DAE22EA930200F292B3 /* ChangeProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21707D8022E9B1D400F292B3 /* ChangeProcessor.swift */; };
@@ -162,10 +158,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21707DA622E9BA2F00F292B3 /* RxSwift.framework in Frameworks */,
-				21707DA722E9BA2F00F292B3 /* PromiseKit.framework in Frameworks */,
-				21707DA822E9BA2F00F292B3 /* Kingfisher.framework in Frameworks */,
-				21707DA922E9BA2F00F292B3 /* RxCocoa.framework in Frameworks */,
 				21707D6522E9AA8E00F292B3 /* Music_iOS.framework in Frameworks */,
 				21707D4222E9AA6C00F292B3 /* MusicUIKit.framework in Frameworks */,
 				21707D5422E9AA7B00F292B3 /* MusicDataKit.framework in Frameworks */,
@@ -406,7 +398,6 @@
 				21707D1B22E711C000F292B3 /* Frameworks */,
 				21707D1C22E711C000F292B3 /* Resources */,
 				21707D4722E9AA6C00F292B3 /* Embed Frameworks */,
-				21707DAA22E9BA4800F292B3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -554,34 +545,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		21707DAA22E9BA4800F292B3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PromiseKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		21707D1A22E711C000F292B3 /* Sources */ = {

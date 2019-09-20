@@ -33,8 +33,10 @@ custom_categories:
   - DispatchQueue+Extensions
 - name: RxCocoa/Traits
   children:
+  - BehaviorRelay
   - ControlEvent
   - ControlProperty
+  - PublishRelay
 - name: RxCocoa/Traits/Driver
   children:
   - BehaviorRelay+Driver
@@ -132,20 +134,12 @@ custom_categories:
   - NSImageView+Rx
   - NSSlider+Rx
   - NSTextField+Rx
-  - NSTextView+Rx
   - NSView+Rx
-- name: RxRelay
-  children:
-  - BehaviorRelay
-  - Observable+Bind
-  - PublishRelay
-  - Utils
 - name: RxSwift
   children:
   - AnyObserver
   - Cancelable
   - ConnectableObservableType
-  - Date+Dispatch
   - Deprecated
   - Disposable
   - Errors
@@ -199,7 +193,6 @@ custom_categories:
   - CombineLatest+Collection
   - CombineLatest+arity
   - CombineLatest
-  - CompactMap
   - Concat
   - Create
   - Debounce
@@ -264,19 +257,19 @@ custom_categories:
   - AnonymousObserver
   - ObserverBase
   - TailRecursiveSink
-- name: RxSwift/Platform
-  children:
-  - AtomicInt
-  - DispatchQueue+Extensions
-  - Platform.Darwin
-  - Platform.Linux
-  - RecursiveLock
 - name: RxSwift/Platform/DataStructures
   children:
   - Bag
   - InfiniteSequence
   - PriorityQueue
   - Queue
+- name: RxSwift/Platform
+  children:
+  - DeprecationWarner
+  - DispatchQueue+Extensions
+  - Platform.Darwin
+  - Platform.Linux
+  - RecursiveLock
 - name: RxSwift/Schedulers
   children:
   - ConcurrentDispatchQueueScheduler

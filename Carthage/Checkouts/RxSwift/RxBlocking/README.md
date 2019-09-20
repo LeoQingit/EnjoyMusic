@@ -12,20 +12,20 @@ extension BlockingObservable {
 }
 
 extension BlockingObservable {
-    public func first() throws -> Element? {}
+    public func first() throws -> E? {}
 }
 
 extension BlockingObservable {
-    public func last() throws -> Element? {}
+    public func last() throws -> E? {}
 }
 
 extension BlockingObservable {
-    public func single() throws -> Element? {}
-    public func single(_ predicate: @escaping (E) throws -> Bool) throws -> Element? {}
+    public func single() throws -> E? {}
+    public func single(_ predicate: @escaping (E) throws -> Bool) throws -> E? {}
 }
 
 extension BlockingObservable {
-    public func materialize() -> MaterializedSequenceResult<Element>
+    public func materialize() -> MaterializedSequenceResult<E>
 }
 ```
 

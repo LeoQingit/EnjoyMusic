@@ -4,35 +4,15 @@ fastlane_version "1.37.0"
 default_platform :ios
 
 platform :ios do
+  before_all do
+
+  end
+
   desc "Runs all the tests"
-  lane :tests do
-    test(scheme: "Kingfisher", swift_version: "5.0")
-    test(scheme: "Kingfisher-macOS", swift_version: "5.0")
-    test(scheme: "Kingfisher-tvOS", swift_version: "5.0")
-
-    test(scheme: "Kingfisher", swift_version: "4.2")
-    test(scheme: "Kingfisher-macOS", swift_version: "4.2")
-    test(scheme: "Kingfisher-tvOS", swift_version: "4.2")
-
-    test(scheme: "Kingfisher", swift_version: "4.0")
-    test(scheme: "Kingfisher-macOS", swift_version: "4.0")
-    test(scheme: "Kingfisher-tvOS", swift_version: "4.0")
-  end
-
-  lane :test do |options|
-    _test(options)
-  end
-
-  private_lane :_test do |options|
-    if options[:scheme].include? "macOS"
-        scan(scheme: options[:scheme], clean: true, xcargs: "SWIFT_VERSION=#{options[:swift_version]}", destination: "platform=macOS")
-    else
-        scan(scheme: options[:scheme], clean: true, xcargs: "SWIFT_VERSION=#{options[:swift_version]}")
-    end
-  end
-
-  lane :test_ci do
-    test(scheme: ENV["SCHEME"], swift_version: ENV["SWIFT_VERSION"])
+  lane :test do
+    scan(scheme: "Kingfisher", clean: true)
+    # scan(scheme: "Kingfisher-macOS", clean: true, destination: 'platform=macOS')
+    scan(scheme: "Kingfisher-tvOS", clean: true)
   end
   
   desc "Lint"
@@ -49,9 +29,8 @@ platform :ios do
       ensure_git_branch
       ensure_git_status_clean
       
-      tests
+      test
       lint
-      carthage(command: "archive", frameworks: ["Kingfisher"])
       
       sync_build_number_to_git
       increment_version_number(version_number: target_version)
@@ -73,8 +52,7 @@ platform :ios do
       api_token: ENV['GITHUB_TOKEN'],
       name: release_log[:title],
       tag_name: target_version,
-      description: release_log[:text],
-      upload_assets: ["Kingfisher.framework.zip"]
+      description: release_log[:text]
       )
 
       pod_push
@@ -95,8 +73,7 @@ platform :ios do
                         --module-version #{target_version} \
                         --module Kingfisher \
                         --root-url http://onevcat.github.io/Kingfisher/ \
-                        --output docs/ \
-                        --theme fullwidth")
+                        --output docs/")
   end
 
   after_all do |lane|

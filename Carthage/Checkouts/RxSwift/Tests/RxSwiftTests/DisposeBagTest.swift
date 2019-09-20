@@ -76,7 +76,7 @@ extension DisposeBagTest {
 
 }
 
-private class TestDisposable: Disposable {
+fileprivate class TestDisposable: Disposable {
     var count = 0
     func dispose() {
         count += 1

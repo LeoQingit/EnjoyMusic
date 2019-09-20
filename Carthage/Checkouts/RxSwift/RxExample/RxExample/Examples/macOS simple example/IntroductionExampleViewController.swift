@@ -18,12 +18,13 @@ class IntroductionExampleViewController : ViewController {
 
     @IBOutlet var leftTextView: NSTextView!
     @IBOutlet var rightTextView: NSTextView!
+    
     @IBOutlet var speechEnabled: NSButton!
     @IBOutlet var slider: NSSlider!
     @IBOutlet var sliderValue: NSTextField!
     
     @IBOutlet var disposeButton: NSButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,17 +74,6 @@ class IntroductionExampleViewController : ViewController {
                 let doubleValue = value.toDouble() ?? 0.0
                 self.slider.doubleValue = doubleValue
                 self.sliderValue.stringValue = "\(Int(doubleValue))"
-            })
-            .disposed(by: disposeBag)
-
-        // Synchronize text in two different textviews.
-        let textViewValue = BehaviorRelay(value: "System Truth")
-
-        _ = leftTextView.rx.string <-> textViewValue
-        _ = rightTextView.rx.string <-> textViewValue
-        textViewValue.asObservable()
-            .subscribe(onNext: { value in
-                print("Text: \(value)")
             })
             .disposed(by: disposeBag)
         

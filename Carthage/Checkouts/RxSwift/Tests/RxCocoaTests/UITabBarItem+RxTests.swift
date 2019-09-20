@@ -15,17 +15,17 @@ final class UITabBarItemTests : RxTest {
 }
 
 extension UITabBarItemTests {
-    func testBadgeValue_Text() {
+    func testBadgetValue_Text() {
         let subject = UITabBarItem(tabBarSystemItem: .more, tag: 0)
         Observable.just("5").subscribe(subject.rx.badgeValue).dispose()
         
-        XCTAssertEqual(subject.badgeValue, "5")
+        XCTAssertTrue(subject.badgeValue == "5")
     }
     
-    func testBadgeValue_Empty() {
+    func testBadgetValue_Empty() {
         let subject = UITabBarItem(tabBarSystemItem: .more, tag: 0)
         Observable.just(nil).subscribe(subject.rx.badgeValue).dispose()
         
-        XCTAssertNil(subject.badgeValue)
+        XCTAssertTrue(subject.badgeValue == nil)
     }
 }

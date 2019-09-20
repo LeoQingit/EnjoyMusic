@@ -88,9 +88,9 @@ enum ObjectRuntimeChange : Hashable {
 }
 
 extension ObjectRuntimeChange {
-    func hash(into hasher: inout Hasher) {
+    var hashValue: Int {
         // who cares, this is not performance critical
-        hasher.combine(0)
+        return 0
     }
 
     var isClassChange: Bool {

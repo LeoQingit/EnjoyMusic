@@ -365,7 +365,7 @@ public extension Thenable where T: Sequence {
     }
 
     /**
-     `Promise<[T]>` => `T` -> Bool => `Promise<[T]>`
+     `Promise<[T]>` => `T` -> Bool => `Promise<[U]>`
 
          firstly {
              .value([1,2,3])

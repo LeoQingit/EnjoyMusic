@@ -27,8 +27,9 @@ public func == (lhs: ItemPath, rhs: ItemPath) -> Bool {
 }
 
 extension ItemPath: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(sectionIndex.byteSwapped)
-        hasher.combine(itemIndex)
+
+    public var hashValue: Int {
+        return sectionIndex.byteSwapped.hashValue ^ itemIndex.hashValue
     }
+    
 }

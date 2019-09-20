@@ -17,13 +17,13 @@ extension Mutable {
         return newSelf
     }
 
-    func mutate(transform: (inout Self) -> Void) -> Self {
+    func mutate(transform: (inout Self) -> ()) -> Self {
         var newSelf = self
         transform(&newSelf)
         return newSelf
     }
 
-    func mutate(transform: (inout Self) throws -> Void) rethrows -> Self {
+    func mutate(transform: (inout Self) throws -> ()) rethrows -> Self {
         var newSelf = self
         try transform(&newSelf)
         return newSelf

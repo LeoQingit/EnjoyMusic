@@ -21,7 +21,7 @@ public class CollectionViewImageCell: UICollectionViewCell {
 
             self.downloadableImage?
                 .asDriver(onErrorJustReturn: DownloadableImage.offlinePlaceholder)
-                .drive(imageOutlet.rx.downloadableImageAnimated(CATransitionType.fade.rawValue))
+                .drive(imageOutlet.rx.downloadableImageAnimated(kCATransitionFade))
                 .disposed(by: disposeBag)
 
             self.disposeBag = disposeBag

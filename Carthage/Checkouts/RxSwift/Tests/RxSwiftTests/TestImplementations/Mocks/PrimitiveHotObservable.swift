@@ -13,38 +13,34 @@ import Dispatch
 let SubscribedToHotObservable = Subscription(0)
 let UnsunscribedFromHotObservable = Subscription(0, 0)
 
-class PrimitiveHotObservable<Element> : ObservableType {
-    typealias Events = Recorded<Element>
-    typealias Observer = AnyObserver<Element>
+class PrimitiveHotObservable<ElementType> : ObservableType {
+    typealias E = ElementType
+
+    typealias Events = Recorded<E>
+    typealias Observer = AnyObserver<E>
     
-    var _subscriptions = [Subscription]()
-    let _observers = PublishSubject<Element>()
-    
-    public var subscriptions: [Subscription] {
-        lock.lock()
-        defer { lock.unlock() }
-        return _subscriptions
-    }
+    var subscriptions = [Subscription]()
+    let observers = PublishSubject<ElementType>()
 
     let lock = RecursiveLock()
     
     init() {
     }
 
-    func on(_ event: Event<Element>) {
+    func on(_ event: Event<E>) {
         lock.lock()
         defer { lock.unlock() }
-        _observers.on(event)
+        observers.on(event)
     }
     
-    func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element {
+    func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
         lock.lock()
         defer { lock.unlock() }
 
-        let removeObserver = _observers.subscribe(observer)
-        _subscriptions.append(SubscribedToHotObservable)
+        let removeObserver = observers.subscribe(observer)
+        subscriptions.append(SubscribedToHotObservable)
 
-        let i = self._subscriptions.count - 1
+        let i = self.subscriptions.count - 1
 
         var count = 0
         
@@ -56,7 +52,7 @@ class PrimitiveHotObservable<Element> : ObservableType {
             count += 1
             assert(count == 1)
             
-            self._subscriptions[i] = UnsunscribedFromHotObservable
+            self.subscriptions[i] = UnsunscribedFromHotObservable
         }
     }
 }

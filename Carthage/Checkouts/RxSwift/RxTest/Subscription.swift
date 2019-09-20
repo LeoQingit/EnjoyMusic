@@ -34,19 +34,21 @@ public struct Subscription
     }
 }
 
-extension Subscription: Hashable {
+extension Subscription
+    : Hashable
+    , Equatable {
     /// The hash value.
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.subscribe)
-        hasher.combine(self.unsubscribe)
+    public var hashValue : Int {
+        return subscribe.hashValue ^ unsubscribe.hashValue
     }
 }
 
-extension Subscription: CustomDebugStringConvertible {
+extension Subscription
+    : CustomDebugStringConvertible {
     /// A textual representation of `self`, suitable for debugging.
     public var debugDescription : String {
         let infiniteText = "Infinity"
-        return "(\(self.subscribe): \(self.unsubscribe != Int.max ? String(self.unsubscribe) : infiniteText))"
+        return "(\(subscribe) : \(unsubscribe != Int.max ? String(unsubscribe) : infiniteText))"
     }
 }
 

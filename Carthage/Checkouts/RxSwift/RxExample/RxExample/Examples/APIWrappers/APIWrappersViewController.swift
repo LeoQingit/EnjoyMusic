@@ -152,6 +152,12 @@ class APIWrappersViewController: ViewController {
                 })
                 .disposed(by: disposeBag)
 
+            textValue.asObservable()
+                .subscribe(onNext: { [weak self] x in
+                    self?.debug("UITextField text \(x)")
+                })
+                .disposed(by: disposeBag)
+
             let attributedTextValue = BehaviorRelay<NSAttributedString?>(value: NSAttributedString(string: ""))
             _ = textField2.rx.attributedText <-> attributedTextValue
 

@@ -18,10 +18,10 @@ import RxCocoa
  This is commented becuse collection view has bugs when doing animated updates. 
  Take a look at randomized sections.
 */
-open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectionModelType>
-    : CollectionViewSectionedDataSource<Section>
+open class RxCollectionViewSectionedAnimatedDataSource<S: AnimatableSectionModelType>
+    : CollectionViewSectionedDataSource<S>
     , RxCollectionViewDataSourceType {
-    public typealias Element = [Section]
+    public typealias Element = [S]
 
     // animation configuration
     public var animationConfiguration: AnimationConfiguration
@@ -46,7 +46,7 @@ open class RxCollectionViewSectionedAnimatedDataSource<Section: AnimatableSectio
             .observeOn(MainScheduler.asyncInstance)
             // Collection view has issues digesting fast updates, this should
             // help to alleviate the issues with them.
-            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .throttle(0.5, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] event in
                 self?.collectionView(event.0, throttledObservedEvent: event.1)
             })

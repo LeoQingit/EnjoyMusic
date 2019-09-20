@@ -103,9 +103,7 @@ extension RxTest {
                 if self.startResourceCount < Resources.total {
                     // main schedulers need to finish work
                     print("Waiting for resource cleanup ...")
-                    let mode = RunLoop.Mode.default
-
-                    RunLoop.current.run(mode: mode, before: Date(timeIntervalSinceNow: 0.05))
+                    RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: Date(timeIntervalSinceNow: 0.05)  )
                 }
                 else {
                     break
@@ -125,3 +123,4 @@ extension RxTest {
         #endif
     }
 }
+

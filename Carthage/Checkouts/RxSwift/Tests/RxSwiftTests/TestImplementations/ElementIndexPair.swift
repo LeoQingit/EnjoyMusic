@@ -6,16 +6,16 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-struct ElementIndexPair<Element: Equatable, I: Equatable> : Equatable {
-    let element: Element
+struct ElementIndexPair<E: Equatable, I: Equatable> : Equatable {
+    let element: E
     let index: I
     
-    init(_ element: Element, _ index: I) {
+    init(_ element: E, _ index: I) {
         self.element = element
         self.index = index
     }
 }
 
-func == <Element, I>(lhs: ElementIndexPair<Element, I>, rhs: ElementIndexPair<Element, I>) -> Bool {
+func == <E, I>(lhs: ElementIndexPair<E, I>, rhs: ElementIndexPair<E, I>) -> Bool {
     return lhs.element == rhs.element && lhs.index == rhs.index
 }

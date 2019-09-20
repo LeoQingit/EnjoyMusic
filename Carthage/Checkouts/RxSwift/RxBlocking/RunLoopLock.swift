@@ -7,17 +7,12 @@
 //
 
 import CoreFoundation
-import Foundation
+
 import RxSwift
 
 #if os(Linux)
     import Foundation
-    #if compiler(>=5.0) 
-    let runLoopMode: RunLoop.Mode = .default
-    #else
-    let runLoopMode: RunLoopMode = .defaultRunLoopMode
-    #endif
-
+    let runLoopMode: RunLoopMode = RunLoopMode.defaultRunLoopMode
     let runLoopModeRaw: CFString = unsafeBitCast(runLoopMode.rawValue._bridgeToObjectiveC(), to: CFString.self)
 #else
     let runLoopMode: CFRunLoopMode = CFRunLoopMode.defaultMode
@@ -27,17 +22,17 @@ import RxSwift
 final class RunLoopLock {
     let _currentRunLoop: CFRunLoop
 
-    let _calledRun = AtomicInt(0)
-    let _calledStop = AtomicInt(0)
-    var _timeout: TimeInterval?
+    var _calledRun: AtomicInt = 0
+    var _calledStop: AtomicInt = 0
+    var _timeout: RxTimeInterval?
 
-    init(timeout: TimeInterval?) {
-        self._timeout = timeout
-        self._currentRunLoop = CFRunLoopGetCurrent()
+    init(timeout: RxTimeInterval?) {
+        _timeout = timeout
+        _currentRunLoop = CFRunLoopGetCurrent()
     }
 
-    func dispatch(_ action: @escaping () -> Void) {
-        CFRunLoopPerformBlock(self._currentRunLoop, runLoopModeRaw) {
+    func dispatch(_ action: @escaping () -> ()) {
+        CFRunLoopPerformBlock(_currentRunLoop, runLoopModeRaw) {
             if CurrentThreadScheduler.isScheduleRequired {
                 _ = CurrentThreadScheduler.instance.schedule(()) { _ in
                     action()
@@ -48,24 +43,24 @@ final class RunLoopLock {
                 action()
             }
         }
-        CFRunLoopWakeUp(self._currentRunLoop)
+        CFRunLoopWakeUp(_currentRunLoop)
     }
 
     func stop() {
-        if decrement(self._calledStop) > 1 {
+        if AtomicIncrement(&_calledStop) != 1 {
             return
         }
-        CFRunLoopPerformBlock(self._currentRunLoop, runLoopModeRaw) {
+        CFRunLoopPerformBlock(_currentRunLoop, runLoopModeRaw) {
             CFRunLoopStop(self._currentRunLoop)
         }
-        CFRunLoopWakeUp(self._currentRunLoop)
+        CFRunLoopWakeUp(_currentRunLoop)
     }
 
     func run() throws {
-        if increment(self._calledRun) != 0 {
+        if AtomicIncrement(&_calledRun) != 1 {
             fatalError("Run can be only called once")
         }
-        if let timeout = self._timeout {
+        if let timeout = _timeout {
             #if os(Linux)
                 switch Int(CFRunLoopRunInMode(runLoopModeRaw, timeout, false)) {
                 case kCFRunLoopRunFinished:
@@ -89,8 +84,6 @@ final class RunLoopLock {
                     return
                 case .timedOut:
                     throw RxError.timeout
-                default:
-                    return
                 }
             #endif
         }

@@ -11,7 +11,7 @@ import RxCocoa
 
 // taken from RxFeedback repo
 
-extension ObservableType where Element == Any {
+extension ObservableType where E == Any {
     /// Feedback loop
     public typealias Feedback<State, Event> = (ObservableSchedulerContext<State>) -> Observable<Event>
     public typealias FeedbackLoop = Feedback
@@ -68,7 +68,7 @@ extension ObservableType where Element == Any {
     }
 }
 
-extension SharedSequenceConvertibleType where Element == Any, SharingStrategy == DriverSharingStrategy {
+extension SharedSequenceConvertibleType where E == Any, SharingStrategy == DriverSharingStrategy {
     /// Feedback loop
     public typealias Feedback<State, Event> = (Driver<State>) -> Signal<Event>
 
@@ -126,7 +126,7 @@ extension ImmediateSchedulerType {
 /// Tuple of observable sequence and corresponding scheduler context on which that observable
 /// sequence receives elements.
 public struct ObservableSchedulerContext<Element>: ObservableType {
-    public typealias Element = Element
+    public typealias E = Element
 
     /// Source observable sequence
     public let source: Observable<Element>
@@ -143,7 +143,7 @@ public struct ObservableSchedulerContext<Element>: ObservableType {
         self.scheduler = scheduler
     }
 
-    public func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element {
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
         return self.source.subscribe(observer)
     }
 }

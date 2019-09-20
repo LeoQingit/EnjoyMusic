@@ -1,9 +1,6 @@
 ignore:
   - "Tests"
-  - "README.md"
-  - "Documentation"
-  - ".travis.yml"
-
+  
 codecov:
   notify:
     require_ci_to_pass: yes
@@ -26,4 +23,7 @@ parsers:
       method: no
       macro: no
 
-comment: off
+comment:
+  layout: "reach, diff, flags, files, footer"
+  behavior: default
+  require_changes: no

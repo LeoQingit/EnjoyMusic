@@ -35,7 +35,6 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
-Kingfisher.framework.zip
 
 # OSX
 .DS_Store
@@ -85,4 +84,3 @@ fastlane/README.md
 
 .bundle/
 vendor/
-.vscode/settings.json

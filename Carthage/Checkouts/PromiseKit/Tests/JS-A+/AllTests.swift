@@ -5,8 +5,6 @@
 //  Created by Lois Di Qual on 2/28/18.
 //
 
-#if swift(>=3.2)
-
 import XCTest
 import PromiseKit
 import JavaScriptCore
@@ -15,9 +13,9 @@ class AllTests: XCTestCase {
     
     func testAll() {
         
-        let scriptPath = URL(fileURLWithPath: #file).deletingLastPathComponent().appendingPathComponent("build/build.js")
-        guard FileManager.default.fileExists(atPath: scriptPath.path) else {
-            return print("Skipping JS-A+: see README for instructions on how to build")
+        let bundle = Bundle(for: AllTests.self)
+        guard let scriptPath = bundle.url(forResource: "build", withExtension: "js", subdirectory: "build") else {
+            return XCTFail("Couldn't find test suite")
         }
         
         guard let script = try? String(contentsOf: scriptPath) else {
@@ -80,5 +78,3 @@ class AllTests: XCTestCase {
         self.wait(for: [expectation], timeout: 60)
     }
 }
-
-#endif

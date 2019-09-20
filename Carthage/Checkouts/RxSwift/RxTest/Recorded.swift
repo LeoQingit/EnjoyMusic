@@ -28,12 +28,18 @@ public struct Recorded<Value>
 extension Recorded {
     /// A textual representation of `self`, suitable for debugging.
     public var debugDescription: String {
-        return "\(self.value) @ \(self.time)"
+        return "\(value) @ \(time)"
     }
 }
 
-extension Recorded: Equatable where Value: Equatable {
-    public static func == (lhs: Recorded<Value>, rhs: Recorded<Value>) -> Bool {
-        return lhs.time == rhs.time && lhs.value == rhs.value
-    }
+public func == <T: Equatable>(lhs: Recorded<T>, rhs: Recorded<T>) -> Bool {
+    return lhs.time == rhs.time && lhs.value == rhs.value
+}
+
+public func == <T: Equatable>(lhs: Recorded<Event<T>>, rhs: Recorded<Event<T>>) -> Bool {
+    return lhs.time == rhs.time && lhs.value == rhs.value
+}
+
+public func == <T: Equatable>(lhs: Recorded<Event<T?>>, rhs: Recorded<Event<T?>>) -> Bool {
+    return lhs.time == rhs.time && lhs.value == rhs.value
 }

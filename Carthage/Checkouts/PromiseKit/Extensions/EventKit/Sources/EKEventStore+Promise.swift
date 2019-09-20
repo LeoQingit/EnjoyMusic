@@ -11,7 +11,27 @@ import EventKit
 import PromiseKit
 #endif
 
+/// Errors representing PromiseKit EventKit failures
+public enum EventKitError: Error, CustomStringConvertible {
+    /// Access to the EKEventStore is restricted
+    case restricted
+    /// Access to the EKEventStore is denied
+    case denied
+
+    /// A textual description of the EKEventStore error
+    public var description: String {
+        switch self {
+        case .restricted:
+            return "A head of family must grant calendar access."
+        case .denied:
+            return "Calendar access has been denied."
+        }
+    }
+}
+
 /**
+ Requests access to the event store.
+
  To import `EKEventStore`:
 
      pod "PromiseKit/EventKit"
@@ -19,21 +39,28 @@ import PromiseKit
  And then in your sources:
 
      import PromiseKit
+
+ - Returns: A promise that fulfills with the EKEventStore.
  */
-extension EKEventStore {
+public func EKEventStoreRequestAccess() -> Promise<EKEventStore> {
+    return Promise { seal in
+        let eventStore = EKEventStore()
 
-    /**
-     Requests access to the event store.
-
-     - Returns: A promise that fulfills with the resulting EKAuthorizationStatus.
-     */
-    public func requestAccess(to entityType: EKEntityType) -> Promise<EKAuthorizationStatus> {
-        return Promise { seal in
-            requestAccess(to: entityType) { granted, error in
-                if let error = error {
+        switch EKEventStore.authorizationStatus(for: .event) {
+        case .authorized:
+            seal.fulfill(eventStore)
+        case .denied:
+            seal.reject(EventKitError.denied)
+        case .restricted:
+            seal.reject(EventKitError.restricted)
+        case .notDetermined:
+            eventStore.requestAccess(to: .event) { granted, error in
+                if granted {
+                    seal.fulfill(eventStore)
+                } else if let error = error {
                     seal.reject(error)
                 } else {
-                    seal.fulfill(EKEventStore.authorizationStatus(for: entityType))
+                    seal.reject(EventKitError.denied)
                 }
             }
         }

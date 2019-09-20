@@ -13,10 +13,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-open class RxTableViewSectionedReloadDataSource<Section: SectionModelType>
-    : TableViewSectionedDataSource<Section>
+open class RxTableViewSectionedReloadDataSource<S: SectionModelType>
+    : TableViewSectionedDataSource<S>
     , RxTableViewDataSourceType {
-    public typealias Element = [Section]
+    public typealias Element = [S]
 
     open func tableView(_ tableView: UITableView, observedEvent: Event<Element>) {
         Binder(self) { dataSource, element in

@@ -124,7 +124,7 @@ extension ObserverTests {
     func testMapElementThrow() {
         let observer = PrimitiveMockObserver<Int>()
 
-        observer.mapObserver { _ -> Int in
+        observer.mapObserver { (x: Int) -> Int in
             throw testError
         }.on(.next(2))
 

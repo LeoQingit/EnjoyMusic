@@ -9,11 +9,10 @@
 import Dispatch
 import RxSwift
 import RxCocoa
-import RxRelay
 import XCTest
 import RxTest
 
-class DriverTest: SharedSequenceTest { }
+class DriverTest : SharedSequenceTest { }
 
 // MARK: properties
 extension DriverTest {
@@ -178,6 +177,21 @@ extension DriverTest {
         XCTAssertEqual(results, [0, 1, 2])
     }
 
+    func testVariableAsDriver() {
+        var hotObservable: Variable<Int>? = Variable(1)
+        let xs = Driver.zip(hotObservable!.asDriver(), Driver.of(0, 0)) { (optInt, int) in
+            return optInt
+        }
+
+        let results = subscribeTwiceOnBackgroundSchedulerAndOnlyOneSubscription(xs) {
+            hotObservable?.value = 1
+            hotObservable?.value = 2
+            hotObservable = nil
+        }
+
+        XCTAssertEqual(results, [1, 1])
+    }
+
     func testAsDriver_onErrorJustReturn() {
         let hotObservable = BackgroundThreadPrimitiveHotObservable<Int>()
         let xs = hotObservable.asDriver(onErrorJustReturn: -1)
@@ -214,7 +228,7 @@ extension DriverTest {
 
     func testAsDriver_onErrorRecover() {
         let hotObservable = BackgroundThreadPrimitiveHotObservable<Int>()
-        let xs = hotObservable.asDriver { _ in
+        let xs = hotObservable.asDriver { e in
             return Driver.empty()
         }
 
@@ -291,7 +305,7 @@ extension DriverTest {
                 return Observable.just(y).asDriver(onErrorDriveWith: Driver.empty())
             }
             .flatMapLatest { y in
-                return Observable.just(y).asDriver(onErrorRecover: { _ in Driver.empty() })
+                return Observable.just(y).asDriver(onErrorRecover: {  _ in Driver.empty() })
             }
             .drive(onNext: { element in
                 latestValue = element

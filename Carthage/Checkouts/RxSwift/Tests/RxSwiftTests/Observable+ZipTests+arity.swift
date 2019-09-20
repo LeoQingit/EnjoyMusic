@@ -35,7 +35,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1)
+            let _ = factory(v0, v1)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 3)
@@ -197,12 +197,12 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 10),
-                .completed(230)
+                .completed(220)
             ])
 
     
             XCTAssertEqual(e0.subscriptions, [Subscription(200, 220)])
-            XCTAssertEqual(e1.subscriptions, [Subscription(200, 230)])
+            XCTAssertEqual(e1.subscriptions, [Subscription(200, 220)])
         }
     }
 
@@ -231,7 +231,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1, v2)
+            let _ = factory(v0, v1, v2)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 6)
@@ -419,13 +419,13 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 15),
-                .completed(240)
+                .completed(230)
             ])
 
     
             XCTAssertEqual(e0.subscriptions, [Subscription(200, 220)])
             XCTAssertEqual(e1.subscriptions, [Subscription(200, 230)])
-            XCTAssertEqual(e2.subscriptions, [Subscription(200, 240)])
+            XCTAssertEqual(e2.subscriptions, [Subscription(200, 230)])
         }
     }
 
@@ -455,7 +455,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1, v2, v3)
+            let _ = factory(v0, v1, v2, v3)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 10)
@@ -670,14 +670,14 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 20),
-                .completed(250)
+                .completed(240)
             ])
 
     
             XCTAssertEqual(e0.subscriptions, [Subscription(200, 220)])
             XCTAssertEqual(e1.subscriptions, [Subscription(200, 230)])
             XCTAssertEqual(e2.subscriptions, [Subscription(200, 240)])
-            XCTAssertEqual(e3.subscriptions, [Subscription(200, 250)])
+            XCTAssertEqual(e3.subscriptions, [Subscription(200, 240)])
         }
     }
 
@@ -708,7 +708,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1, v2, v3, v4)
+            let _ = factory(v0, v1, v2, v3, v4)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 15)
@@ -951,7 +951,7 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 25),
-                .completed(260)
+                .completed(250)
             ])
 
     
@@ -959,7 +959,7 @@ extension ObservableZipTest {
             XCTAssertEqual(e1.subscriptions, [Subscription(200, 230)])
             XCTAssertEqual(e2.subscriptions, [Subscription(200, 240)])
             XCTAssertEqual(e3.subscriptions, [Subscription(200, 250)])
-            XCTAssertEqual(e4.subscriptions, [Subscription(200, 260)])
+            XCTAssertEqual(e4.subscriptions, [Subscription(200, 250)])
         }
     }
 
@@ -991,7 +991,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1, v2, v3, v4, v5)
+            let _ = factory(v0, v1, v2, v3, v4, v5)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 21)
@@ -1263,7 +1263,7 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 30),
-                .completed(270)
+                .completed(260)
             ])
 
     
@@ -1272,7 +1272,7 @@ extension ObservableZipTest {
             XCTAssertEqual(e2.subscriptions, [Subscription(200, 240)])
             XCTAssertEqual(e3.subscriptions, [Subscription(200, 250)])
             XCTAssertEqual(e4.subscriptions, [Subscription(200, 260)])
-            XCTAssertEqual(e5.subscriptions, [Subscription(200, 270)])
+            XCTAssertEqual(e5.subscriptions, [Subscription(200, 260)])
         }
     }
 
@@ -1305,7 +1305,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1, v2, v3, v4, v5, v6)
+            let _ = factory(v0, v1, v2, v3, v4, v5, v6)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 28)
@@ -1607,7 +1607,7 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 35),
-                .completed(280)
+                .completed(270)
             ])
 
     
@@ -1617,7 +1617,7 @@ extension ObservableZipTest {
             XCTAssertEqual(e3.subscriptions, [Subscription(200, 250)])
             XCTAssertEqual(e4.subscriptions, [Subscription(200, 260)])
             XCTAssertEqual(e5.subscriptions, [Subscription(200, 270)])
-            XCTAssertEqual(e6.subscriptions, [Subscription(200, 280)])
+            XCTAssertEqual(e6.subscriptions, [Subscription(200, 270)])
         }
     }
 
@@ -1651,7 +1651,7 @@ extension ObservableZipTest {
 
             var result: Int! = nil
 
-            _ = factory(v0, v1, v2, v3, v4, v5, v6, v7)
+            let _ = factory(v0, v1, v2, v3, v4, v5, v6, v7)
                 .subscribe(onNext: { (x: Int) -> Void in result = x })
 
             XCTAssertEqual(result, 36)
@@ -1984,7 +1984,7 @@ extension ObservableZipTest {
 
             XCTAssertEqual(res.events, [
                 .next(210, 40),
-                .completed(290)
+                .completed(280)
             ])
 
     
@@ -1995,7 +1995,7 @@ extension ObservableZipTest {
             XCTAssertEqual(e4.subscriptions, [Subscription(200, 260)])
             XCTAssertEqual(e5.subscriptions, [Subscription(200, 270)])
             XCTAssertEqual(e6.subscriptions, [Subscription(200, 280)])
-            XCTAssertEqual(e7.subscriptions, [Subscription(200, 290)])
+            XCTAssertEqual(e7.subscriptions, [Subscription(200, 280)])
         }
     }
 

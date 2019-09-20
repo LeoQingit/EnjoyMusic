@@ -9,6 +9,7 @@ e.g.
 ```swift
 extension ObservableType where E: MaybeCool {
 
+    @warn_unused_result(message="http://git.io/rxs.uo")
     public func coolElements()
         -> Observable<E> {
           return filter { e -> Bool in

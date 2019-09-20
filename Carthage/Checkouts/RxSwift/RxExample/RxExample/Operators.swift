@@ -8,17 +8,12 @@
 
 import RxSwift
 import RxCocoa
-#if os(iOS)
 import UIKit
-#elseif os(macOS)
-import AppKit
-#endif
 
 // Two way binding operator between control property and relay, that's all it takes.
 
 infix operator <-> : DefaultPrecedence
 
-#if os(iOS)
 func nonMarkedText(_ textInput: UITextInput) -> String? {
     let start = textInput.beginningOfDocument
     let end = textInput.endOfDocument
@@ -71,11 +66,10 @@ func <-> <Base>(textInput: TextInput<Base>, relay: BehaviorRelay<String>) -> Dis
 
     return Disposables.create(bindToUIDisposable, bindToRelay)
 }
-#endif
 
 func <-> <T>(property: ControlProperty<T>, relay: BehaviorRelay<T>) -> Disposable {
     if T.self == String.self {
-#if DEBUG && !os(macOS)
+#if DEBUG
         fatalError("It is ok to delete this message, but this is here to warn that you are maybe trying to bind to some `rx.text` property directly to relay.\n" +
             "That will usually work ok, but for some languages that use IME, that simplistic method could cause unexpected issues because it will return intermediate results while text is being inputed.\n" +
             "REMEDY: Just use `textField <-> relay` instead of `textField.rx.text <-> relay`.\n" +
@@ -94,3 +88,6 @@ func <-> <T>(property: ControlProperty<T>, relay: BehaviorRelay<T>) -> Disposabl
 
     return Disposables.create(bindToUIDisposable, bindToRelay)
 }
+
+// }
+

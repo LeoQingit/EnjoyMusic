@@ -1,8 +1,6 @@
 import Foundation
 import HomeKit
-#if !PMKCocoaPods
 import PromiseKit
-#endif
 
 #if !os(tvOS) && !os(watchOS)
 
