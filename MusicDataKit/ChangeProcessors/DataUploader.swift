@@ -1,5 +1,5 @@
 //
-//  MessageUploader.swift
+//  DataUploader.swift
 //  UPMApp
 //
 //  Created by Leo Qin on 2019/4/30.
@@ -7,18 +7,20 @@
 
 import Foundation
 
-final class MessageUploader: ElementChangeProcessor {
+final class DataUploader: ElementChangeProcessor {
 
-    var elementsInProgress = InProgressTracker<Message>()
+    var elementsInProgress = InProgressTracker<Song>()
     /// 设置更改处理器上下文
-    func setup(for context: ChangeProcessorContext) { }
+    func setup(for context: ChangeProcessorContext) {
+        
+    }
 
     /// 本地跟踪元件谓语（消息的话用状态）
     var predicateForLocallyTrackedElements: NSPredicate {
-        return Message.waitingForUploadPredicate
+        return Song.waitingForUploadPredicate
     }
     /// 处理本地变更元件
-    func processChangedLocalElement(_ objects: [Message], in context: ChangeProcessorContext) {
+    func processChangedLocalElement(_ objects: [Song], in context: ChangeProcessorContext) {
         processInsertedMessage(objects, in: context)
     }
     
@@ -30,18 +32,19 @@ final class MessageUploader: ElementChangeProcessor {
     
 }
 
-extension MessageUploader {
-    fileprivate func processInsertedMessage(_ insertions: [Message], in context: ChangeProcessorContext) {
+extension DataUploader {
+    fileprivate func processInsertedMessage(_ insertions: [Song], in context: ChangeProcessorContext) {
         context.remote.uploadMessage(insertions, completion:
             context.perform { remoteMessage, error in
                 guard error == nil else { return }
                 
-                for message in insertions {
-                    guard let remoteMessage =  remoteMessage.first(where: {
-                        message.msgId == $0.msgId
-                    }) else { continue }
-                    message.replace(with: remoteMessage)
-                }
+//                for song in insertions {
+//                    guard let remoteMessage =  remoteMessage.first(where: {
+//                        song.songId == $0.songId
+//                    }) else { continue }
+//                }
+//
+                
                 context.delayedSaveOrRollback()
                 self.elementsInProgress.markObjectsAsComplete(insertions)
             } )

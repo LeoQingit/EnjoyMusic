@@ -5,14 +5,14 @@
 //  Created by Leo Qin on 2019/4/28.
 //
 
-import Foundation
+import CoreData
 
 /// 更改处理器上下文协议
 protocol ChangeProcessorContext: class {
     /// 更改处理器操作上下文：同步上下文
     var context: NSManagedObjectContext { get }
     
-    var remote: MessageRemote { get }
+    var remote: DataRemote { get }
     
     /// 在同步上下文队列执行操作
     func perform (_ block: @escaping () ->())

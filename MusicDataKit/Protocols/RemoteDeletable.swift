@@ -5,7 +5,7 @@
 //  Created by Leo Qin on 2019/5/8.
 //
 
-import Foundation
+import CoreData
 
 fileprivate let StatusKey = "status"
 
@@ -19,7 +19,7 @@ public protocol RemoteDeletable: class {
 extension RemoteDeletable {
     /// 未被标记为删除Predicate
     public static var notMarkedForRemoteDeletionPredicate: NSPredicate {
-        return NSPredicate(format: "%K <> \(MessageStatus.deleted.rawValue)", StatusKey)
+        return NSPredicate(format: "%K <> \(SongStatus.deleted.rawValue)", StatusKey)
     }
     
     /// 被标记为删除Predicate
@@ -35,7 +35,7 @@ extension RemoteDeletable {
 
 extension RemoteDeletable where Self: NSManagedObject {
     public var changedForRemoteDeletion: Bool {
-        return changedValue(forKey: StatusKey) as? Int32 == MessageStatus.deleted.rawValue
+        return changedValue(forKey: StatusKey) as? Int32 == SongStatus.deleted.rawValue
     }
 }
 

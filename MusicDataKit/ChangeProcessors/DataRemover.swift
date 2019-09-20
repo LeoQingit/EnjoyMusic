@@ -1,5 +1,5 @@
 //
-//  MessageRemover.swift
+//  DataRemover.swift
 //  UPMApp
 //
 //  Created by Leo Qin on 2019/5/15.
@@ -7,17 +7,17 @@
 
 import Foundation
 
-final class MessageRemover: ElementChangeProcessor {
+final class DataRemover: ElementChangeProcessor {
     
-    var elementsInProgress = InProgressTracker<Message>()
+    var elementsInProgress = InProgressTracker<Song>()
     
     var predicateForLocallyTrackedElements: NSPredicate {
-        let marked = Message.markedForRemoteDeletionPredicate
-        let notDeleted = Message.notMarkedForLocalDeletionPredicate
+        let marked = Song.markedForRemoteDeletionPredicate
+        let notDeleted = Song.notMarkedForLocalDeletionPredicate
         return NSCompoundPredicate(andPredicateWithSubpredicates: [marked, notDeleted])
     }
     
-    func processChangedLocalElement(_ elements: [Message], in context: ChangeProcessorContext) {
+    func processChangedLocalElement(_ elements: [Song], in context: ChangeProcessorContext) {
         processDeletedMessage(elements, in: context)
     }
     
@@ -36,8 +36,8 @@ final class MessageRemover: ElementChangeProcessor {
     
 }
 
-extension MessageRemover {
-    fileprivate func processDeletedMessage(_ deletions: [Message], in context: ChangeProcessorContext) {
+extension DataRemover {
+    fileprivate func processDeletedMessage(_ deletions: [Song], in context: ChangeProcessorContext) {
         let allObjects = Set(deletions)
         let localOnly = allObjects.filter { $0.remoteId == nil }
         let objectsToDeleteRemotely = allObjects.subtracting(localOnly)
@@ -45,11 +45,11 @@ extension MessageRemover {
         deleteRemotely(objectsToDeleteRemotely, context: context)
     }
     
-    fileprivate func deleteLocally(_ deletions: Set<Message>, context: ChangeProcessorContext) {
+    fileprivate func deleteLocally(_ deletions: Set<Song>, context: ChangeProcessorContext) {
         deletions.forEach { $0.markForLocalDeletion() }
     }
     
-    fileprivate func deleteRemotely(_ deletions: Set<Message>, context: ChangeProcessorContext) {
+    fileprivate func deleteRemotely(_ deletions: Set<Song>, context: ChangeProcessorContext) {
         context.remote.removeMessage(Array(deletions), completion: context.perform { deletedRecordIds, error in
             let deletedIDs = Set(deletedRecordIds)
             guard error == nil else { return }

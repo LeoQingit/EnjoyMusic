@@ -22,21 +22,18 @@ public final class SyncCoordinator {
     /// 同步队列
     let syncGroup: DispatchGroup = DispatchGroup()
     /// 远端定义接口
-    let remote: MessageRemote
+    let remote: DataRemote
     
     fileprivate var observerTokens: [NSObjectProtocol] = []
     
     let changeProcessors: [ChangeProcessor]
     
-    let imProcessor: IMProcessor
-    
     var teardownFlag = atomic_flag()
     
-    init(viewContext: NSManagedObjectContext, syncContext: NSManagedObjectContext, launchOptions: LaunchOptions) {
+    init(viewContext: NSManagedObjectContext, syncContext: NSManagedObjectContext) {
         
-        imProcessor = JMessageProcessor(launchOptions: launchOptions)
-        changeProcessors = [MessageUploader(), MessageDownloader(), MessageRemover()]
-        remote = CloudRemote(imProcessor: imProcessor)
+        changeProcessors = [DataUploader(), DataDownloader(), DataRemover()]
+        remote = CloudRemote()
         self.viewContext = viewContext
         self.syncContext = syncContext
         setup()
@@ -46,7 +43,7 @@ public final class SyncCoordinator {
 //    init(container: NSPersistentContainer, launchOptions: LaunchOptions) {
 //        
 //        imProcessor = JMessageProcessor(launchOptions: launchOptions)
-//        changeProcessors = [MessageUploader(), MessageDownloader(), MessageRemover()]
+//        changeProcessors = [DataUploader(), DataDownloader(), DataRemover()]
 //        remote = CloudRemote(imProcessor: imProcessor)
 //        viewContext = container.viewContext
 //        syncContext = container.newBackgroundContext()
@@ -70,7 +67,6 @@ public final class SyncCoordinator {
     
     fileprivate func setup() {
         perform {
-            self.setupProcessorDelegate()
             self.setupViewContext()
             self.setupContexts()
             self.setupChangeProcessors()
@@ -78,31 +74,11 @@ public final class SyncCoordinator {
         }
     }
     
-    fileprivate func setupViewContext(with userId: String? = UserManager.shared.getUserInfo()?.userId) {
+    fileprivate func setupViewContext(with userId: String? = nil) {
+        guard let userId = userId else { return }
         viewContext.userID = userId
     }
     
-    fileprivate func setupProcessorDelegate() {
-        imProcessor.setupDelegate(with: imProcessor)
-        imProcessor.setupMessageHandler(with: self)
-    }
-    
-    fileprivate func removeProcessorDelegate() {
-        imProcessor.removeDelegate(with: imProcessor)
-    }
-    
-}
-
-extension SyncCoordinator: IMMessageHandler {
-    func handle<T>(_ delegate: IMDelegate, with changes: [RemoteRecordChange<T>]) where T : RemoteRecord {
-        processRemoteChanges(changes: changes) {
-            self.perform {
-                self.context.delayedSaveOrRollback(group: self.syncGroup, completion: { (success) in
-                    //
-                })
-            }
-        }
-    }
 }
 
 extension SyncCoordinator: MessageNotificationDrain {
@@ -191,6 +167,7 @@ extension SyncCoordinator: ContextOwner {
 
 
 extension SyncCoordinator: ChangeProcessorContext {
+    
     var context: NSManagedObjectContext {
         return syncContext
     }

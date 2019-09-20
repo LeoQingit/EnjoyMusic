@@ -5,7 +5,7 @@
 //  Created by Leo Qin on 2019/5/6.
 //
 
-import Foundation
+import CoreData
 
 /// 上下文属主协议：处理同步上下文、主上下文同步问题
 protocol ContextOwner: ObserverTokenStore {

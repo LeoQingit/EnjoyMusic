@@ -5,7 +5,7 @@
 //  Created by Leo Qin on 2019/4/28.
 //
 
-import Foundation
+import CoreData
 
 final class EntityAndPredicate<O: NSManagedObject> {
     let entity: NSEntityDescription

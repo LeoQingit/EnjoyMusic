@@ -5,7 +5,7 @@
 //  Created by Leo Qin on 2019/4/29.
 //
 
-import Foundation
+import CoreData
 
 final class InProgressTracker<O: NSManagedObject> where O: Managed {
     fileprivate var objectsInProgress = Set<O>()

@@ -7,7 +7,8 @@
 
 import CoreData
 
-let UPMxcdataModeldName = "UPMApp"
+let UPMxcdataModeldName = "EnjoyMusic"
+
 public protocol Managed: class, NSFetchRequestResult {
     static var entity: NSEntityDescription { get }
     static var entityName: String { get }
@@ -57,25 +58,27 @@ extension Managed {
 extension Managed where Self: NSManagedObject {
 
     public static func setupEntityDescription() -> NSEntityDescription {
-        
-        guard var modelURL = Bundle.main.url(forResource: UPMxcdataModeldName, withExtension: "momd") else { fatalError("No Such ModelURL") }
-        if #available(iOS 11.0, *) { } else {
+        if #available(iOS 11.0, *) {
+            return entity()
+        } else {
+            guard var modelURL = Bundle.main.url(forResource: UPMxcdataModeldName, withExtension: "momd") else { fatalError("No Such ModelURL") }
+            
             modelURL = modelURL.appendingPathComponent("UPMApp.mom")
+            
+            guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+                fatalError("No Such MOM")
+            }
+            
+            guard let className = NSStringFromClass(classForCoder()).components(separatedBy: ".").last else {
+                fatalError("No Such Class")
+            }
+            
+            guard let entity = mom.entitiesByName[className] else {
+                fatalError("No Such Entity")
+            }
+            
+            return entity
         }
-        
-        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalError("No Such MOM")
-        }
-        
-        guard let className = NSStringFromClass(classForCoder()).components(separatedBy: ".").last else {
-            fatalError("No Such Class")
-        }
-        
-        guard let entity = mom.entitiesByName[className] else {
-            fatalError("No Such Entity")
-        }
-        
-        return entity
     }
 
     public static var entityName: String {
