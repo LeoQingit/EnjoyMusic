@@ -2,9 +2,6 @@
 //  CollectionViewDataSource.swift
 //  Music
 //
-//  Created by Florian on 31/08/15.
-//  Copyright © 2015 objc.io. All rights reserved.
-//
 
 import UIKit
 import CoreData

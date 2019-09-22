@@ -2,9 +2,6 @@
 //  CloudKit+Sync.swift
 //  Music
 //
-//  Created by Florian on 26/05/15.
-//  Copyright (c) 2015 objc.io. All rights reserved.
-//
 
 import CloudKit
 

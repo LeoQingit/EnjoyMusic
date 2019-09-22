@@ -2,9 +2,6 @@
 //  MusicRemote.swift
 //  Music
 //
-//  Created by Florian on 21/09/15.
-//  Copyright © 2015 objc.io. All rights reserved.
-//
 
 import CoreLocation
 import MusicModel

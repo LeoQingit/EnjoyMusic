@@ -2,9 +2,6 @@
 //  Region.swift
 //  Music
 //
-//  Created by Florian on 03/09/15.
-//  Copyright © 2015 objc.io. All rights reserved.
-//
 
 import CoreData
 import CoreDataHelpers

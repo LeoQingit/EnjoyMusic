@@ -2,9 +2,6 @@
 //  MusicModelVersion.swift
 //  Music
 //
-//  Created by Florian on 06/10/15.
-//  Copyright © 2015 objc.io. All rights reserved.
-//
 
 import CoreDataHelpers
 

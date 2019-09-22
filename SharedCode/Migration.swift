@@ -2,9 +2,6 @@
 //  Migration.swift
 //  Migrations
 //
-//  Created by Florian on 06/10/15.
-//  Copyright © 2015 objc.io. All rights reserved.
-//
 
 import CoreData
 

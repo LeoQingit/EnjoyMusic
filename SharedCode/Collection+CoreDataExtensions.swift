@@ -2,9 +2,6 @@
 //  Collection+CoreDataExtensions.swift
 //  psctest
 //
-//  Created by Florian on 18/08/15.
-//  Copyright © 2015 objc.io. All rights reserved.
-//
 
 import CoreData
 
