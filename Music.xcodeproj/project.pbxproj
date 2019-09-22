@@ -103,8 +103,8 @@
 		FC94D5DE23371FF700C54873 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D5DC23371FF700C54873 /* AppDelegate.swift */; };
 		FC94D5E42337220500C54873 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC94D5E32337220500C54873 /* CloudKit.framework */; };
 		FC94D5E62337225400C54873 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC94D5E52337225400C54873 /* Main.storyboard */; };
-		FC94D5F2233735A300C54873 /* Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC94D5F0233735A300C54873 /* Music.xcdatamodeld */; };
 		FCFAC160233743F1004C9B87 /* ShareImage.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFAC15F233743F1004C9B87 /* ShareImage.png */; };
+		FCFAC16323374553004C9B87 /* Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FCFAC16123374553004C9B87 /* Music.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,8 +275,8 @@
 		FC94D5E2233721F900C54873 /* Music.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Music.entitlements; sourceTree = "<group>"; };
 		FC94D5E32337220500C54873 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		FC94D5E52337225400C54873 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		FC94D5F1233735A300C54873 /* Music.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Music.xcdatamodel; sourceTree = "<group>"; };
 		FCFAC15F233743F1004C9B87 /* ShareImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareImage.png; path = Assets.xcassets/AppIcon.appiconset/ShareImage.png; sourceTree = "<group>"; };
+		FCFAC16223374553004C9B87 /* Music.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Music.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,7 +415,7 @@
 				FC94D5542337105800C54873 /* MusicMergePolicy.swift */,
 				FC94D5552337105800C54873 /* MusicModelVersion.swift */,
 				FC94D5532337105800C54873 /* MusicStack.swift */,
-				FC94D5F0233735A300C54873 /* Music.xcdatamodeld */,
+				FCFAC16123374553004C9B87 /* Music.xcdatamodeld */,
 				FC94D3F0233707CF00C54873 /* Info.plist */,
 			);
 			path = MusicModel;
@@ -971,7 +971,7 @@
 				FC94D4A523370E3B00C54873 /* ISO3166.swift in Sources */,
 				FC94D5502337101500C54873 /* ColorDifference.swift in Sources */,
 				FC94D5482337101500C54873 /* LABPixel+ClusteredType.swift in Sources */,
-				FC94D5F2233735A300C54873 /* Music.xcdatamodeld in Sources */,
+				FCFAC16323374553004C9B87 /* Music.xcdatamodeld in Sources */,
 				FC94D5592337105800C54873 /* MusicMergePolicy.swift in Sources */,
 				FC94D54F2337101500C54873 /* Memoization.swift in Sources */,
 				FC94D4AE23370E7400C54873 /* DelayedDeletable.swift in Sources */,
@@ -1547,14 +1547,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		FC94D5F0233735A300C54873 /* Music.xcdatamodeld */ = {
+		FCFAC16123374553004C9B87 /* Music.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				FC94D5F1233735A300C54873 /* Music.xcdatamodel */,
+				FCFAC16223374553004C9B87 /* Music.xcdatamodel */,
 			);
-			currentVersion = FC94D5F1233735A300C54873 /* Music.xcdatamodel */;
-			name = Music.xcdatamodeld;
-			path = "../../../Downloads/core-data-master/Moody/MoodyModel/Music.xcdatamodeld";
+			currentVersion = FCFAC16223374553004C9B87 /* Music.xcdatamodel */;
+			path = Music.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
