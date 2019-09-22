@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Continent" representedClassName="MoodyModel.Continent" parentEntity="Region" syncable="YES">
+        <attribute name="numberOfCountries" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="countries" toMany="YES" deletionRule="Nullify" destinationEntity="Country" inverseName="continent" inverseEntity="Country" syncable="YES"/>
+    </entity>
+    <entity name="Country" representedClassName="MoodyModel.Country" parentEntity="Region" syncable="YES">
+        <relationship name="continent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Continent" inverseName="countries" inverseEntity="Continent" syncable="YES"/>
+        <relationship name="moods" toMany="YES" deletionRule="Nullify" destinationEntity="Mood" inverseName="country" inverseEntity="Mood" syncable="YES"/>
+    </entity>
+    <entity name="Mood" representedClassName="MoodyModel.Mood" syncable="YES">
+        <attribute name="creatorID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remoteIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="moods" inverseEntity="Country" syncable="YES"/>
+        <fetchIndex name="byMarkedForDeletionDateIndex">
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byRemoteIdentifierIndex">
+            <fetchIndexElement property="remoteIdentifier" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="compoundIndex">
+            <fetchIndexElement property="markedForRemoteDeletion" type="Binary" order="ascending"/>
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+            <fetchIndexElement property="date" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="Region" representedClassName="MoodyModel.Region" isAbstract="YES" syncable="YES">
+        <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numberOfMoods" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numericISO3166Code" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="uniquenessDummy" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <fetchIndex name="compoundIndex">
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+            <fetchIndexElement property="updatedAt" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="numericISO3166Code"/>
+                <constraint value="uniquenessDummy"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Continent" positionX="-54" positionY="9" width="128" height="75"/>
+        <element name="Country" positionX="-36" positionY="18" width="128" height="75"/>
+        <element name="Mood" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Region" positionX="160" positionY="192" width="128" height="120"/>
+    </elements>
+</model>
