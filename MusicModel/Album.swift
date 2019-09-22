@@ -1,5 +1,5 @@
 //
-//  Country.swift
+//  Album.swift
 //  Music
 //
 
@@ -9,16 +9,16 @@ import CoreData
 import CoreDataHelpers
 
 
-public class Country: NSManagedObject {
+public class Album: NSManagedObject {
 
     @NSManaged fileprivate(set) var songs: Set<Song>
-    @NSManaged fileprivate(set) var continent: Continent?
+    @NSManaged fileprivate(set) var artlist: Artlist?
     @NSManaged public internal(set) var numberOfSongs: Int64
     @NSManaged internal var updatedAt: Date
 
-    public fileprivate(set) var iso3166Code: ISO3166.Country {
+    public fileprivate(set) var iso3166Code: ISO3166.Album {
         get {
-            guard let c = ISO3166.Country(rawValue: numericISO3166Code) else { fatalError("Unknown country code") }
+            guard let c = ISO3166.Album(rawValue: numericISO3166Code) else { fatalError("Unknown album code") }
             return c
         }
         set {
@@ -31,18 +31,18 @@ public class Country: NSManagedObject {
         primitiveUpdatedAt = Date()
     }
 
-    static func findOrCreate(for isoCountry: ISO3166.Country, in context: NSManagedObjectContext) -> Country {
-        let predicate = Country.predicate(format: "%K == %d", #keyPath(numericISO3166Code), Int(isoCountry.rawValue))
-        let country = findOrCreate(in: context, matching: predicate) {
-            $0.iso3166Code = isoCountry
-            $0.continent = Continent.findOrCreateContinent(for: isoCountry, in: context)
+    static func findOrCreate(for isoAlbum: ISO3166.Album, in context: NSManagedObjectContext) -> Album {
+        let predicate = Album.predicate(format: "%K == %d", #keyPath(numericISO3166Code), Int(isoAlbum.rawValue))
+        let album = findOrCreate(in: context, matching: predicate) {
+            $0.iso3166Code = isoAlbum
+            $0.artlist = Artlist.findOrCreateArtlist(for: isoAlbum, in: context)
         }
-        return country
+        return album
     }
 
     public override func prepareForDeletion() {
-        guard let c = continent else { return }
-        if c.countries.filter({ !$0.isDeleted }).isEmpty {
+        guard let c = artlist else { return }
+        if c.albums.filter({ !$0.isDeleted }).isEmpty {
             managedObjectContext?.delete(c)
         }
     }
@@ -59,7 +59,7 @@ public class Country: NSManagedObject {
             refreshUpdateDate()
         }
         if changedForDelayedDeletion {
-            removeFromContinent()
+            removeFromArtlist()
         }
     }
 
@@ -91,25 +91,25 @@ public class Country: NSManagedObject {
     fileprivate func refreshUpdateDate() {
         guard changedValue(forKey: UpdateTimestampKey) == nil else { return }
         updatedAt = Date()
-        continent?.refreshUpdateDate()
+        artlist?.refreshUpdateDate()
     }
 
     fileprivate func updateSongCount() {
         guard Int64(songs.count) != numberOfSongs else { return }
         numberOfSongs = Int64(songs.count)
-        continent?.updateSongCount()
+        artlist?.updateSongCount()
     }
 
-    fileprivate func removeFromContinent() {
-        guard continent != nil else { return }
-        continent = nil
+    fileprivate func removeFromArtlist() {
+        guard artlist != nil else { return }
+        artlist = nil
     }
 
 
 }
 
 
-extension Country: Managed {
+extension Album: Managed {
     public static var defaultSortDescriptors: [NSSortDescriptor] {
         return [NSSortDescriptor(key: UpdateTimestampKey, ascending: false)]
     }
@@ -119,9 +119,9 @@ extension Country: Managed {
     }
 }
 
-extension Country: DelayedDeletable {
+extension Album: DelayedDeletable {
     @NSManaged public var markedForDeletionDate: Date?
 }
 
-extension Country: UpdateTimestampable {}
+extension Album: UpdateTimestampable {}
 

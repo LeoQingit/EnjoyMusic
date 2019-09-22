@@ -21,8 +21,8 @@ public class Song: NSManagedObject {
     @NSManaged public var creatorID: String?
     @NSManaged public var remoteIdentifier: RemoteRecordID?
 
-    @NSManaged public fileprivate(set) var country___: Country
-    @NSManaged public fileprivate(set) var country: Country?
+    @NSManaged public fileprivate(set) var album___: Album
+    @NSManaged public fileprivate(set) var album: Album?
 
 
     public override func awakeFromInsert() {
@@ -39,18 +39,18 @@ public class Song: NSManagedObject {
 
 
     public static func insert(into moc: NSManagedObjectContext, image: UIImage, location: CLLocation?, placemark: CLPlacemark?) -> Song {
-        let iso3166 = ISO3166.Country.fromISO3166(placemark?.isoCountryCode ?? "")
-        return insert(into: moc, colors: image.songColors, location: location, isoCountry: iso3166)
+        let iso3166 = ISO3166.Album.fromISO3166(placemark?.isoCountryCode ?? "")
+        return insert(into: moc, colors: image.songColors, location: location, isoAlbum: iso3166)
     }
 
-    public static func insert(into moc: NSManagedObjectContext, colors: [UIColor], location: CLLocation?, isoCountry: ISO3166.Country, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
+    public static func insert(into moc: NSManagedObjectContext, colors: [UIColor], location: CLLocation?, isoAlbum: ISO3166.Album, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
         let song: Song = moc.insertObject()
         song.colors = colors
         if let coord = location?.coordinate {
             song.latitude = NSNumber(value: coord.latitude)
             song.longitude = NSNumber(value: coord.longitude)
         }
-        song.country = Country.findOrCreate(for: isoCountry, in: moc)
+        song.album = Album.findOrCreate(for: isoAlbum, in: moc)
         song.remoteIdentifier = remoteIdentifier
         if let d = date {
             song.date = d
@@ -62,7 +62,7 @@ public class Song: NSManagedObject {
     public override func willSave() {
         super.willSave()
         if changedForDelayedDeletion || changedForRemoteDeletion {
-            removeFromCountry()
+            removeFromAlbum()
         }
     }
 
@@ -74,9 +74,9 @@ public class Song: NSManagedObject {
     @NSManaged fileprivate var longitude: NSNumber?
 
 
-    fileprivate func removeFromCountry() {
-        guard country != nil else { return }
-        country = nil
+    fileprivate func removeFromAlbum() {
+        guard album != nil else { return }
+        album = nil
     }
 
 }

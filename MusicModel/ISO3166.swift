@@ -9,7 +9,7 @@
 import Foundation
 
 public struct ISO3166 {
-    public enum Country: Int16 {
+    public enum Album: Int16 {
         case guy = 328
         case pol = 616
         case ltu = 440
@@ -262,7 +262,7 @@ public struct ISO3166 {
         case nga = 566
         case unknown = 0
     }
-    public enum Continent: Int16 {
+    public enum Artlist: Int16 {
         case na = 10001
         case an = 10002
         case eu = 10003
@@ -273,7 +273,7 @@ public struct ISO3166 {
     }
 }
 
-private let countriesAndContinents: [(ISO3166.Continent, ISO3166.Country)] = [
+private let albumsAndArtlists: [(ISO3166.Artlist, ISO3166.Album)] = [
     (.as, .afg),
     (.eu, .alb),
     (.an, .ata),
@@ -534,16 +534,16 @@ private let countriesAndContinents: [(ISO3166.Continent, ISO3166.Country)] = [
     (.af, .zmb),
 ]
 
-extension ISO3166.Continent {
-    init?(country: ISO3166.Country) {
-        let cc = countriesAndContinents.first { $0.1 == country }
-        guard let (continent, _) = cc else { return nil }
-        self = continent
+extension ISO3166.Artlist {
+    init?(album: ISO3166.Album) {
+        let cc = albumsAndArtlists.first { $0.1 == album }
+        guard let (artlist, _) = cc else { return nil }
+        self = artlist
     }
 }
 
-extension ISO3166.Country {
-    public static func fromISO3166(_ s: String) -> ISO3166.Country {
+extension ISO3166.Album {
+    public static func fromISO3166(_ s: String) -> ISO3166.Album {
         switch (s.lowercased()) {
         case "guy": return .guy
         case "pol": return .pol
@@ -1050,7 +1050,7 @@ extension ISO3166.Country {
     }
 }
 
-extension ISO3166.Country {
+extension ISO3166.Album {
     public var threeLetterName: String {
         switch self {
         case .guy: return "guy"
@@ -1308,36 +1308,36 @@ extension ISO3166.Country {
     }
 }
 
-extension ISO3166.Country: CustomStringConvertible {
+extension ISO3166.Album: CustomStringConvertible {
     public var description: String { return threeLetterName }
 }
 
-extension ISO3166.Continent: CustomStringConvertible {
+extension ISO3166.Artlist: CustomStringConvertible {
     public var description: String {
-        return NSLocalizedString(localizationKey, tableName: nil, bundle: Bundle(for: Continent.self), value: localizationKey, comment: "")
+        return NSLocalizedString(localizationKey, tableName: nil, bundle: Bundle(for: Artlist.self), value: localizationKey, comment: "")
     }
     fileprivate var localizationKey: String {
         switch (self) {
-        case .na: return "continent.NorthAmerica"
-        case .an: return "continent.Antarctica"
-        case .eu: return "continent.Europe"
-        case .af: return "continent.Africa"
-        case .as: return "continent.Asia"
-        case .sa: return "continent.SouthAmerica"
-        case .oc: return "continent.Oceania"
+        case .na: return "artlist.NorthAmerica"
+        case .an: return "artlist.Antarctica"
+        case .eu: return "artlist.Europe"
+        case .af: return "artlist.Africa"
+        case .as: return "artlist.Asia"
+        case .sa: return "artlist.SouthAmerica"
+        case .oc: return "artlist.Oceania"
         }
     }
 }
 
-extension ISO3166.Country: LocalizedStringConvertible {
+extension ISO3166.Album: LocalizedStringConvertible {
     public var localizedDescription: String {
         let loc = NSLocale.current
         return (loc as NSLocale).displayName(forKey: NSLocale.Key.countryCode,
-            value: threeLetterName) ?? NSLocalizedString("country.Unknown", tableName: nil, bundle: Bundle(for: Continent.self), value: "country.Unknown", comment: "")
+            value: threeLetterName) ?? NSLocalizedString("album.Unknown", tableName: nil, bundle: Bundle(for: Artlist.self), value: "album.Unknown", comment: "")
     }
 }
 
-extension ISO3166.Continent: LocalizedStringConvertible {
+extension ISO3166.Artlist: LocalizedStringConvertible {
     public var localizedDescription: String { return String(describing: self) }
 }
 

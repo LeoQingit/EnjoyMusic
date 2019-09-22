@@ -42,8 +42,8 @@
 		FC94D48E23370D6B00C54873 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D47E23370D6B00C54873 /* Utilities.swift */; };
 		FC94D49023370D6B00C54873 /* CoreDataErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D48023370D6B00C54873 /* CoreDataErrors.swift */; };
 		FC94D49123370D6B00C54873 /* ValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D48123370D6B00C54873 /* ValueTransformer.swift */; };
-		FC94D4A123370E3B00C54873 /* Continent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D49C23370E3B00C54873 /* Continent.swift */; };
-		FC94D4A223370E3B00C54873 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D49D23370E3B00C54873 /* Country.swift */; };
+		FC94D4A123370E3B00C54873 /* Artlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D49C23370E3B00C54873 /* Artlist.swift */; };
+		FC94D4A223370E3B00C54873 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D49D23370E3B00C54873 /* Album.swift */; };
 		FC94D4A323370E3B00C54873 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D49E23370E3B00C54873 /* Song.swift */; };
 		FC94D4A423370E3B00C54873 /* GeographicRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D49F23370E3B00C54873 /* GeographicRegion.swift */; };
 		FC94D4A523370E3B00C54873 /* ISO3166.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D4A023370E3B00C54873 /* ISO3166.swift */; };
@@ -215,8 +215,8 @@
 		FC94D47E23370D6B00C54873 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FC94D48023370D6B00C54873 /* CoreDataErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataErrors.swift; sourceTree = "<group>"; };
 		FC94D48123370D6B00C54873 /* ValueTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTransformer.swift; sourceTree = "<group>"; };
-		FC94D49C23370E3B00C54873 /* Continent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Continent.swift; sourceTree = "<group>"; };
-		FC94D49D23370E3B00C54873 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		FC94D49C23370E3B00C54873 /* Artlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artlist.swift; sourceTree = "<group>"; };
+		FC94D49D23370E3B00C54873 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		FC94D49E23370E3B00C54873 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		FC94D49F23370E3B00C54873 /* GeographicRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeographicRegion.swift; sourceTree = "<group>"; };
 		FC94D4A023370E3B00C54873 /* ISO3166.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO3166.swift; sourceTree = "<group>"; };
@@ -504,8 +504,8 @@
 		FC94D49B23370DFA00C54873 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FC94D49C23370E3B00C54873 /* Continent.swift */,
-				FC94D49D23370E3B00C54873 /* Country.swift */,
+				FC94D49C23370E3B00C54873 /* Artlist.swift */,
+				FC94D49D23370E3B00C54873 /* Album.swift */,
 				FC94D49F23370E3B00C54873 /* GeographicRegion.swift */,
 				FC94D4A023370E3B00C54873 /* ISO3166.swift */,
 				FC94D49E23370E3B00C54873 /* Song.swift */,
@@ -962,7 +962,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC94D4A123370E3B00C54873 /* Continent.swift in Sources */,
+				FC94D4A123370E3B00C54873 /* Artlist.swift in Sources */,
 				FC94D4A423370E3B00C54873 /* GeographicRegion.swift in Sources */,
 				FC94D54E2337101500C54873 /* ColorSpaceConversion.swift in Sources */,
 				FC94D48E23370D6B00C54873 /* Utilities.swift in Sources */,
@@ -981,7 +981,7 @@
 				FC94D54B2337101500C54873 /* PlatformExtensions.swift in Sources */,
 				FC94D54C2337101500C54873 /* RandomNumbers.mm in Sources */,
 				FC94D49123370D6B00C54873 /* ValueTransformer.swift in Sources */,
-				FC94D4A223370E3B00C54873 /* Country.swift in Sources */,
+				FC94D4A223370E3B00C54873 /* Album.swift in Sources */,
 				FC94D4A323370E3B00C54873 /* Song.swift in Sources */,
 				FC94D4B123370E7400C54873 /* UpdateTimestampable.swift in Sources */,
 				FC94D49023370D6B00C54873 /* CoreDataErrors.swift in Sources */,

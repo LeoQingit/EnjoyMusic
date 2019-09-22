@@ -16,7 +16,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
     }
 
     var managedObjectContext: NSManagedObjectContext!
-    var countries: [Country]?
+    var albums: [Album]?
     var songSource: SongSource! {
         didSet {
             guard let o = songSource.managedObject as? Managed else { return }
@@ -29,7 +29,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        countries = songSource.prefetch(in: managedObjectContext)
+        albums = songSource.prefetch(in: managedObjectContext)
         setupTableView()
     }
 

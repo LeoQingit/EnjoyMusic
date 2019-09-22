@@ -10,8 +10,8 @@ import CoreDataHelpers
 enum SongSource {
     case all
     case yours(String?)
-    case country(MusicModel.Country)
-    case continent(MusicModel.Continent)
+    case album(MusicModel.Album)
+    case artlist(MusicModel.Artlist)
 }
 
 
@@ -22,34 +22,34 @@ extension SongSource {
             return NSPredicate(value: true)
         case .yours(let id):
             return Song.predicateForOwnedByUser(withIdentifier: id)
-        case .country(let c):
-            return NSPredicate(format: "country = %@", argumentArray: [c])
-        case .continent(let c):
-            return NSPredicate(format: "country in %@", argumentArray: [c.countries])
+        case .album(let c):
+            return NSPredicate(format: "album = %@", argumentArray: [c])
+        case .artlist(let c):
+            return NSPredicate(format: "album in %@", argumentArray: [c.albums])
         }
     }
 
     var managedObject: NSManagedObject? {
         switch self {
-        case .country(let c): return c
-        case .continent(let c): return c
+        case .album(let c): return c
+        case .artlist(let c): return c
         default: return nil
         }
     }
 
-    func prefetch(in context: NSManagedObjectContext) -> [MusicModel.Country] {
+    func prefetch(in context: NSManagedObjectContext) -> [MusicModel.Album] {
         switch self {
         case .all:
-            return MusicModel.Country.fetch(in: context) { request in
-                request.predicate = MusicModel.Country.defaultPredicate
+            return MusicModel.Album.fetch(in: context) { request in
+                request.predicate = MusicModel.Album.defaultPredicate
             }
         case .yours(let id):
-            let yoursPredicate = MusicModel.Country.predicateForContainingSongs(withCreatorIdentifier: id)
-            let predicate = MusicModel.Country.predicate(yoursPredicate)
-            return MusicModel.Country.fetch(in: context) { $0.predicate = predicate }
-        case .continent(let c):
-            c.countries.fetchFaults()
-            return Array(c.countries)
+            let yoursPredicate = MusicModel.Album.predicateForContainingSongs(withCreatorIdentifier: id)
+            let predicate = MusicModel.Album.predicate(yoursPredicate)
+            return MusicModel.Album.fetch(in: context) { $0.predicate = predicate }
+        case .artlist(let c):
+            c.albums.fetchFaults()
+            return Array(c.albums)
         default: return []
         }
     }
@@ -61,8 +61,8 @@ extension SongSource: LocalizedStringConvertible {
         switch self  {
         case .all: return ""
         case .yours: return ""
-        case .country(let c): return c.localizedDescription
-        case .continent(let c): return c.localizedDescription
+        case .album(let c): return c.localizedDescription
+        case .artlist(let c): return c.localizedDescription
         }
     }
 }

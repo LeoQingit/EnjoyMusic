@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Continent" representedClassName="MusicModel.Continent" parentEntity="Region" syncable="YES">
-        <attribute name="numberOfCountries" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="countries" toMany="YES" deletionRule="Nullify" destinationEntity="Country" inverseName="continent" inverseEntity="Country" syncable="YES"/>
+    <entity name="Album" representedClassName="MusicModel.Album" parentEntity="Region" syncable="YES">
+        <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="albums" inverseEntity="Artlist" syncable="YES"/>
+        <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song" syncable="YES"/>
     </entity>
-    <entity name="Country" representedClassName="MusicModel.Country" parentEntity="Region" syncable="YES">
-        <relationship name="continent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Continent" inverseName="countries" inverseEntity="Continent" syncable="YES"/>
-        <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="country" inverseEntity="Song" syncable="YES"/>
+    <entity name="Artlist" representedClassName="MusicModel.Artlist" parentEntity="Region" syncable="YES">
+        <attribute name="numberOfAlbums" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="albums" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artlist" inverseEntity="Album" syncable="YES"/>
     </entity>
     <entity name="Region" representedClassName="MusicModel.Region" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -29,14 +29,19 @@
     </entity>
     <entity name="Song" representedClassName="MusicModel.Song" syncable="YES">
         <attribute name="colors" optional="YES" attributeType="Transformable" valueTransformerName="ColorsTransformer" syncable="YES"/>
+        <attribute name="coverURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creatorID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteIdentifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="songs" inverseEntity="Country" syncable="YES"/>
+        <attribute name="songData" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album" syncable="YES"/>
         <compoundIndexes>
             <compoundIndex>
                 <index value="markedForRemoteDeletion"/>
@@ -46,9 +51,9 @@
         </compoundIndexes>
     </entity>
     <elements>
-        <element name="Continent" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="Country" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Artlist" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Album" positionX="0" positionY="0" width="128" height="75"/>
         <element name="Region" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Song" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="Song" positionX="0" positionY="0" width="128" height="255"/>
     </elements>
 </model>

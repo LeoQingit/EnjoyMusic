@@ -28,7 +28,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-xN-vBF">
                                             <rect key="frame" x="15" y="26" width="200.5" height="38"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="&lt;&lt;LABEL&gt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Eq-Hpz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="&lt;&lt;LABEL&gt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Eq-Hpz" userLabel="Album">
                                                     <rect key="frame" x="0.0" y="28" width="200.5" height="10"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,13 +66,12 @@
                                         <constraint firstAttribute="trailing" secondItem="0EP-4E-KEu" secondAttribute="trailing" id="Ddc-RS-yiV"/>
                                         <constraint firstItem="0EP-4E-KEu" firstAttribute="leading" secondItem="KLV-xN-vBF" secondAttribute="trailing" constant="15" id="ph2-TI-waL"/>
                                         <constraint firstItem="0EP-4E-KEu" firstAttribute="top" secondItem="5TP-qf-XaZ" secondAttribute="top" id="rVW-AX-l7T"/>
-                                        <constraint firstAttribute="centerY" secondItem="KLV-xN-vBF" secondAttribute="centerY" id="s63-Nt-7fI"/>
                                         <constraint firstAttribute="bottom" secondItem="0EP-4E-KEu" secondAttribute="bottom" id="x5R-Wx-hSI"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="KLV-xN-vBF" secondAttribute="bottom" constant="15" id="yCj-wt-yk7"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="country" destination="wQE-Eq-Hpz" id="OQR-Xr-tWO"/>
+                                    <outlet property="album" destination="wQE-Eq-Hpz" id="hzj-RN-2Ij"/>
                                     <outlet property="label" destination="qYv-bT-GCC" id="UUd-2N-IOF"/>
                                     <outlet property="songView" destination="0EP-4E-KEu" id="fCg-H3-JMV"/>
                                     <segue destination="fKz-xX-5Pg" kind="show" identifier="showSongDetail" id="p1V-sO-xG8"/>
@@ -482,8 +481,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="filterSegmentedControl" destination="mIs-pU-waG" id="uMp-7N-VKr"/>
-                        <segue destination="GCj-er-51c" kind="show" identifier="showCountrySongs" id="HVD-z9-SHn"/>
-                        <segue destination="GCj-er-51c" kind="show" identifier="showContinentSongs" id="Bbt-e8-drK"/>
+                        <segue destination="GCj-er-51c" kind="show" identifier="showAlbumSongs" id="HVD-z9-SHn"/>
+                        <segue destination="GCj-er-51c" kind="show" identifier="showArtlistSongs" id="Bbt-e8-drK"/>
                         <segue destination="GCj-er-51c" kind="show" identifier="showAllSongs" id="x6e-gb-GPI"/>
                         <segue destination="GCj-er-51c" kind="show" identifier="showYourSongs" id="QAC-pp-BaJ"/>
                     </connections>
@@ -494,7 +493,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Pyw-EJ-cVg"/>
+        <segue reference="p1V-sO-xG8"/>
         <segue reference="Bbt-e8-drK"/>
     </inferredMetricsTieBreakers>
 </document>

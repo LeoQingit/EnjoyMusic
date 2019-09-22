@@ -116,13 +116,13 @@ extension RemoteSong {
         guard let date = record.object(forKey: "date") as? Date,
             let colorData = record.object(forKey: "colors") as? Data,
             let colors = colorData.songColors,
-            let countryCode = record.object(forKey: "country") as? Int,
+            let albumCode = record.object(forKey: "album") as? Int,
             let creatorID = record.creatorUserRecordID?.recordName
             else { return nil }
-        let isoCountry = ISO3166.Country(rawValue: Int16(countryCode)) ?? ISO3166.Country.unknown
+        let isoAlbum = ISO3166.Album(rawValue: Int16(albumCode)) ?? ISO3166.Album.unknown
         let location = record.object(forKey: "location") as? CLLocation
         
-        self.init(id: record.recordID.recordName, creatorID: creatorID, date: date, location: location, colors: colors, isoCountry: isoCountry)
+        self.init(id: record.recordID.recordName, creatorID: creatorID, date: date, location: location, colors: colors, isoAlbum: isoAlbum)
     }
 }
 
@@ -134,7 +134,7 @@ extension Song {
         record["date"] = date as NSDate
         record["location"] = location
         record["colors"] = colors.songData as NSData
-        record["country"] = NSNumber(value: country?.iso3166Code.rawValue ?? 0)
+        record["album"] = NSNumber(value: album?.iso3166Code.rawValue ?? 0)
         record["version"] = NSNumber(value: 1)
         return record
     }

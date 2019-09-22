@@ -87,7 +87,7 @@ class SongAnnotation: NSObject, MKAnnotation {
 
     fileprivate init?(song: Song) {
         coordinate = song.location?.coordinate ?? CLLocationCoordinate2D()
-        title = song.country?.localizedDescription
+        title = song.album?.localizedDescription
         super.init()
         guard let _ = song.location, let _ = title else { return nil }
     }

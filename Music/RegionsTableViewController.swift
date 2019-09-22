@@ -17,8 +17,8 @@ class RegionsTableViewController: UITableViewController, SegueHandler {
     enum SegueIdentifier: String {
         case showAllSongs = "showAllSongs"
         case showYourSongs = "showYourSongs"
-        case showCountrySongs = "showCountrySongs"
-        case showContinentSongs = "showContinentSongs"
+        case showAlbumSongs = "showAlbumSongs"
+        case showArtlistSongs = "showArtlistSongs"
     }
 
     @IBOutlet weak var filterSegmentedControl: UISegmentedControl!
@@ -39,12 +39,12 @@ class RegionsTableViewController: UITableViewController, SegueHandler {
             vc.songSource = .all
         case .showYourSongs:
             vc.songSource = .yours(managedObjectContext.userID)
-        case .showCountrySongs:
-            guard let country = dataSource?.selectedObject as? Country else { fatalError("Must be a country") }
-            vc.songSource = .country(country)
-        case .showContinentSongs:
-            guard let continent = dataSource?.selectedObject as? Continent else { fatalError("Must be a continent") }
-            vc.songSource = .continent(continent)
+        case .showAlbumSongs:
+            guard let album = dataSource?.selectedObject as? Album else { fatalError("Must be a album") }
+            vc.songSource = .album(album)
+        case .showArtlistSongs:
+            guard let artlist = dataSource?.selectedObject as? Artlist else { fatalError("Must be a artlist") }
+            vc.songSource = .artlist(artlist)
         }
     }
 
@@ -130,9 +130,9 @@ protocol DisplayableRegion: LocalizedStringConvertible {
     var localizedDetailDescription: String { get }
 }
 
-extension Country: DisplayableRegion {
+extension Album: DisplayableRegion {
     var segue: RegionsTableViewController.SegueIdentifier {
-        return .showCountrySongs
+        return .showAlbumSongs
     }
 
     var localizedDetailDescription: String {
@@ -145,9 +145,9 @@ extension Country: DisplayableRegion {
 }
 
 
-extension Continent: DisplayableRegion {
+extension Artlist: DisplayableRegion {
     var segue: RegionsTableViewController.SegueIdentifier {
-        return .showContinentSongs
+        return .showArtlistSongs
     }
 
     var localizedDetailDescription: String {
@@ -164,8 +164,8 @@ extension UISegmentedControl {
     fileprivate var regionType: Managed.Type {
         switch selectedSegmentIndex {
         case 0: return Region.self
-        case 1: return Country.self
-        case 2: return Continent.self
+        case 1: return Album.self
+        case 2: return Artlist.self
         default: fatalError("Invalid filter index")
         }
     }

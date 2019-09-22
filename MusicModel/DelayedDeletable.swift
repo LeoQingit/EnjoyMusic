@@ -47,8 +47,8 @@ private let DeletionAgeBeforePermanentlyDeletingObjects = TimeInterval(2 * 60)
 extension NSManagedObjectContext {
     public func batchDeleteObjectsMarkedForLocalDeletion() {
         Song.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
-        Country.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
-        Continent.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
+        Album.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
+        Artlist.batchDeleteObjectsMarkedForLocalDeletionInContext(self)
     }
 }
 

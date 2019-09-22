@@ -36,26 +36,26 @@ public class MusicMergePolicy: NSMergePolicy {
             region.updatedAt = date
         }
 
-        resolveCountryConflicts(list)
-        resolveContinentConflicts(list)
+        resolveAlbumConflicts(list)
+        resolveArtlistConflicts(list)
     }
 
-    func resolveCountryConflicts(_ conflicts: [NSMergeConflict]) {
-        for country in conflicts.conflictedObjects(of: Country.self) {
-            country.refresh()
-            country.numberOfSongs = Int64(country.songs.count)
+    func resolveAlbumConflicts(_ conflicts: [NSMergeConflict]) {
+        for album in conflicts.conflictedObjects(of: Album.self) {
+            album.refresh()
+            album.numberOfSongs = Int64(album.songs.count)
         }
     }
 
-    func resolveContinentConflicts(_ conflicts: [NSMergeConflict]) {
-        for continent in conflicts.conflictedObjects(of: Continent.self) {
-            continent.refresh()
-            continent.numberOfCountries = Int64(continent.countries.count)
-            guard let ctx = continent.managedObjectContext else { continue }
+    func resolveArtlistConflicts(_ conflicts: [NSMergeConflict]) {
+        for artlist in conflicts.conflictedObjects(of: Artlist.self) {
+            artlist.refresh()
+            artlist.numberOfAlbums = Int64(artlist.albums.count)
+            guard let ctx = artlist.managedObjectContext else { continue }
             let count = Song.count(in: ctx) { request in
-                request.predicate = Song.predicate(format: "country IN %@", continent.countries)
+                request.predicate = Song.predicate(format: "album IN %@", artlist.albums)
             }
-            continent.numberOfSongs = Int64(count)
+            artlist.numberOfSongs = Int64(count)
         }
     }
 

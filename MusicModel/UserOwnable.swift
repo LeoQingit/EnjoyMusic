@@ -36,7 +36,7 @@ extension UserOwnable where Self: NSManagedObject {
 extension Song: UserOwnable {}
 
 
-extension Country {
+extension Album {
     public static func predicateForContainingSongs(withCreatorIdentifier identifier: String?) -> NSPredicate {
         let noIDPredicate = NSPredicate(format: "ANY songs.%K = NULL", CreatorIDKey)
         let defaultOwnerPredicate = NSPredicate(format: "ANY songs.%K = %@", CreatorIDKey, CKCurrentUserDefaultName)

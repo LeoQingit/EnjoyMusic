@@ -10,7 +10,7 @@ import MusicModel
 class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var songView: SongView!
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var country: UILabel!
+    @IBOutlet weak var album: UILabel!
 }
 
 
@@ -28,7 +28,7 @@ extension SongTableViewCell {
     func configure(for song: Song) {
         songView.colors = song.colors
         label.text = dateFormatter.string(from: song.date)
-        country.text = song.country?.localizedDescription ?? ""
+        album.text = song.album?.localizedDescription ?? ""
     }
 }
 
