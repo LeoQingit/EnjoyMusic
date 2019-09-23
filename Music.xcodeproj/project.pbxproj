@@ -17,7 +17,8 @@
 		2117A1062338B1DB002C1489 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A1052338B1DB002C1489 /* NotificationController.swift */; };
 		2117A1082338B1DB002C1489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2117A1072338B1DB002C1489 /* Assets.xcassets */; };
 		2117A10D2338B1DB002C1489 /* WatchMusic.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2117A0F02338B1D8002C1489 /* WatchMusic.app */; };
-		2117A11E2338C71E002C1489 /* WatchMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A11D2338C696002C1489 /* WatchMainCell.swift */; };
+		2117A11E2338C71E002C1489 /* MainTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A11D2338C696002C1489 /* MainTableRowController.swift */; };
+		FC75C614233907CB00D99C93 /* AllMusicInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75C613233907CB00D99C93 /* AllMusicInterfaceController.swift */; };
 		FC94D3972337076F00C54873 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D3962337076F00C54873 /* ViewController.swift */; };
 		FC94D39F2337076F00C54873 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC94D39E2337076F00C54873 /* Assets.xcassets */; };
 		FC94D3A22337076F00C54873 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC94D3A02337076F00C54873 /* LaunchScreen.storyboard */; };
@@ -235,7 +236,8 @@
 		2117A1072338B1DB002C1489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2117A1092338B1DB002C1489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2117A10A2338B1DB002C1489 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		2117A11D2338C696002C1489 /* WatchMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMainCell.swift; sourceTree = "<group>"; };
+		2117A11D2338C696002C1489 /* MainTableRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableRowController.swift; sourceTree = "<group>"; };
+		FC75C613233907CB00D99C93 /* AllMusicInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMusicInterfaceController.swift; sourceTree = "<group>"; };
 		FC94D3912337076F00C54873 /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC94D3962337076F00C54873 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FC94D39E2337076F00C54873 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -414,7 +416,8 @@
 			isa = PBXGroup;
 			children = (
 				2117A1012338B1DB002C1489 /* InterfaceController.swift */,
-				2117A11D2338C696002C1489 /* WatchMainCell.swift */,
+				2117A11D2338C696002C1489 /* MainTableRowController.swift */,
+				FC75C613233907CB00D99C93 /* AllMusicInterfaceController.swift */,
 				2117A1032338B1DB002C1489 /* ExtensionDelegate.swift */,
 				2117A1052338B1DB002C1489 /* NotificationController.swift */,
 				2117A1072338B1DB002C1489 /* Assets.xcassets */,
@@ -1066,7 +1069,8 @@
 			files = (
 				2117A1062338B1DB002C1489 /* NotificationController.swift in Sources */,
 				2117A1042338B1DB002C1489 /* ExtensionDelegate.swift in Sources */,
-				2117A11E2338C71E002C1489 /* WatchMainCell.swift in Sources */,
+				2117A11E2338C71E002C1489 /* MainTableRowController.swift in Sources */,
+				FC75C614233907CB00D99C93 /* AllMusicInterfaceController.swift in Sources */,
 				2117A1022338B1DB002C1489 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1265,7 +1269,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 49QL38VYXX;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
 				INFOPLIST_FILE = "WatchMusic Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1287,7 +1291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 49QL38VYXX;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
 				INFOPLIST_FILE = "WatchMusic Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

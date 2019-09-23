@@ -7,6 +7,7 @@
 //
 
 import WatchKit
+import WatchConnectivity
 import Foundation
 
 
@@ -14,13 +15,27 @@ class InterfaceController: WKInterfaceController {
 
     @IBOutlet weak var mainTable: WKInterfaceTable!
     
+    var session: WCSession!
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        mainTable.setNumberOfRows(2, withRowType: "mainTableCell")
-        let cell = mainTable.rowController(at: 0) as! WatchMainCell
-//        cell.iconImageView.setImage(<#T##image: UIImage?##UIImage?#>)
-        cell.titleLabel.setText("Demo")
-        // Configure interface objects here.
+        
+        session = WCSession.default
+        session.delegate = self
+        session.activate()
+        
+        let mainTitleArr = [
+            "正在播放",
+            "所有歌曲",
+            "我喜欢"
+        ]
+        
+        mainTable.setNumberOfRows(mainTitleArr.count, withRowType: "MainTableRowController")
+        for(idx, item) in mainTitleArr.enumerated() {
+            let cell = mainTable.rowController(at: idx) as! MainTableRowController
+            cell.titleLabel.setText(item)
+        }
+
     }
     
     override func willActivate() {
@@ -33,4 +48,17 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
+}
+
+
+extension InterfaceController: WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+        <#code#>
+    }
+    
+    
 }

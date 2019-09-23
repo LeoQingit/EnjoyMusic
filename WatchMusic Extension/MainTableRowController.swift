@@ -1,5 +1,5 @@
 //
-//  WatchMainCell.swift
+//  MainTableRowController.swift
 //  Music
 //
 //  Created by Leo Qin on 2019/9/23.
@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class WatchMainCell: NSObject {
+class MainTableRowController: NSObject {
     @IBOutlet weak var iconImageView: WKInterfaceImage!
     @IBOutlet weak var titleLabel: WKInterfaceLabel!
     
