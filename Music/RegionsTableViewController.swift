@@ -91,21 +91,21 @@ class RegionsTableViewController: UITableViewController, SegueHandler {
 extension RegionsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let region = dataSource.objectAtIndexPath(indexPath)
-        performSegue(withIdentifier: region.segue)
+//        performSegue(withIdentifier: region.segue)
     }
 }
 
 
 extension RegionsTableViewController: TableViewDataSourceDelegate {
-    func supplementaryObject(at indexPath: IndexPath) -> DisplayableRegion? {
+    func supplementaryObject(at indexPath: IndexPath) -> String? {
         switch indexPath.row {
-        case 0: return UserRegion.all
-        case 1: return UserRegion.yours
+        case 0: return "UserRegion.all"
+        case 1: return "UserRegion.yours"
         default: return nil
         }
     }
 
-    func configure(_ cell: RegionTableViewCell, for object: DisplayableRegion) {
+    func configure(_ cell: RegionTableViewCell, for object: String) {
         cell.configure(for: object)
     }
 
@@ -125,41 +125,6 @@ extension RegionsTableViewController: TableViewDataSourceDelegate {
 }
 
 
-protocol DisplayableRegion: LocalizedStringConvertible {
-    var segue: RegionsTableViewController.SegueIdentifier { get }
-    var localizedDetailDescription: String { get }
-}
-
-extension Album: DisplayableRegion {
-    var segue: RegionsTableViewController.SegueIdentifier {
-        return .showAlbumSongs
-    }
-
-    var localizedDetailDescription: String {
-        return ""
-    }
-
-    public var localizedDescription: String {
-        return iso3166Code.localizedDescription
-    }
-}
-
-
-extension Artlist: DisplayableRegion {
-    var segue: RegionsTableViewController.SegueIdentifier {
-        return .showArtlistSongs
-    }
-
-    var localizedDetailDescription: String {
-        return ""
-    }
-
-    public var localizedDescription: String {
-        return iso3166Code.localizedDescription
-    }
-}
-
-
 extension UISegmentedControl {
     fileprivate var regionType: Managed.Type {
         switch selectedSegmentIndex {
@@ -170,34 +135,4 @@ extension UISegmentedControl {
         }
     }
 }
-
-
-enum UserRegion {
-    case all
-    case yours
-}
-
-extension UserRegion: DisplayableRegion {
-    var segue: RegionsTableViewController.SegueIdentifier {
-        switch self {
-        case .all: return .showAllSongs
-        case .yours: return .showYourSongs
-        }
-    }
-
-    var localizedDescription: String {
-        switch self {
-        case .all: return ""
-        case .yours: return ""
-        }
-    }
-
-    var localizedDetailDescription: String {
-        switch self {
-        case .all: return ""
-        case .yours: return ""
-        }
-    }
-}
-
 

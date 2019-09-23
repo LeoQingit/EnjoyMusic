@@ -6,7 +6,6 @@
 import CoreData
 import CoreLocation
 
-
 public protocol RemoteObject: class {
 }
 
@@ -18,17 +17,13 @@ public struct RemoteSong: RemoteRecord {
     public var id: RemoteRecordID?
     public var creatorID: RemoteRecordID?
     public var date: Date
-    public var location: CLLocation?
-    public var colors: [UIColor]
-    public var isoAlbum: ISO3166.Album
+    public var songURL: String?
 
-    public init(id: RemoteRecordID?, creatorID: RemoteRecordID?, date: Date, location: CLLocation?, colors: [UIColor], isoAlbum: ISO3166.Album) {
+    public init(id: RemoteRecordID?, creatorID: RemoteRecordID?, date: Date, songURL: String?) {
         self.id = id
         self.creatorID = creatorID
         self.date = date
-        self.location = location
-        self.colors = colors
-        self.isoAlbum = isoAlbum
+        self.songURL = songURL
     }
 }
 

@@ -16,26 +16,16 @@ public class Album: NSManagedObject {
     @NSManaged public internal(set) var numberOfSongs: Int64
     @NSManaged internal var updatedAt: Date
 
-    public fileprivate(set) var iso3166Code: ISO3166.Album {
-        get {
-            guard let c = ISO3166.Album(rawValue: numericISO3166Code) else { fatalError("Unknown album code") }
-            return c
-        }
-        set {
-            numericISO3166Code = newValue.rawValue
-        }
-    }
-
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         primitiveUpdatedAt = Date()
     }
 
-    static func findOrCreate(for isoAlbum: ISO3166.Album, in context: NSManagedObjectContext) -> Album {
-        let predicate = Album.predicate(format: "%K == %d", #keyPath(numericISO3166Code), Int(isoAlbum.rawValue))
+    static func findOrCreate(for unique: String, in context: NSManagedObjectContext) -> Album {
+        let predicate = Album.predicate(format: "%K == %@", #keyPath(uniqueId), unique)
         let album = findOrCreate(in: context, matching: predicate) {
-            $0.iso3166Code = isoAlbum
-            $0.artlist = Artlist.findOrCreateArtlist(for: isoAlbum, in: context)
+            $0.uniqueId = unique
+            $0.artlist = Artlist.findOrCreateArtlist(for: "未知", in: context)
         }
         return album
     }
@@ -70,7 +60,7 @@ public class Album: NSManagedObject {
 
 
     // MARK: Private
-    @NSManaged fileprivate var numericISO3166Code: Int16
+    @NSManaged fileprivate var uniqueId: String
     @NSManaged fileprivate var primitiveUpdatedAt: Date
 
 

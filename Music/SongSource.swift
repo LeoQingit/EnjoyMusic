@@ -55,15 +55,3 @@ extension SongSource {
     }
 }
 
-
-extension SongSource: LocalizedStringConvertible {
-    var localizedDescription: String {
-        switch self  {
-        case .all: return ""
-        case .yours: return ""
-        case .album(let c): return c.localizedDescription
-        case .artlist(let c): return c.localizedDescription
-        }
-    }
-}
-

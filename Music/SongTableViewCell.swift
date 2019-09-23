@@ -26,9 +26,8 @@ private let dateFormatter: DateFormatter = {
 
 extension SongTableViewCell {
     func configure(for song: Song) {
-        songView.colors = song.colors
-        label.text = dateFormatter.string(from: song.date)
-        album.text = song.album?.localizedDescription ?? ""
+        label.text = song.name
+        album.text = dateFormatter.string(from: song.date)
     }
 }
 

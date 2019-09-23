@@ -15,7 +15,6 @@ import CoreDataHelpers
 class SongDetailViewController: UIViewController {
 
     @IBOutlet weak var songView: SongView!
-    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var trashButton: UIBarButtonItem!
 
     fileprivate var observer: ManagedObjectObserver?
@@ -26,13 +25,13 @@ class SongDetailViewController: UIViewController {
                 guard type == .delete else { return }
                 let _ = self.navigationController?.popViewController(animated: true)
             }
-            updateViews()
+//            updateViews()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateViews()
+//        updateViews()
     }
 
     @IBAction func deleteSong(_ sender: UIBarButtonItem) {
@@ -44,22 +43,12 @@ class SongDetailViewController: UIViewController {
 
     // MARK: Private
 
-    fileprivate func updateViews() {
-        songView?.colors = song.colors
-        mapView?.alpha = 1
-        navigationItem.title = song.dateDescription
-        trashButton.isEnabled = song.belongsToCurrentUser
-        updateMapView()
-    }
+//    fileprivate func updateViews() {
+//        songView?.colors = song.colors
+//        navigationItem.title = song.dateDescription
+//        trashButton.isEnabled = song.belongsToCurrentUser
+//    }
 
-    fileprivate func updateMapView() {
-        guard let map = mapView, let annotation = SongAnnotation(song: song) else { return }
-        map.removeAnnotations(mapView!.annotations)
-        map.addAnnotation(annotation)
-        map.selectAnnotation(annotation, animated: false)
-        map.setCenter(annotation.coordinate, animated: false)
-        map.setRegion(MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 2e6, longitudinalMeters: 2e6), animated: false)
-    }
 
 }
 
@@ -76,21 +65,6 @@ private let dateComponentsFormatter: DateComponentsFormatter = {
 extension Song {
     var dateDescription: String {
         guard let timeString = dateComponentsFormatter.string(from: abs(date.timeIntervalSinceNow)) else { return "" }
-        return ""
+        return timeString
     }
 }
-
-
-class SongAnnotation: NSObject, MKAnnotation {
-    let coordinate: CLLocationCoordinate2D
-    let title: String?
-
-    fileprivate init?(song: Song) {
-        coordinate = song.location?.coordinate ?? CLLocationCoordinate2D()
-        title = song.album?.localizedDescription
-        super.init()
-        guard let _ = song.location, let _ = title else { return nil }
-    }
-}
-
-

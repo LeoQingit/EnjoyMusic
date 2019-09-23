@@ -11,7 +11,7 @@ protocol CameraViewControllerDelegate: class {
 }
 
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var cameraView: CameraView?
     weak var delegate: CameraViewControllerDelegate!
@@ -67,6 +67,14 @@ class CameraViewController: UIViewController {
     fileprivate func updateAuthorizationStatus() {
         cameraView?.authorized = readyToSnap
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
+            delegate.didCapture(image)
+        }
+        dismiss(animated: true, completion: nil)
+        imagePicker = nil
+    }
 
 }
 
@@ -85,17 +93,5 @@ extension CameraViewController: CaptureSessionDelegate {
 
 }
 
-
-extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            delegate.didCapture(image)
-        }
-        dismiss(animated: true, completion: nil)
-        imagePicker = nil
-    }
-
-}
 
 

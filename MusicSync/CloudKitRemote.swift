@@ -114,15 +114,13 @@ extension RemoteSong {
     fileprivate init?(record: CKRecord) {
         guard record.recordType == RemoteSong.remoteRecordName else { fatalError("wrong record type") }
         guard let date = record.object(forKey: "date") as? Date,
-            let colorData = record.object(forKey: "colors") as? Data,
-            let colors = colorData.songColors,
-            let albumCode = record.object(forKey: "album") as? Int,
+            let songURL = record.object(forKey: "songURL") as? String,
             let creatorID = record.creatorUserRecordID?.recordName
             else { return nil }
-        let isoAlbum = ISO3166.Album(rawValue: Int16(albumCode)) ?? ISO3166.Album.unknown
-        let location = record.object(forKey: "location") as? CLLocation
         
-        self.init(id: record.recordID.recordName, creatorID: creatorID, date: date, location: location, colors: colors, isoAlbum: isoAlbum)
+        
+        self.init(id: record.recordID.recordName, creatorID: creatorID, date: date, songURL: songURL)
+        
     }
 }
 
@@ -132,9 +130,7 @@ extension Song {
         let record = CKRecord(recordType: RemoteSong.remoteRecordName)
         //TODO(swift3) Do we have to cast / wrap NSDate, NSData, NSNumber...?
         record["date"] = date as NSDate
-        record["location"] = location
         record["colors"] = colors.songData as NSData
-        record["album"] = NSNumber(value: album?.iso3166Code.rawValue ?? 0)
         record["version"] = NSNumber(value: 1)
         return record
     }

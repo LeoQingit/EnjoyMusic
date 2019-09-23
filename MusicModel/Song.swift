@@ -13,16 +13,18 @@ public class Song: NSManagedObject {
 
     @NSManaged public fileprivate(set) var date: Date
     @NSManaged public fileprivate(set) var colors: [UIColor]
-    public var location: CLLocation? {
-        guard let lat = latitude, let lon = longitude else { return nil }
-        return CLLocation(latitude: lat.doubleValue, longitude: lon.doubleValue)
-    }
 
     @NSManaged public var creatorID: String?
     @NSManaged public var remoteIdentifier: RemoteRecordID?
 
     @NSManaged public fileprivate(set) var album___: Album
     @NSManaged public fileprivate(set) var album: Album?
+    @NSManaged public fileprivate(set) var coverURL: String?
+    @NSManaged public fileprivate(set) var duration: Double
+    @NSManaged public fileprivate(set) var favorite: Int16
+    @NSManaged public var name: String?
+    
+    @NSManaged public fileprivate(set) var songURL: String?
 
 
     public override func awakeFromInsert() {
@@ -30,27 +32,17 @@ public class Song: NSManagedObject {
         primitiveDate = Date()
     }
 
-    public static func insert(into moc: NSManagedObjectContext, image: UIImage) -> Song {
+    public static func insert(into moc: NSManagedObjectContext, songURL: String?) -> Song {
         let song: Song = moc.insertObject()
-        song.colors = image.songColors
+        song.songURL = songURL
         song.date = Date()
         return song
     }
 
-
-    public static func insert(into moc: NSManagedObjectContext, image: UIImage, location: CLLocation?, placemark: CLPlacemark?) -> Song {
-        let iso3166 = ISO3166.Album.fromISO3166(placemark?.isoCountryCode ?? "")
-        return insert(into: moc, colors: image.songColors, location: location, isoAlbum: iso3166)
-    }
-
-    public static func insert(into moc: NSManagedObjectContext, colors: [UIColor], location: CLLocation?, isoAlbum: ISO3166.Album, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
+    public static func insert(into moc: NSManagedObjectContext, songURL: String?, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
         let song: Song = moc.insertObject()
-        song.colors = colors
-        if let coord = location?.coordinate {
-            song.latitude = NSNumber(value: coord.latitude)
-            song.longitude = NSNumber(value: coord.longitude)
-        }
-        song.album = Album.findOrCreate(for: isoAlbum, in: moc)
+        song.songURL = songURL
+        song.album = Album.findOrCreate(for: "未知", in: moc)
         song.remoteIdentifier = remoteIdentifier
         if let d = date {
             song.date = d
@@ -70,8 +62,6 @@ public class Song: NSManagedObject {
     // MARK: Private
 
     @NSManaged fileprivate var primitiveDate: Date
-    @NSManaged fileprivate var latitude: NSNumber?
-    @NSManaged fileprivate var longitude: NSNumber?
 
 
     fileprivate func removeFromAlbum() {

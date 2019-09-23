@@ -13,9 +13,9 @@ class RegionTableViewCell: UITableViewCell {
 
 
 extension RegionTableViewCell {
-    func configure(for object: DisplayableRegion) {
-        titleLabel.text = object.localizedDescription
-        detailLabel.text = object.localizedDetailDescription
+    func configure(for object: String) {
+        titleLabel.text = "object.localizedDescription"
+        detailLabel.text = "object.localizedDetailDescription"
     }
 }
 

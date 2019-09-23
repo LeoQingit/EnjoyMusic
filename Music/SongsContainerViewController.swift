@@ -23,7 +23,6 @@ class SongsContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = songSource.localizedDescription
         presentationStyle = UserDefaults.standard.songPresentationStyle
     }
 

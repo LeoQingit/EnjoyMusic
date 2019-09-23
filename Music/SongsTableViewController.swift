@@ -7,17 +7,18 @@ import UIKit
 import CoreData
 import MusicModel
 import CoreDataHelpers
-
+import AVFoundation
 
 class SongsTableViewController: UITableViewController, SongsPresenter, SegueHandler {
 
     enum SegueIdentifier: String {
         case showSongDetail = "showSongDetail"
     }
+    var player: AVAudioPlayer!
 
     var managedObjectContext: NSManagedObjectContext!
     var albums: [Album]?
-    var songSource: SongSource! {
+    var songSource: SongSource! = .all {
         didSet {
             guard let o = songSource.managedObject as? Managed else { return }
             observer = ManagedObjectObserver(object: o) { [unowned self] type in
@@ -33,15 +34,6 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
         setupTableView()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(for: segue) {
-        case .showSongDetail:
-            guard let vc = segue.destination as? SongDetailViewController else { fatalError("Wrong view controller type") }
-            guard let song = dataSource.selectedObject else { fatalError("Showing detail, but no selected row?") }
-            vc.song = song
-        }
-    }
-
 
     // MARK: Private
 
@@ -51,6 +43,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
     fileprivate func setupTableView() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
+        tableView.delegate = self
         let request = Song.sortedFetchRequest(with: songSource.predicate)
         request.returnsObjectsAsFaults = false
         request.fetchBatchSize = 20
@@ -67,4 +60,33 @@ extension SongsTableViewController: TableViewDataSourceDelegate {
     }
 }
 
+
+extension SongsTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let song = dataSource.selectedObject else { fatalError("Showing detail, but no selected row?") }
+        if let urlStr = song.songURL {
+            do {
+                print(urlStr)
+                let data = NSData(contentsOfFile: urlStr)! as Data
+                let avplayer = try AVAudioPlayer(data: data)
+                self.player = avplayer
+                avplayer.volume = 0.5
+                avplayer.play()
+                avplayer.delegate = self
+            } catch {
+                print(error)
+            }
+        }
+    }
+}
+
+extension SongsTableViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("success")
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print(error)
+    }
+}
 

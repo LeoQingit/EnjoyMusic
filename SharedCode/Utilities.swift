@@ -71,6 +71,10 @@ extension URL {
     static var documents: URL {
         return try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
+    
+    static var library: URL {
+        return try! FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    }
 }
 
 

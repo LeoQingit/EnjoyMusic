@@ -11,7 +11,7 @@
     <entity name="Region" representedClassName="MusicModel.Region" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="numberOfSongs" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="numericISO3166Code" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="uniqueId" attributeType="String" syncable="YES"/>
         <attribute name="uniquenessDummy" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <compoundIndexes>
@@ -22,7 +22,7 @@
         </compoundIndexes>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="numericISO3166Code"/>
+                <constraint value="uniqueId"/>
                 <constraint value="uniquenessDummy"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
@@ -32,15 +32,13 @@
         <attribute name="coverURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creatorID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="favorite" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="favorite" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="remoteIdentifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="songData" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="songURL" optional="YES" attributeType="String" storedInTruthFile="YES" syncable="YES"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album" syncable="YES"/>
         <compoundIndexes>
             <compoundIndex>
@@ -51,9 +49,9 @@
         </compoundIndexes>
     </entity>
     <elements>
-        <element name="Artlist" positionX="0" positionY="0" width="128" height="75"/>
         <element name="Album" positionX="0" positionY="0" width="128" height="75"/>
-        <element name="Region" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Song" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="Artlist" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Region" positionX="0" positionY="0" width="128" height="30"/>
+        <element name="Song" positionX="0" positionY="0" width="128" height="225"/>
     </elements>
 </model>

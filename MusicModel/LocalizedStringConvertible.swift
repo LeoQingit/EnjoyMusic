@@ -5,7 +5,7 @@
 
 import Foundation
 
-public protocol LocalizedStringConvertible {
-    var localizedDescription: String { get }
-}
+//public protocol LocalizedStringConvertible {
+//    var localizedDescription: String { get }
+//}
 

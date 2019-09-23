@@ -55,11 +55,10 @@ class RootViewController: UIViewController, SegueHandler {
     fileprivate func saveSongWithImage(_ image: UIImage) {
         geoLocationController.retrieveCurrentLocation { location, placemark in
             self.managedObjectContext.performChanges {
-                let _ = Song.insert(into: self.managedObjectContext, image: image, location: location, placemark: placemark)
+                let _ = Song.insert(into: self.managedObjectContext, songURL: nil)
             }
         }
     }
-
 }
 
 extension RootViewController: UINavigationControllerDelegate {
@@ -84,7 +83,6 @@ extension RootViewController: CameraViewControllerDelegate {
     func didCapture(_ image: UIImage) {
         saveSongWithImage(image)
     }
-
 
 }
 

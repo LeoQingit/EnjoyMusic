@@ -21,8 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         createMusicContainer { container in
             self.persistentContainer = container
             self.syncCoordinator = SyncCoordinator(container: container)
+//            MusicScannerTool.shared.scanMusicPath(completion: { urlString in
+//                container.viewContext.performChanges {
+//                    let song = Song.insert(into: container.viewContext, songURL: urlString)
+//                    if let subString = urlString?.split(separator: "/").last {
+//                        song.name = String(subString)
+//                    }
+//                }
+//            })
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let vc = storyboard.instantiateViewController(withIdentifier: "RootViewController") as? RootViewController
+            guard let vc = storyboard.instantiateViewController(withIdentifier: "SongsTableViewController") as? SongsTableViewController
                 else { fatalError("Wrong view controller type") }
             vc.managedObjectContext = container.viewContext
             self.window?.rootViewController = vc

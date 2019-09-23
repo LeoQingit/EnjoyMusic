@@ -16,25 +16,14 @@ public class Artlist: NSManagedObject {
     @NSManaged public fileprivate(set) var albums: Set<Album>
     @NSManaged internal var updatedAt: Date
 
-    public fileprivate(set) var iso3166Code: ISO3166.Artlist {
-        get {
-            guard let c = ISO3166.Artlist(rawValue: numericISO3166Code) else { fatalError("Unknown artlist code") }
-            return c
-        }
-        set {
-            numericISO3166Code = newValue.rawValue
-        }
-    }
-
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         primitiveUpdatedAt = Date()
     }
 
-    static func findOrCreateArtlist(for isoAlbum: ISO3166.Album, in context: NSManagedObjectContext) -> Artlist? {
-        guard let iso3166 = ISO3166.Artlist(album: isoAlbum) else { return nil }
-        let predicate = Artlist.predicate(format: "%K == %d", #keyPath(numericISO3166Code), Int(iso3166.rawValue))
-        let artlist = findOrCreate(in: context, matching: predicate) { $0.iso3166Code = iso3166 }
+    static func findOrCreateArtlist(for unique: String, in context: NSManagedObjectContext) -> Artlist? {
+        let predicate = Artlist.predicate(format: "%K == %@", #keyPath(uniqueId), unique)
+        let artlist = findOrCreate(in: context, matching: predicate) { $0.uniqueId = unique }
         return artlist
     }
 
@@ -65,7 +54,7 @@ public class Artlist: NSManagedObject {
 
     // MARK: Private
 
-    @NSManaged fileprivate var numericISO3166Code: Int16
+    @NSManaged fileprivate var uniqueId: String
     @NSManaged fileprivate var primitiveUpdatedAt: Date
 
     fileprivate var hasChangedAlbums: Bool {
@@ -90,13 +79,6 @@ public class Artlist: NSManagedObject {
         return changedValue(forKey: #keyPath(Artlist.numberOfSongs)) != nil
     }
 
-}
-
-
-extension Artlist: LocalizedStringConvertible {
-    public var localizedDescription: String {
-        return iso3166Code.localizedDescription
-    }
 }
 
 
