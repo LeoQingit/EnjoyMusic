@@ -45,6 +45,7 @@
 	<string>Music needs access to your Photo Library</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
