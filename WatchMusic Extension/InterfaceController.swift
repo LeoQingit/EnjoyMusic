@@ -57,7 +57,10 @@ extension InterfaceController: WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
-        <#code#>
+        print(file)
+    }
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
+        print(messageData)
     }
     
     

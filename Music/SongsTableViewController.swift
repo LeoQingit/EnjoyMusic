@@ -8,6 +8,7 @@ import CoreData
 import MusicModel
 import CoreDataHelpers
 import AVFoundation
+import WatchConnectivity
 
 class SongsTableViewController: UITableViewController, SongsPresenter, SegueHandler {
 
@@ -15,6 +16,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
         case showSongDetail = "showSongDetail"
     }
     var player: AVAudioPlayer!
+    var session: WCSession!
 
     var managedObjectContext: NSManagedObjectContext!
     var albums: [Album]?
@@ -30,6 +32,9 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        session = WCSession.default
+        session.delegate = self
+        session.activate()
         albums = songSource.prefetch(in: managedObjectContext)
         setupTableView()
     }
@@ -73,6 +78,11 @@ extension SongsTableViewController {
                 avplayer.volume = 0.5
                 avplayer.play()
                 avplayer.delegate = self
+                session.sendMessageData(data, replyHandler: { data in
+                    print(data)
+                }) { error in
+                    print(error)
+                }
             } catch {
                 print(error)
             }
@@ -86,7 +96,24 @@ extension SongsTableViewController: AVAudioPlayerDelegate {
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        print(error)
+        print(error as Any)
     }
 }
 
+
+extension SongsTableViewController: WCSessionDelegate {
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    
+}
