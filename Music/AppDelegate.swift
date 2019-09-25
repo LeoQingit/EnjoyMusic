@@ -8,6 +8,7 @@ import MusicSync
 import MusicModel
 import CoreData
 
+private let SongURLKey = "songURL"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,17 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var persistentContainer: NSPersistentContainer!
     var syncCoordinator: SyncCoordinator!
     var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         application.registerForRemoteNotifications()
         createMusicContainer { container in
             self.persistentContainer = container
             self.syncCoordinator = SyncCoordinator(container: container)
-            MusicScannerTool.shared.scanMusicPath(completion: { urlString in
+            MusicScannerTool.shared.scanMusicPath(completion: { url in
+                guard let url = url else { return }
+                let temp = Song.fetch(in: container.viewContext) { (request) in
+                    request.predicate = NSPredicate.init(value: true)
+                }
                 container.viewContext.performChanges {
-                    let song = Song.insert(into: container.viewContext, songURL: urlString)
-                    if let subString = urlString?.split(separator: "/").last {
-                        song.name = String(subString)
+                    let tp = Song.findOrCreate(in: container.viewContext, matching:  NSPredicate(format: "%K = %@", SongURLKey, url.relativePath)) { song in
+                        song.name = url.lastPathComponent
+                        song.songURL = url.relativePath
                     }
                 }
             })

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G95" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Album" representedClassName="MusicModel.Album" parentEntity="Region" syncable="YES">
         <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="albums" inverseEntity="Artlist" syncable="YES"/>
         <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song" syncable="YES"/>
@@ -52,6 +52,6 @@
         <element name="Album" positionX="0" positionY="0" width="128" height="75"/>
         <element name="Artlist" positionX="0" positionY="0" width="128" height="75"/>
         <element name="Region" positionX="0" positionY="0" width="128" height="30"/>
-        <element name="Song" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="Song" positionX="0" positionY="0" width="128" height="223"/>
     </elements>
 </model>

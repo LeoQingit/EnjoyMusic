@@ -24,7 +24,7 @@ public class Song: NSManagedObject {
     @NSManaged public fileprivate(set) var favorite: Int16
     @NSManaged public var name: String?
     
-    @NSManaged public fileprivate(set) var songURL: String?
+    @NSManaged public var songURL: String?
 
 
     public override func awakeFromInsert() {
