@@ -32,9 +32,11 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        session = WCSession.default
-        session.delegate = self
-        session.activate()
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         albums = songSource.prefetch(in: managedObjectContext)
         setupTableView()
     }
@@ -69,20 +71,30 @@ extension SongsTableViewController: TableViewDataSourceDelegate {
 extension SongsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let song = dataSource.selectedObject else { fatalError("Showing detail, but no selected row?") }
-        if let urlStr = song.songURL {
+        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        if let urlStr = song.name, let filePath = filePath {
             do {
                 print(urlStr)
-                let data = NSData(contentsOfFile: urlStr)! as Data
-                let avplayer = try AVAudioPlayer(data: data)
-                self.player = avplayer
-                avplayer.volume = 0.5
-                avplayer.play()
-                avplayer.delegate = self
+                let data = try NSData.init(contentsOfFile: filePath + "/" + urlStr) as Data
+//                let avplayer = try AVAudioPlayer(data: data)
+//                self.player = avplayer
+//                avplayer.volume = 0.5
+//                avplayer.play()
+//                avplayer.delegate = self
                 session.sendMessageData(data, replyHandler: { data in
                     print(data)
                 }) { error in
                     print(error)
                 }
+                let url = URL.init(fileURLWithPath: filePath + "/" + urlStr)
+                    
+                if session.isReachable {
+                    let transfer = session.transferFile(url, metadata: nil)
+                    
+                    let progress = transfer.progress
+                }
+                
+                
             } catch {
                 print(error)
             }

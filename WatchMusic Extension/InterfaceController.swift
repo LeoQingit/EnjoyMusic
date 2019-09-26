@@ -58,6 +58,8 @@ extension InterfaceController: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         print(file)
+
+        let data = Data.init(contentsOf: file.fileURL)
     }
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         print(messageData)

@@ -13,7 +13,7 @@ class MusicScannerTool {
     
     var quryQueue = DispatchQueue(label: "com.scanner.www", qos: .default, attributes: .concurrent, autoreleaseFrequency: .never, target: nil)
     
-    func scanMusicPath(completion: @escaping (URL?)->()) {
+    func scanMusicPath(completion: @escaping ([String])->()) {
         quryQueue.async {
             
             let manager = FileManager.default
@@ -23,9 +23,7 @@ class MusicScannerTool {
                 
                 if let documentDir = filePaths.first {
                     let filelist = try manager.contentsOfDirectory(atPath: documentDir)
-                    for item in filelist {
-                        completion(URL(string: documentDir)?.appendingPathComponent(item))
-                    }
+                    completion(filelist)
                 }
                 
             } catch {
