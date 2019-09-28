@@ -18,6 +18,9 @@
 		2117A1082338B1DB002C1489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2117A1072338B1DB002C1489 /* Assets.xcassets */; };
 		2117A10D2338B1DB002C1489 /* WatchMusic.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2117A0F02338B1D8002C1489 /* WatchMusic.app */; };
 		2117A11E2338C71E002C1489 /* MainTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A11D2338C696002C1489 /* MainTableRowController.swift */; };
+		FC033509233FB50900A07468 /* WatchMusicSync.h in Headers */ = {isa = PBXBuildFile; fileRef = FC033507233FB50900A07468 /* WatchMusicSync.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC03350C233FB50900A07468 /* WatchMusicSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC033505233FB50900A07468 /* WatchMusicSync.framework */; };
+		FC03350D233FB50900A07468 /* WatchMusicSync.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC033505233FB50900A07468 /* WatchMusicSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC75C614233907CB00D99C93 /* AllMusicInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75C613233907CB00D99C93 /* AllMusicInterfaceController.swift */; };
 		FC94D3972337076F00C54873 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC94D3962337076F00C54873 /* ViewController.swift */; };
 		FC94D39F2337076F00C54873 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC94D39E2337076F00C54873 /* Assets.xcassets */; };
@@ -133,6 +136,13 @@
 			remoteGlobalIDString = 2117A0EF2338B1D8002C1489;
 			remoteInfo = WatchMusic;
 		};
+		FC03350A233FB50900A07468 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC94D3892337076F00C54873 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC033504233FB50900A07468;
+			remoteInfo = WatchMusicSync;
+		};
 		FC94D3D4233707AE00C54873 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC94D3892337076F00C54873 /* Project object */;
@@ -207,6 +217,17 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FC0334FF233FB2B500A07468 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FC03350D233FB50900A07468 /* WatchMusicSync.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC94D3E4233707AE00C54873 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,6 +258,9 @@
 		2117A1092338B1DB002C1489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2117A10A2338B1DB002C1489 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		2117A11D2338C696002C1489 /* MainTableRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableRowController.swift; sourceTree = "<group>"; };
+		FC033505233FB50900A07468 /* WatchMusicSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchMusicSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC033507233FB50900A07468 /* WatchMusicSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchMusicSync.h; sourceTree = "<group>"; };
+		FC033508233FB50900A07468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC75C613233907CB00D99C93 /* AllMusicInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMusicInterfaceController.swift; sourceTree = "<group>"; };
 		FC94D3912337076F00C54873 /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC94D3962337076F00C54873 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -345,6 +369,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC03350C233FB50900A07468 /* WatchMusicSync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC033502233FB50900A07468 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +459,15 @@
 			path = "WatchMusic Extension";
 			sourceTree = "<group>";
 		};
+		FC033506233FB50900A07468 /* WatchMusicSync */ = {
+			isa = PBXGroup;
+			children = (
+				FC033507233FB50900A07468 /* WatchMusicSync.h */,
+				FC033508233FB50900A07468 /* Info.plist */,
+			);
+			path = WatchMusicSync;
+			sourceTree = "<group>";
+		};
 		FC94D3882337076F00C54873 = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +479,7 @@
 				FC94D410233707E900C54873 /* CoreDataHelpers */,
 				2117A0F12338B1D8002C1489 /* WatchMusic */,
 				2117A1002338B1DB002C1489 /* WatchMusic Extension */,
+				FC033506233FB50900A07468 /* WatchMusicSync */,
 				FC94D3922337076F00C54873 /* Products */,
 				FC94D55F233713C500C54873 /* Frameworks */,
 			);
@@ -454,6 +496,7 @@
 				FC94D40F233707E900C54873 /* CoreDataHelpers.framework */,
 				2117A0F02338B1D8002C1489 /* WatchMusic.app */,
 				2117A0FC2338B1DB002C1489 /* WatchMusic Extension.appex */,
+				FC033505233FB50900A07468 /* WatchMusicSync.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -735,6 +778,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		FC033500233FB50900A07468 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC033509233FB50900A07468 /* WatchMusicSync.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC94D3C5233707AE00C54873 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -789,15 +840,35 @@
 				2117A0F82338B1DB002C1489 /* Sources */,
 				2117A0F92338B1DB002C1489 /* Frameworks */,
 				2117A0FA2338B1DB002C1489 /* Resources */,
+				FC0334FF233FB2B500A07468 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FC03350B233FB50900A07468 /* PBXTargetDependency */,
 			);
 			name = "WatchMusic Extension";
 			productName = "WatchMusic Extension";
 			productReference = 2117A0FC2338B1DB002C1489 /* WatchMusic Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		FC033504233FB50900A07468 /* WatchMusicSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC03350E233FB50900A07468 /* Build configuration list for PBXNativeTarget "WatchMusicSync" */;
+			buildPhases = (
+				FC033500233FB50900A07468 /* Headers */,
+				FC033501233FB50900A07468 /* Sources */,
+				FC033502233FB50900A07468 /* Frameworks */,
+				FC033503233FB50900A07468 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WatchMusicSync;
+			productName = WatchMusicSync;
+			productReference = FC033505233FB50900A07468 /* WatchMusicSync.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		FC94D3902337076F00C54873 /* Music */ = {
 			isa = PBXNativeTarget;
@@ -936,6 +1007,9 @@
 							};
 						};
 					};
+					FC033504233FB50900A07468 = {
+						CreatedOnToolsVersion = 11.0;
+					};
 					FC94D3902337076F00C54873 = {
 						CreatedOnToolsVersion = 10.3;
 						SystemCapabilities = {
@@ -992,6 +1066,7 @@
 				FC94D40E233707E900C54873 /* CoreDataHelpers */,
 				2117A0EF2338B1D8002C1489 /* WatchMusic */,
 				2117A0FB2338B1DB002C1489 /* WatchMusic Extension */,
+				FC033504233FB50900A07468 /* WatchMusicSync */,
 			);
 		};
 /* End PBXProject section */
@@ -1011,6 +1086,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2117A1082338B1DB002C1489 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC033503233FB50900A07468 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,6 +1154,13 @@
 				2117A11E2338C71E002C1489 /* MainTableRowController.swift in Sources */,
 				FC75C614233907CB00D99C93 /* AllMusicInterfaceController.swift in Sources */,
 				2117A1022338B1DB002C1489 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC033501233FB50900A07468 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1206,6 +1295,11 @@
 			isa = PBXTargetDependency;
 			target = 2117A0EF2338B1D8002C1489 /* WatchMusic */;
 			targetProxy = 2117A10B2338B1DB002C1489 /* PBXContainerItemProxy */;
+		};
+		FC03350B233FB50900A07468 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC033504233FB50900A07468 /* WatchMusicSync */;
+			targetProxy = FC03350A233FB50900A07468 /* PBXContainerItemProxy */;
 		};
 		FC94D3D5233707AE00C54873 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1358,6 +1452,66 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.3;
+			};
+			name = Release;
+		};
+		FC03350F233FB50900A07468 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchMusicSync/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.music.www.WatchMusicSync;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		FC033510233FB50900A07468 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchMusicSync/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.music.www.WatchMusicSync;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -1520,6 +1674,7 @@
 		FC94D3E2233707AE00C54873 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1550,6 +1705,7 @@
 		FC94D3E3233707AE00C54873 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1619,6 +1775,7 @@
 		FC94D405233707CF00C54873 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1649,6 +1806,7 @@
 		FC94D406233707CF00C54873 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1718,6 +1876,7 @@
 		FC94D427233707EA00C54873 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1746,6 +1905,7 @@
 		FC94D428233707EA00C54873 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1788,6 +1948,15 @@
 			buildConfigurations = (
 				2117A1132338B1DB002C1489 /* Debug */,
 				2117A1142338B1DB002C1489 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC03350E233FB50900A07468 /* Build configuration list for PBXNativeTarget "WatchMusicSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC03350F233FB50900A07468 /* Debug */,
+				FC033510233FB50900A07468 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

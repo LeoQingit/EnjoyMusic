@@ -23,11 +23,12 @@ class InterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        session = WCSession.default
-        session.delegate = self
-        session.activate()
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         
-
         
         let mainTitleArr = [
             "正在播放",
