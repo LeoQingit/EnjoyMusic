@@ -6,12 +6,32 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--All Music Interface Controller-->
         <scene sceneID="qRH-K7-vd5">
             <objects>
-                <controller id="FSh-LN-cj9"/>
+                <controller id="FSh-LN-cj9" customClass="AllMusicInterfaceController" customModule="WatchMusic_Extension">
+                    <items>
+                        <table alignment="left" id="00b-4O-Y3B">
+                            <items>
+                                <tableRow id="6Fi-ZQ-xNV" customClass="SongTableRowController" customModule="WatchMusic_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="I70-T6-krB">
+                                        <items>
+                                            <label width="136" height="41" alignment="left" text="Label" textAlignment="center" id="pkt-Ho-wjW"/>
+                                        </items>
+                                        <connections>
+                                            <segue destination="hQL-lu-Gf5" kind="push" id="jWU-oL-CxR"/>
+                                        </connections>
+                                    </group>
+                                    <connections>
+                                        <outlet property="nameLabel" destination="pkt-Ho-wjW" id="V7k-b5-0Vh"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="132" y="136"/>
+            <point key="canvasLocation" x="131.64102564102566" y="135.56410256410257"/>
         </scene>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
@@ -58,21 +78,32 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="220" y="643"/>
+            <point key="canvasLocation" x="157" y="776"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="WatchMusic" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="468" y="643"/>
+            <point key="canvasLocation" x="479" y="776"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="DZD-O0-CFH">
+            <objects>
+                <controller id="hQL-lu-Gf5">
+                    <items>
+                        <nowPlayingView alignment="left" id="kkk-EF-urW"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="394" y="136"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
                 <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="WatchMusic" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="468" y="345"/>
+            <point key="canvasLocation" x="441" y="460"/>
         </scene>
     </scenes>
 </document>
