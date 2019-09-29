@@ -18,6 +18,59 @@
 		2117A1082338B1DB002C1489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2117A1072338B1DB002C1489 /* Assets.xcassets */; };
 		2117A10D2338B1DB002C1489 /* WatchMusic.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2117A0F02338B1D8002C1489 /* WatchMusic.app */; };
 		2117A11E2338C71E002C1489 /* MainTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A11D2338C696002C1489 /* MainTableRowController.swift */; };
+		21A66F3C2340626C0011A4FC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F2C2340626C0011A4FC /* Utilities.swift */; };
+		21A66F4D234063F00011A4FC /* ConsoleRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F49234063F00011A4FC /* ConsoleRemote.swift */; };
+		21A66F4E234063F00011A4FC /* MusicRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F4A234063F00011A4FC /* MusicRemote.swift */; };
+		21A66F4F234063F00011A4FC /* CloudKitRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F4B234063F00011A4FC /* CloudKitRemote.swift */; };
+		21A66F50234063F00011A4FC /* CloudKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F4C234063F00011A4FC /* CloudKit+Extensions.swift */; };
+		21A66F5523406B290011A4FC /* Mood+Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5123406B290011A4FC /* Mood+Remote.swift */; };
+		21A66F5623406B290011A4FC /* SongRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5223406B290011A4FC /* SongRemover.swift */; };
+		21A66F5723406B290011A4FC /* SongUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5323406B290011A4FC /* SongUploader.swift */; };
+		21A66F5823406B290011A4FC /* SongDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5423406B290011A4FC /* SongDownloader.swift */; };
+		21A66F5D23406B4D0011A4FC /* ApplicationActiveStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5923406B4D0011A4FC /* ApplicationActiveStateObserver.swift */; };
+		21A66F5E23406B4D0011A4FC /* EntityAndPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5A23406B4D0011A4FC /* EntityAndPredicate.swift */; };
+		21A66F5F23406B4D0011A4FC /* CoreData+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5B23406B4D0011A4FC /* CoreData+Sync.swift */; };
+		21A66F6023406B4D0011A4FC /* InProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F5C23406B4D0011A4FC /* InProgressTracker.swift */; };
+		21A66F6423406B6F0011A4FC /* SyncContextOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F6123406B6F0011A4FC /* SyncContextOwner.swift */; };
+		21A66F6523406B6F0011A4FC /* SyncCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F6223406B6F0011A4FC /* SyncCoordinator.swift */; };
+		21A66F6623406B6F0011A4FC /* ChangeProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F6323406B6F0011A4FC /* ChangeProcessor.swift */; };
+		21A66F7023406BA50011A4FC /* WatchMusicModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A66F6E23406BA50011A4FC /* WatchMusicModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		21A66F7323406BA50011A4FC /* WatchMusicModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */; };
+		21A66F7423406BA50011A4FC /* WatchMusicModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		21A66F8023406C2B0011A4FC /* UpdateTimestampable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7A23406C2B0011A4FC /* UpdateTimestampable.swift */; };
+		21A66F8123406C2B0011A4FC /* DelayedDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7B23406C2B0011A4FC /* DelayedDeletable.swift */; };
+		21A66F8223406C2B0011A4FC /* LocalizedStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7C23406C2B0011A4FC /* LocalizedStringConvertible.swift */; };
+		21A66F8323406C2B0011A4FC /* UserOwnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7D23406C2B0011A4FC /* UserOwnable.swift */; };
+		21A66F8423406C2B0011A4FC /* RemoteUploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7E23406C2B0011A4FC /* RemoteUploadable.swift */; };
+		21A66F8523406C2B0011A4FC /* RemoteDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7F23406C2B0011A4FC /* RemoteDeletable.swift */; };
+		21A66F8A23406C4C0011A4FC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8623406C4C0011A4FC /* Song.swift */; };
+		21A66F8B23406C4C0011A4FC /* GeographicRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8723406C4C0011A4FC /* GeographicRegion.swift */; };
+		21A66F8C23406C4C0011A4FC /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8823406C4C0011A4FC /* Album.swift */; };
+		21A66F8D23406C4C0011A4FC /* Artlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8923406C4C0011A4FC /* Artlist.swift */; };
+		21A66FA223406C6A0011A4FC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F9223406C6A0011A4FC /* Utilities.swift */; };
+		21A66FA423406C6A0011A4FC /* CoreDataErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F9423406C6A0011A4FC /* CoreDataErrors.swift */; };
+		21A66FA523406C6A0011A4FC /* ValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F9523406C6A0011A4FC /* ValueTransformer.swift */; };
+		21A66FB223406CD70011A4FC /* MusicMergePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FAF23406CD70011A4FC /* MusicMergePolicy.swift */; };
+		21A66FB323406CD70011A4FC /* MusicModelVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FB023406CD70011A4FC /* MusicModelVersion.swift */; };
+		21A66FB423406CD70011A4FC /* MusicStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FB123406CD70011A4FC /* MusicStack.swift */; };
+		21A66FB723406CEE0011A4FC /* Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FB523406CEE0011A4FC /* Music.xcdatamodeld */; };
+		21A66FC123406D090011A4FC /* WatchCoreDataHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A66FBF23406D090011A4FC /* WatchCoreDataHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		21A66FC423406D090011A4FC /* WatchCoreDataHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */; };
+		21A66FC523406D090011A4FC /* WatchCoreDataHelpers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		21A66FDA23406D260011A4FC /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FCA23406D260011A4FC /* NSManagedObjectContext+Extensions.swift */; };
+		21A66FDB23406D260011A4FC /* NSManagedObjectContext+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FCB23406D260011A4FC /* NSManagedObjectContext+Observers.swift */; };
+		21A66FDD23406D260011A4FC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FCD23406D260011A4FC /* Utilities.swift */; };
+		21A66FDE23406D260011A4FC /* ManagedObjectObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FCE23406D260011A4FC /* ManagedObjectObserver.swift */; };
+		21A66FE223406D260011A4FC /* ModelVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FD223406D260011A4FC /* ModelVersion.swift */; };
+		21A66FE523406D260011A4FC /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FD523406D260011A4FC /* Managed.swift */; };
+		21A66FE623406D260011A4FC /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FD623406D260011A4FC /* Migration.swift */; };
+		21A66FE723406D260011A4FC /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FD723406D260011A4FC /* NSPersistentStoreCoordinator+Extensions.swift */; };
+		21A66FE823406D260011A4FC /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FD823406D260011A4FC /* NSManagedObject+Extensions.swift */; };
+		21A66FE923406D260011A4FC /* Collection+CoreDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66FD923406D260011A4FC /* Collection+CoreDataExtensions.swift */; };
+		21A66FEA23406D820011A4FC /* WatchMusicModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */; };
+		21A66FEB23406D820011A4FC /* WatchMusicModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		21A66FEF23406D8C0011A4FC /* WatchCoreDataHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */; };
+		21A66FF023406D8C0011A4FC /* WatchCoreDataHelpers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FC033509233FB50900A07468 /* WatchMusicSync.h in Headers */ = {isa = PBXBuildFile; fileRef = FC033507233FB50900A07468 /* WatchMusicSync.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC03350C233FB50900A07468 /* WatchMusicSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC033505233FB50900A07468 /* WatchMusicSync.framework */; };
 		FC03350D233FB50900A07468 /* WatchMusicSync.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC033505233FB50900A07468 /* WatchMusicSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -136,6 +189,34 @@
 			remoteGlobalIDString = 2117A0EF2338B1D8002C1489;
 			remoteInfo = WatchMusic;
 		};
+		21A66F7123406BA50011A4FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC94D3892337076F00C54873 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21A66F6B23406BA50011A4FC;
+			remoteInfo = WatchMusicModel;
+		};
+		21A66FC223406D090011A4FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC94D3892337076F00C54873 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21A66FBC23406D080011A4FC;
+			remoteInfo = WatchCoreDataHelpers;
+		};
+		21A66FEC23406D820011A4FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC94D3892337076F00C54873 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21A66F6B23406BA50011A4FC;
+			remoteInfo = WatchMusicModel;
+		};
+		21A66FF123406D8C0011A4FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC94D3892337076F00C54873 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21A66FBC23406D080011A4FC;
+			remoteInfo = WatchCoreDataHelpers;
+		};
 		FC03350A233FB50900A07468 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC94D3892337076F00C54873 /* Project object */;
@@ -217,12 +298,36 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21A66FEE23406D830011A4FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				21A66FEB23406D820011A4FC /* WatchMusicModel.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66FF323406D8C0011A4FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				21A66FF023406D8C0011A4FC /* WatchCoreDataHelpers.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC0334FF233FB2B500A07468 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				21A66F7423406BA50011A4FC /* WatchMusicModel.framework in Embed Frameworks */,
+				21A66FC523406D090011A4FC /* WatchCoreDataHelpers.framework in Embed Frameworks */,
 				FC03350D233FB50900A07468 /* WatchMusicSync.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -258,6 +363,55 @@
 		2117A1092338B1DB002C1489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2117A10A2338B1DB002C1489 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		2117A11D2338C696002C1489 /* MainTableRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableRowController.swift; sourceTree = "<group>"; };
+		21A66F2C2340626C0011A4FC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		21A66F49234063F00011A4FC /* ConsoleRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleRemote.swift; sourceTree = "<group>"; };
+		21A66F4A234063F00011A4FC /* MusicRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicRemote.swift; sourceTree = "<group>"; };
+		21A66F4B234063F00011A4FC /* CloudKitRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitRemote.swift; sourceTree = "<group>"; };
+		21A66F4C234063F00011A4FC /* CloudKit+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Extensions.swift"; sourceTree = "<group>"; };
+		21A66F5123406B290011A4FC /* Mood+Remote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mood+Remote.swift"; sourceTree = "<group>"; };
+		21A66F5223406B290011A4FC /* SongRemover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongRemover.swift; sourceTree = "<group>"; };
+		21A66F5323406B290011A4FC /* SongUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongUploader.swift; sourceTree = "<group>"; };
+		21A66F5423406B290011A4FC /* SongDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongDownloader.swift; sourceTree = "<group>"; };
+		21A66F5923406B4D0011A4FC /* ApplicationActiveStateObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationActiveStateObserver.swift; sourceTree = "<group>"; };
+		21A66F5A23406B4D0011A4FC /* EntityAndPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityAndPredicate.swift; sourceTree = "<group>"; };
+		21A66F5B23406B4D0011A4FC /* CoreData+Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreData+Sync.swift"; sourceTree = "<group>"; };
+		21A66F5C23406B4D0011A4FC /* InProgressTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InProgressTracker.swift; sourceTree = "<group>"; };
+		21A66F6123406B6F0011A4FC /* SyncContextOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncContextOwner.swift; sourceTree = "<group>"; };
+		21A66F6223406B6F0011A4FC /* SyncCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncCoordinator.swift; sourceTree = "<group>"; };
+		21A66F6323406B6F0011A4FC /* ChangeProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeProcessor.swift; sourceTree = "<group>"; };
+		21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchMusicModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A66F6E23406BA50011A4FC /* WatchMusicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchMusicModel.h; sourceTree = "<group>"; };
+		21A66F6F23406BA50011A4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A66F7A23406C2B0011A4FC /* UpdateTimestampable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTimestampable.swift; sourceTree = "<group>"; };
+		21A66F7B23406C2B0011A4FC /* DelayedDeletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayedDeletable.swift; sourceTree = "<group>"; };
+		21A66F7C23406C2B0011A4FC /* LocalizedStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStringConvertible.swift; sourceTree = "<group>"; };
+		21A66F7D23406C2B0011A4FC /* UserOwnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOwnable.swift; sourceTree = "<group>"; };
+		21A66F7E23406C2B0011A4FC /* RemoteUploadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUploadable.swift; sourceTree = "<group>"; };
+		21A66F7F23406C2B0011A4FC /* RemoteDeletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDeletable.swift; sourceTree = "<group>"; };
+		21A66F8623406C4C0011A4FC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		21A66F8723406C4C0011A4FC /* GeographicRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeographicRegion.swift; sourceTree = "<group>"; };
+		21A66F8823406C4C0011A4FC /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		21A66F8923406C4C0011A4FC /* Artlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artlist.swift; sourceTree = "<group>"; };
+		21A66F9223406C6A0011A4FC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		21A66F9423406C6A0011A4FC /* CoreDataErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataErrors.swift; sourceTree = "<group>"; };
+		21A66F9523406C6A0011A4FC /* ValueTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTransformer.swift; sourceTree = "<group>"; };
+		21A66FAF23406CD70011A4FC /* MusicMergePolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicMergePolicy.swift; sourceTree = "<group>"; };
+		21A66FB023406CD70011A4FC /* MusicModelVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicModelVersion.swift; sourceTree = "<group>"; };
+		21A66FB123406CD70011A4FC /* MusicStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicStack.swift; sourceTree = "<group>"; };
+		21A66FB623406CEE0011A4FC /* Music.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Music.xcdatamodel; sourceTree = "<group>"; };
+		21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchCoreDataHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A66FBF23406D090011A4FC /* WatchCoreDataHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchCoreDataHelpers.h; sourceTree = "<group>"; };
+		21A66FC023406D090011A4FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A66FCA23406D260011A4FC /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		21A66FCB23406D260011A4FC /* NSManagedObjectContext+Observers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Observers.swift"; sourceTree = "<group>"; };
+		21A66FCD23406D260011A4FC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		21A66FCE23406D260011A4FC /* ManagedObjectObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectObserver.swift; sourceTree = "<group>"; };
+		21A66FD223406D260011A4FC /* ModelVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelVersion.swift; sourceTree = "<group>"; };
+		21A66FD523406D260011A4FC /* Managed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Managed.swift; sourceTree = "<group>"; };
+		21A66FD623406D260011A4FC /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
+		21A66FD723406D260011A4FC /* NSPersistentStoreCoordinator+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentStoreCoordinator+Extensions.swift"; sourceTree = "<group>"; };
+		21A66FD823406D260011A4FC /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
+		21A66FD923406D260011A4FC /* Collection+CoreDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+CoreDataExtensions.swift"; sourceTree = "<group>"; };
 		FC033505233FB50900A07468 /* WatchMusicSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchMusicSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC033507233FB50900A07468 /* WatchMusicSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchMusicSync.h; sourceTree = "<group>"; };
 		FC033508233FB50900A07468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -369,7 +523,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A66F7323406BA50011A4FC /* WatchMusicModel.framework in Frameworks */,
+				21A66FC423406D090011A4FC /* WatchCoreDataHelpers.framework in Frameworks */,
 				FC03350C233FB50900A07468 /* WatchMusicSync.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66F6923406BA50011A4FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A66FEF23406D8C0011A4FC /* WatchCoreDataHelpers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66FBA23406D080011A4FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A66FEA23406D820011A4FC /* WatchMusicModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,9 +631,142 @@
 			path = "WatchMusic Extension";
 			sourceTree = "<group>";
 		};
+		2170B9882340622200CD58A3 /* Sync Engine */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F6323406B6F0011A4FC /* ChangeProcessor.swift */,
+				21A66F6123406B6F0011A4FC /* SyncContextOwner.swift */,
+				21A66F6223406B6F0011A4FC /* SyncCoordinator.swift */,
+			);
+			name = "Sync Engine";
+			sourceTree = "<group>";
+		};
+		21A66F25234062380011A4FC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F5923406B4D0011A4FC /* ApplicationActiveStateObserver.swift */,
+				21A66F5B23406B4D0011A4FC /* CoreData+Sync.swift */,
+				21A66F5A23406B4D0011A4FC /* EntityAndPredicate.swift */,
+				21A66F5C23406B4D0011A4FC /* InProgressTracker.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		21A66F262340623B0011A4FC /* ChangeProcessors */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F5123406B290011A4FC /* Mood+Remote.swift */,
+				21A66F5423406B290011A4FC /* SongDownloader.swift */,
+				21A66F5223406B290011A4FC /* SongRemover.swift */,
+				21A66F5323406B290011A4FC /* SongUploader.swift */,
+			);
+			name = ChangeProcessors;
+			sourceTree = "<group>";
+		};
+		21A66F27234062410011A4FC /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F4C234063F00011A4FC /* CloudKit+Extensions.swift */,
+				21A66F4B234063F00011A4FC /* CloudKitRemote.swift */,
+				21A66F49234063F00011A4FC /* ConsoleRemote.swift */,
+				21A66F4A234063F00011A4FC /* MusicRemote.swift */,
+			);
+			name = Remote;
+			sourceTree = "<group>";
+		};
+		21A66F282340626C0011A4FC /* SharedCode */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F2C2340626C0011A4FC /* Utilities.swift */,
+			);
+			path = SharedCode;
+			sourceTree = SOURCE_ROOT;
+		};
+		21A66F6D23406BA50011A4FC /* WatchMusicModel */ = {
+			isa = PBXGroup;
+			children = (
+				21A66FAF23406CD70011A4FC /* MusicMergePolicy.swift */,
+				21A66FB023406CD70011A4FC /* MusicModelVersion.swift */,
+				21A66FB123406CD70011A4FC /* MusicStack.swift */,
+				21A66F8E23406C6A0011A4FC /* SharedCode */,
+				21A66F7923406C0A0011A4FC /* Model */,
+				21A66F7823406C000011A4FC /* Protocols */,
+				21A66F6E23406BA50011A4FC /* WatchMusicModel.h */,
+				21A66FB523406CEE0011A4FC /* Music.xcdatamodeld */,
+				21A66F6F23406BA50011A4FC /* Info.plist */,
+			);
+			path = WatchMusicModel;
+			sourceTree = "<group>";
+		};
+		21A66F7823406C000011A4FC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F7B23406C2B0011A4FC /* DelayedDeletable.swift */,
+				21A66F7C23406C2B0011A4FC /* LocalizedStringConvertible.swift */,
+				21A66F7F23406C2B0011A4FC /* RemoteDeletable.swift */,
+				21A66F7E23406C2B0011A4FC /* RemoteUploadable.swift */,
+				21A66F7A23406C2B0011A4FC /* UpdateTimestampable.swift */,
+				21A66F7D23406C2B0011A4FC /* UserOwnable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		21A66F7923406C0A0011A4FC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F8823406C4C0011A4FC /* Album.swift */,
+				21A66F8923406C4C0011A4FC /* Artlist.swift */,
+				21A66F8723406C4C0011A4FC /* GeographicRegion.swift */,
+				21A66F8623406C4C0011A4FC /* Song.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		21A66F8E23406C6A0011A4FC /* SharedCode */ = {
+			isa = PBXGroup;
+			children = (
+				21A66F9223406C6A0011A4FC /* Utilities.swift */,
+				21A66F9423406C6A0011A4FC /* CoreDataErrors.swift */,
+				21A66F9523406C6A0011A4FC /* ValueTransformer.swift */,
+			);
+			path = SharedCode;
+			sourceTree = SOURCE_ROOT;
+		};
+		21A66FBE23406D090011A4FC /* WatchCoreDataHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				21A66FC923406D260011A4FC /* SharedCode */,
+				21A66FBF23406D090011A4FC /* WatchCoreDataHelpers.h */,
+				21A66FC023406D090011A4FC /* Info.plist */,
+			);
+			path = WatchCoreDataHelpers;
+			sourceTree = "<group>";
+		};
+		21A66FC923406D260011A4FC /* SharedCode */ = {
+			isa = PBXGroup;
+			children = (
+				21A66FCA23406D260011A4FC /* NSManagedObjectContext+Extensions.swift */,
+				21A66FCB23406D260011A4FC /* NSManagedObjectContext+Observers.swift */,
+				21A66FCD23406D260011A4FC /* Utilities.swift */,
+				21A66FCE23406D260011A4FC /* ManagedObjectObserver.swift */,
+				21A66FD223406D260011A4FC /* ModelVersion.swift */,
+				21A66FD523406D260011A4FC /* Managed.swift */,
+				21A66FD623406D260011A4FC /* Migration.swift */,
+				21A66FD723406D260011A4FC /* NSPersistentStoreCoordinator+Extensions.swift */,
+				21A66FD823406D260011A4FC /* NSManagedObject+Extensions.swift */,
+				21A66FD923406D260011A4FC /* Collection+CoreDataExtensions.swift */,
+			);
+			path = SharedCode;
+			sourceTree = SOURCE_ROOT;
+		};
 		FC033506233FB50900A07468 /* WatchMusicSync */ = {
 			isa = PBXGroup;
 			children = (
+				21A66F282340626C0011A4FC /* SharedCode */,
+				21A66F27234062410011A4FC /* Remote */,
+				21A66F262340623B0011A4FC /* ChangeProcessors */,
+				21A66F25234062380011A4FC /* Helpers */,
+				2170B9882340622200CD58A3 /* Sync Engine */,
 				FC033507233FB50900A07468 /* WatchMusicSync.h */,
 				FC033508233FB50900A07468 /* Info.plist */,
 			);
@@ -480,6 +785,8 @@
 				2117A0F12338B1D8002C1489 /* WatchMusic */,
 				2117A1002338B1DB002C1489 /* WatchMusic Extension */,
 				FC033506233FB50900A07468 /* WatchMusicSync */,
+				21A66F6D23406BA50011A4FC /* WatchMusicModel */,
+				21A66FBE23406D090011A4FC /* WatchCoreDataHelpers */,
 				FC94D3922337076F00C54873 /* Products */,
 				FC94D55F233713C500C54873 /* Frameworks */,
 			);
@@ -497,6 +804,8 @@
 				2117A0F02338B1D8002C1489 /* WatchMusic.app */,
 				2117A0FC2338B1DB002C1489 /* WatchMusic Extension.appex */,
 				FC033505233FB50900A07468 /* WatchMusicSync.framework */,
+				21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */,
+				21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -778,6 +1087,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		21A66F6723406BA50011A4FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A66F7023406BA50011A4FC /* WatchMusicModel.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66FB823406D080011A4FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A66FC123406D090011A4FC /* WatchCoreDataHelpers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC033500233FB50900A07468 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -846,11 +1171,51 @@
 			);
 			dependencies = (
 				FC03350B233FB50900A07468 /* PBXTargetDependency */,
+				21A66F7223406BA50011A4FC /* PBXTargetDependency */,
+				21A66FC323406D090011A4FC /* PBXTargetDependency */,
 			);
 			name = "WatchMusic Extension";
 			productName = "WatchMusic Extension";
 			productReference = 2117A0FC2338B1DB002C1489 /* WatchMusic Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		21A66F6B23406BA50011A4FC /* WatchMusicModel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21A66F7523406BA50011A4FC /* Build configuration list for PBXNativeTarget "WatchMusicModel" */;
+			buildPhases = (
+				21A66F6723406BA50011A4FC /* Headers */,
+				21A66F6823406BA50011A4FC /* Sources */,
+				21A66F6923406BA50011A4FC /* Frameworks */,
+				21A66F6A23406BA50011A4FC /* Resources */,
+				21A66FF323406D8C0011A4FC /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21A66FF223406D8C0011A4FC /* PBXTargetDependency */,
+			);
+			name = WatchMusicModel;
+			productName = WatchMusicModel;
+			productReference = 21A66F6C23406BA50011A4FC /* WatchMusicModel.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		21A66FBC23406D080011A4FC /* WatchCoreDataHelpers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21A66FC623406D090011A4FC /* Build configuration list for PBXNativeTarget "WatchCoreDataHelpers" */;
+			buildPhases = (
+				21A66FB823406D080011A4FC /* Headers */,
+				21A66FB923406D080011A4FC /* Sources */,
+				21A66FBA23406D080011A4FC /* Frameworks */,
+				21A66FBB23406D080011A4FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WatchCoreDataHelpers;
+			productName = WatchCoreDataHelpers;
+			productReference = 21A66FBD23406D080011A4FC /* WatchCoreDataHelpers.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		FC033504233FB50900A07468 /* WatchMusicSync */ = {
 			isa = PBXNativeTarget;
@@ -860,10 +1225,12 @@
 				FC033501233FB50900A07468 /* Sources */,
 				FC033502233FB50900A07468 /* Frameworks */,
 				FC033503233FB50900A07468 /* Resources */,
+				21A66FEE23406D830011A4FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				21A66FED23406D820011A4FC /* PBXTargetDependency */,
 			);
 			name = WatchMusicSync;
 			productName = WatchMusicSync;
@@ -1007,6 +1374,13 @@
 							};
 						};
 					};
+					21A66F6B23406BA50011A4FC = {
+						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
+					};
+					21A66FBC23406D080011A4FC = {
+						CreatedOnToolsVersion = 11.0;
+					};
 					FC033504233FB50900A07468 = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -1067,6 +1441,8 @@
 				2117A0EF2338B1D8002C1489 /* WatchMusic */,
 				2117A0FB2338B1DB002C1489 /* WatchMusic Extension */,
 				FC033504233FB50900A07468 /* WatchMusicSync */,
+				21A66F6B23406BA50011A4FC /* WatchMusicModel */,
+				21A66FBC23406D080011A4FC /* WatchCoreDataHelpers */,
 			);
 		};
 /* End PBXProject section */
@@ -1086,6 +1462,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				2117A1082338B1DB002C1489 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66F6A23406BA50011A4FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66FBB23406D080011A4FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,10 +1547,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21A66F6823406BA50011A4FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A66FB223406CD70011A4FC /* MusicMergePolicy.swift in Sources */,
+				21A66F8A23406C4C0011A4FC /* Song.swift in Sources */,
+				21A66FB423406CD70011A4FC /* MusicStack.swift in Sources */,
+				21A66FA523406C6A0011A4FC /* ValueTransformer.swift in Sources */,
+				21A66FA423406C6A0011A4FC /* CoreDataErrors.swift in Sources */,
+				21A66F8D23406C4C0011A4FC /* Artlist.swift in Sources */,
+				21A66F8523406C2B0011A4FC /* RemoteDeletable.swift in Sources */,
+				21A66FA223406C6A0011A4FC /* Utilities.swift in Sources */,
+				21A66F8423406C2B0011A4FC /* RemoteUploadable.swift in Sources */,
+				21A66FB723406CEE0011A4FC /* Music.xcdatamodeld in Sources */,
+				21A66F8223406C2B0011A4FC /* LocalizedStringConvertible.swift in Sources */,
+				21A66F8023406C2B0011A4FC /* UpdateTimestampable.swift in Sources */,
+				21A66F8C23406C4C0011A4FC /* Album.swift in Sources */,
+				21A66FB323406CD70011A4FC /* MusicModelVersion.swift in Sources */,
+				21A66F8123406C2B0011A4FC /* DelayedDeletable.swift in Sources */,
+				21A66F8B23406C4C0011A4FC /* GeographicRegion.swift in Sources */,
+				21A66F8323406C2B0011A4FC /* UserOwnable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A66FB923406D080011A4FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A66FDD23406D260011A4FC /* Utilities.swift in Sources */,
+				21A66FE823406D260011A4FC /* NSManagedObject+Extensions.swift in Sources */,
+				21A66FDA23406D260011A4FC /* NSManagedObjectContext+Extensions.swift in Sources */,
+				21A66FE923406D260011A4FC /* Collection+CoreDataExtensions.swift in Sources */,
+				21A66FDE23406D260011A4FC /* ManagedObjectObserver.swift in Sources */,
+				21A66FE723406D260011A4FC /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
+				21A66FE223406D260011A4FC /* ModelVersion.swift in Sources */,
+				21A66FDB23406D260011A4FC /* NSManagedObjectContext+Observers.swift in Sources */,
+				21A66FE623406D260011A4FC /* Migration.swift in Sources */,
+				21A66FE523406D260011A4FC /* Managed.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC033501233FB50900A07468 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A66F6523406B6F0011A4FC /* SyncCoordinator.swift in Sources */,
+				21A66F5D23406B4D0011A4FC /* ApplicationActiveStateObserver.swift in Sources */,
+				21A66F5723406B290011A4FC /* SongUploader.swift in Sources */,
+				21A66F3C2340626C0011A4FC /* Utilities.swift in Sources */,
+				21A66F5E23406B4D0011A4FC /* EntityAndPredicate.swift in Sources */,
+				21A66F4D234063F00011A4FC /* ConsoleRemote.swift in Sources */,
+				21A66F6623406B6F0011A4FC /* ChangeProcessor.swift in Sources */,
+				21A66F5823406B290011A4FC /* SongDownloader.swift in Sources */,
+				21A66F6023406B4D0011A4FC /* InProgressTracker.swift in Sources */,
+				21A66F5523406B290011A4FC /* Mood+Remote.swift in Sources */,
+				21A66F50234063F00011A4FC /* CloudKit+Extensions.swift in Sources */,
+				21A66F4F234063F00011A4FC /* CloudKitRemote.swift in Sources */,
+				21A66F6423406B6F0011A4FC /* SyncContextOwner.swift in Sources */,
+				21A66F5F23406B4D0011A4FC /* CoreData+Sync.swift in Sources */,
+				21A66F4E234063F00011A4FC /* MusicRemote.swift in Sources */,
+				21A66F5623406B290011A4FC /* SongRemover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1296,6 +1743,26 @@
 			target = 2117A0EF2338B1D8002C1489 /* WatchMusic */;
 			targetProxy = 2117A10B2338B1DB002C1489 /* PBXContainerItemProxy */;
 		};
+		21A66F7223406BA50011A4FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21A66F6B23406BA50011A4FC /* WatchMusicModel */;
+			targetProxy = 21A66F7123406BA50011A4FC /* PBXContainerItemProxy */;
+		};
+		21A66FC323406D090011A4FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21A66FBC23406D080011A4FC /* WatchCoreDataHelpers */;
+			targetProxy = 21A66FC223406D090011A4FC /* PBXContainerItemProxy */;
+		};
+		21A66FED23406D820011A4FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21A66F6B23406BA50011A4FC /* WatchMusicModel */;
+			targetProxy = 21A66FEC23406D820011A4FC /* PBXContainerItemProxy */;
+		};
+		21A66FF223406D8C0011A4FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21A66FBC23406D080011A4FC /* WatchCoreDataHelpers */;
+			targetProxy = 21A66FF123406D8C0011A4FC /* PBXContainerItemProxy */;
+		};
 		FC03350B233FB50900A07468 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FC033504233FB50900A07468 /* WatchMusicSync */;
@@ -1376,7 +1843,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.3;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -1398,7 +1865,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.3;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -1425,7 +1892,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.3;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -1451,7 +1918,130 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "WatchMusic/WatchMusic-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.3;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		21A66F7623406BA50011A4FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchMusicModel/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.leoqin.www.WatchMusicModel;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		21A66F7723406BA50011A4FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchMusicModel/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.leoqin.www.WatchMusicModel;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		21A66FC723406D090011A4FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchCoreDataHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.leoqin.www.WatchCoreDataHelpers;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		21A66FC823406D090011A4FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PME9AV7ZS3;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WatchCoreDataHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.leoqin.www.WatchCoreDataHelpers;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -1952,6 +2542,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		21A66F7523406BA50011A4FC /* Build configuration list for PBXNativeTarget "WatchMusicModel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21A66F7623406BA50011A4FC /* Debug */,
+				21A66F7723406BA50011A4FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21A66FC623406D090011A4FC /* Build configuration list for PBXNativeTarget "WatchCoreDataHelpers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21A66FC723406D090011A4FC /* Debug */,
+				21A66FC823406D090011A4FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FC03350E233FB50900A07468 /* Build configuration list for PBXNativeTarget "WatchMusicSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2027,6 +2635,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		21A66FB523406CEE0011A4FC /* Music.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				21A66FB623406CEE0011A4FC /* Music.xcdatamodel */,
+			);
+			currentVersion = 21A66FB623406CEE0011A4FC /* Music.xcdatamodel */;
+			path = Music.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		FCFAC16123374553004C9B87 /* Music.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

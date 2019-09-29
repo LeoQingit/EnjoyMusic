@@ -7,11 +7,28 @@
 //
 
 import WatchKit
+import CoreData
+import WatchMusicModel
+import WatchMusicSync
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
+    
+    var persistentContainer: NSPersistentContainer!
+    var syncCoordinator: SyncCoordinator!
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+        createMusicContainer { container in
+            self.persistentContainer = container
+            self.syncCoordinator = SyncCoordinator(container: container)
+            
+            
+            
+            guard let vc = WKExtension.shared().rootInterfaceController as? InterfaceController
+                else { fatalError("Wrong view controller type") }
+            vc.managedObjectContext = container.viewContext
+        }
+        
     }
 
     func applicationDidBecomeActive() {

@@ -9,14 +9,18 @@
 import WatchKit
 import WatchConnectivity
 import CoreAudio
+import CoreData
 import AVFoundation
 import Foundation
+import WatchMusicModel
 
 
 class InterfaceController: WKInterfaceController {
 
     @IBOutlet weak var mainTable: WKInterfaceTable!
     var player: AVAudioPlayer!
+    
+    var managedObjectContext: NSManagedObjectContext!
     
     var session: WCSession!
     
@@ -64,19 +68,22 @@ extension InterfaceController: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         print(file)
-        let avSession = AVAudioSession.sharedInstance()
+//        let avSession = AVAudioSession.sharedInstance()
         
         
         do {
             let data = try Data.init(contentsOf: file.fileURL)
-            try avSession.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longForm, options: [])
-            player = try AVAudioPlayer(data: data)
-            avSession.activate(options: []) { (success, error) in
-                // Check for an error and play audio.
-                
-                
-                self.player.play()
-            }
+            
+            let _ = Song.insert(into: managedObjectContext, songData: data)
+
+//            try avSession.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longForm, options: [])
+//            player = try AVAudioPlayer(data: data)
+//            avSession.activate(options: []) { (success, error) in
+//                // Check for an error and play audio.
+//
+//
+//                self.player.play()
+//            }
             
         } catch {
             

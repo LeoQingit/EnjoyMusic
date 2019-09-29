@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     for name in fileNames {
                         let tp = Song.findOrCreate(in: container.viewContext, matching:  NSPredicate(format: "%K = %@", SongNameKey, name)) { song in
                             song.name = name
-                            //                        song.songURL = url.relativePath
                         }
                     }
                 }
