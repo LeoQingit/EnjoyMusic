@@ -24,7 +24,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             
             
             
-            guard let vc = WKExtension.shared().rootInterfaceController as? InterfaceController
+            guard let vc = WKExtension.shared().rootInterfaceController as? MainInterfaceController
                 else { fatalError("Wrong view controller type") }
             vc.managedObjectContext = container.viewContext
         }

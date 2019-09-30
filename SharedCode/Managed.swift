@@ -55,8 +55,6 @@ extension Managed {
 extension Managed where Self: NSManagedObject {
 
     public static var entity: NSEntityDescription {
-        print(self)
-        print(entity())
         return entity()
     }
 

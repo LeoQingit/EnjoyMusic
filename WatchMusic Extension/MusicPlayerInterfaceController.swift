@@ -1,8 +1,8 @@
 //
-//  AllMusicInterfaceController.swift
+//  MusicPlayerInterfaceController.swift
 //  WatchMusic Extension
 //
-//  Created by Qin Leo on 2019/9/23.
+//  Created by Leo Qin on 2019/9/29.
 //  Copyright © 2019 Qin Leo. All rights reserved.
 //
 
@@ -10,12 +10,10 @@ import WatchKit
 import Foundation
 
 
-class AllMusicInterfaceController: WKInterfaceController {
+class MusicPlayerInterfaceController: WKInterfaceController {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-        
         
         // Configure interface objects here.
     }

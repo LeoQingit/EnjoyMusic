@@ -1,5 +1,5 @@
 //
-//  InterfaceController.swift
+//  MainInterfaceController.swift
 //  WatchMusic Extension
 //
 //  Created by Leo Qin on 2019/9/23.
@@ -15,7 +15,7 @@ import Foundation
 import WatchMusicModel
 
 
-class InterfaceController: WKInterfaceController {
+class MainInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var mainTable: WKInterfaceTable!
     var player: AVAudioPlayer!
@@ -32,7 +32,6 @@ class InterfaceController: WKInterfaceController {
             session.delegate = self
             session.activate()
         }
-        
         
         let mainTitleArr = [
             "正在播放",
@@ -61,29 +60,20 @@ class InterfaceController: WKInterfaceController {
 }
 
 
-extension InterfaceController: WCSessionDelegate {
+extension MainInterfaceController: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         
     }
     
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         print(file)
-//        let avSession = AVAudioSession.sharedInstance()
-        
         
         do {
-            let data = try Data.init(contentsOf: file.fileURL)
-            
-            let _ = Song.insert(into: managedObjectContext, songData: data)
+            let data = try Data(contentsOf: file.fileURL)
 
-//            try avSession.setCategory(AVAudioSession.Category.playback, mode: .default, policy: .longForm, options: [])
-//            player = try AVAudioPlayer(data: data)
-//            avSession.activate(options: []) { (success, error) in
-//                // Check for an error and play audio.
-//
-//
-//                self.player.play()
-//            }
+            managedObjectContext.performChanges {[unowned self] in
+                let _ = Song.insert(into: self.managedObjectContext, songName: file.fileURL.lastPathComponent, songData: data)
+            }
             
         } catch {
             
@@ -93,6 +83,12 @@ extension InterfaceController: WCSessionDelegate {
     }
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         print(messageData)
+    }
+    
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        if rowIndex == 1 {
+            pushController(withName: "AllSongsInterfaceController", context: managedObjectContext)
+        }
     }
     
     

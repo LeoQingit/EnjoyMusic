@@ -31,8 +31,9 @@ public class Song: NSManagedObject {
         primitiveDate = Date()
     }
 
-    public static func insert(into moc: NSManagedObjectContext, songData: Data?) -> Song {
+    public static func insert(into moc: NSManagedObjectContext, songName: String?, songData: Data?) -> Song {
         let song: Song = moc.insertObject()
+        song.name = songName
         song.songData = songData
         song.date = Date()
         return song

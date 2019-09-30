@@ -88,7 +88,7 @@ extension SongsTableViewController {
                 }
                 let url = URL.init(fileURLWithPath: filePath + "/" + urlStr)
                     
-                if session.isReachable && session.isPaired && session.isWatchAppInstalled {
+                if session.isPaired && session.isWatchAppInstalled {
                     let transfer = session.transferFile(url, metadata: nil)
                     
                     let progress = transfer.progress

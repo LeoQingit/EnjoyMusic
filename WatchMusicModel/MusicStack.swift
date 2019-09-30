@@ -12,7 +12,7 @@ private let ubiquityToken: String = {
 
     return string.removingCharacters(in: CharacterSet.letters.inverted)
 }()
-private let storeURL = URL.library.appendingPathComponent("\(ubiquityToken).music")
+private let storeURL = URL.documents.appendingPathComponent("\(ubiquityToken).music")
 
 private let musicContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "Music", managedObjectModel: MusicModelVersion.current.managedObjectModel())

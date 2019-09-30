@@ -6,21 +6,18 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
     </dependencies>
     <scenes>
-        <!--All Music Interface Controller-->
+        <!--所有音乐-->
         <scene sceneID="qRH-K7-vd5">
             <objects>
-                <controller id="FSh-LN-cj9" customClass="AllMusicInterfaceController" customModule="WatchMusic_Extension">
+                <controller identifier="AllSongsInterfaceController" title="所有音乐" id="FSh-LN-cj9" customClass="AllSongsInterfaceController" customModule="WatchMusic_Extension">
                     <items>
                         <table alignment="left" id="00b-4O-Y3B">
                             <items>
-                                <tableRow id="6Fi-ZQ-xNV" customClass="SongTableRowController" customModule="WatchMusic_Extension">
+                                <tableRow identifier="SongTableRowController" id="6Fi-ZQ-xNV" customClass="SongTableRowController" customModule="WatchMusic_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="I70-T6-krB">
                                         <items>
                                             <label width="136" height="41" alignment="left" text="Label" textAlignment="center" id="pkt-Ho-wjW"/>
                                         </items>
-                                        <connections>
-                                            <segue destination="hQL-lu-Gf5" kind="push" id="jWU-oL-CxR"/>
-                                        </connections>
                                     </group>
                                     <connections>
                                         <outlet property="nameLabel" destination="pkt-Ho-wjW" id="V7k-b5-0Vh"/>
@@ -29,14 +26,17 @@
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="mainTable" destination="00b-4O-Y3B" id="aMg-PE-V5H"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="131.64102564102566" y="135.56410256410257"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Main Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="WatchMusic" customModuleProvider="target">
+                <controller id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="WatchMusic" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="eyH-3n-S0Z">
                             <items>
@@ -50,7 +50,6 @@
                                     <connections>
                                         <outlet property="iconImageView" destination="Pf8-Z3-bVw" id="Bwh-7c-j5f"/>
                                         <outlet property="titleLabel" destination="BNl-va-UuK" id="jVQ-MA-Wfj"/>
-                                        <segue destination="FSh-LN-cj9" kind="push" id="75M-W4-ICH"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -87,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="479" y="776"/>
         </scene>
-        <!--Interface Controller-->
+        <!--MusicPlayerInterfaceController-->
         <scene sceneID="DZD-O0-CFH">
             <objects>
-                <controller id="hQL-lu-Gf5">
+                <controller identifier="MusicPlayerInterfaceController" id="hQL-lu-Gf5" customClass="MusicPlayerInterfaceController" customModule="WatchMusic_Extension">
                     <items>
                         <nowPlayingView alignment="left" id="kkk-EF-urW"/>
                     </items>
