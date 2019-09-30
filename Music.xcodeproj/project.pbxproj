@@ -85,6 +85,19 @@
 		21F8C5702341FC3B00D0B897 /* AssetPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5622341FC3B00D0B897 /* AssetPlayer.swift */; };
 		21F8C5712341FC3B00D0B897 /* EnabledItemCellViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5642341FC3B00D0B897 /* EnabledItemCellViewDelegate.swift */; };
 		21F8C5722341FC3B00D0B897 /* CommandCellViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5652341FC3B00D0B897 /* CommandCellViewDelegate.swift */; };
+		21F8C5862342005200D0B897 /* ConfigAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5762342005200D0B897 /* ConfigAsset.swift */; };
+		21F8C5872342005200D0B897 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5772342005200D0B897 /* ConfigCommand.swift */; };
+		21F8C5882342005200D0B897 /* ConfigCommandCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5782342005200D0B897 /* ConfigCommandCollection.swift */; };
+		21F8C5892342005200D0B897 /* ConfigPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5792342005200D0B897 /* ConfigPath.swift */; };
+		21F8C58A2342005200D0B897 /* ConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C57A2342005200D0B897 /* ConfigModel.swift */; };
+		21F8C58B2342005200D0B897 /* NowPlayableMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C57C2342005200D0B897 /* NowPlayableMetadata.swift */; };
+		21F8C58C2342005200D0B897 /* NowPlayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C57D2342005200D0B897 /* NowPlayable.swift */; };
+		21F8C58D2342005200D0B897 /* NowPlayableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C57E2342005200D0B897 /* NowPlayableError.swift */; };
+		21F8C58E2342005200D0B897 /* NowPlayableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C57F2342005200D0B897 /* NowPlayableCommand.swift */; };
+		21F8C58F2342005200D0B897 /* AssetPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5812342005200D0B897 /* AssetPlayer.swift */; };
+		21F8C5902342005200D0B897 /* EnabledItemCellViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5832342005200D0B897 /* EnabledItemCellViewDelegate.swift */; };
+		21F8C5912342005200D0B897 /* CommandCellViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5842342005200D0B897 /* CommandCellViewDelegate.swift */; };
+		21F8C5922342005200D0B897 /* AssetPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5852342005200D0B897 /* AssetPlayerView.swift */; };
 		FC033509233FB50900A07468 /* WatchMusicSync.h in Headers */ = {isa = PBXBuildFile; fileRef = FC033507233FB50900A07468 /* WatchMusicSync.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC03350C233FB50900A07468 /* WatchMusicSync.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC033505233FB50900A07468 /* WatchMusicSync.framework */; };
 		FC03350D233FB50900A07468 /* WatchMusicSync.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC033505233FB50900A07468 /* WatchMusicSync.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -442,6 +455,19 @@
 		21F8C5622341FC3B00D0B897 /* AssetPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPlayer.swift; sourceTree = "<group>"; };
 		21F8C5642341FC3B00D0B897 /* EnabledItemCellViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnabledItemCellViewDelegate.swift; sourceTree = "<group>"; };
 		21F8C5652341FC3B00D0B897 /* CommandCellViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandCellViewDelegate.swift; sourceTree = "<group>"; };
+		21F8C5762342005200D0B897 /* ConfigAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigAsset.swift; sourceTree = "<group>"; };
+		21F8C5772342005200D0B897 /* ConfigCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigCommand.swift; sourceTree = "<group>"; };
+		21F8C5782342005200D0B897 /* ConfigCommandCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigCommandCollection.swift; sourceTree = "<group>"; };
+		21F8C5792342005200D0B897 /* ConfigPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigPath.swift; sourceTree = "<group>"; };
+		21F8C57A2342005200D0B897 /* ConfigModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigModel.swift; sourceTree = "<group>"; };
+		21F8C57C2342005200D0B897 /* NowPlayableMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableMetadata.swift; sourceTree = "<group>"; };
+		21F8C57D2342005200D0B897 /* NowPlayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayable.swift; sourceTree = "<group>"; };
+		21F8C57E2342005200D0B897 /* NowPlayableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableError.swift; sourceTree = "<group>"; };
+		21F8C57F2342005200D0B897 /* NowPlayableCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowPlayableCommand.swift; sourceTree = "<group>"; };
+		21F8C5812342005200D0B897 /* AssetPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPlayer.swift; sourceTree = "<group>"; };
+		21F8C5832342005200D0B897 /* EnabledItemCellViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnabledItemCellViewDelegate.swift; sourceTree = "<group>"; };
+		21F8C5842342005200D0B897 /* CommandCellViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandCellViewDelegate.swift; sourceTree = "<group>"; };
+		21F8C5852342005200D0B897 /* AssetPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetPlayerView.swift; sourceTree = "<group>"; };
 		FC033505233FB50900A07468 /* WatchMusicSync.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WatchMusicSync.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC033507233FB50900A07468 /* WatchMusicSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchMusicSync.h; sourceTree = "<group>"; };
 		FC033508233FB50900A07468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -846,6 +872,58 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		21F8C5742342005200D0B897 /* MediaSharedCode */ = {
+			isa = PBXGroup;
+			children = (
+				21F8C5752342005200D0B897 /* Configuration */,
+				21F8C57B2342005200D0B897 /* NowPlayable */,
+				21F8C5802342005200D0B897 /* Player */,
+				21F8C5822342005200D0B897 /* Utility */,
+			);
+			path = MediaSharedCode;
+			sourceTree = SOURCE_ROOT;
+		};
+		21F8C5752342005200D0B897 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				21F8C5762342005200D0B897 /* ConfigAsset.swift */,
+				21F8C5772342005200D0B897 /* ConfigCommand.swift */,
+				21F8C5782342005200D0B897 /* ConfigCommandCollection.swift */,
+				21F8C5792342005200D0B897 /* ConfigPath.swift */,
+				21F8C57A2342005200D0B897 /* ConfigModel.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		21F8C57B2342005200D0B897 /* NowPlayable */ = {
+			isa = PBXGroup;
+			children = (
+				21F8C57C2342005200D0B897 /* NowPlayableMetadata.swift */,
+				21F8C57D2342005200D0B897 /* NowPlayable.swift */,
+				21F8C57E2342005200D0B897 /* NowPlayableError.swift */,
+				21F8C57F2342005200D0B897 /* NowPlayableCommand.swift */,
+			);
+			path = NowPlayable;
+			sourceTree = "<group>";
+		};
+		21F8C5802342005200D0B897 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				21F8C5812342005200D0B897 /* AssetPlayer.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		21F8C5822342005200D0B897 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				21F8C5832342005200D0B897 /* EnabledItemCellViewDelegate.swift */,
+				21F8C5842342005200D0B897 /* CommandCellViewDelegate.swift */,
+				21F8C5852342005200D0B897 /* AssetPlayerView.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		FC033506233FB50900A07468 /* WatchMusicSync */ = {
 			isa = PBXGroup;
 			children = (
@@ -902,6 +980,7 @@
 			children = (
 				FCFAC15F233743F1004C9B87 /* ShareImage.png */,
 				FC94D5E2233721F900C54873 /* Music.entitlements */,
+				21F8C5742342005200D0B897 /* MediaSharedCode */,
 				FC94D5C823371F6B00C54873 /* Helpers */,
 				FC94D5C323371F5A00C54873 /* Protocols */,
 				FC94D5BE23371F4200C54873 /* Data Sources */,
@@ -1717,7 +1796,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21F8C5922342005200D0B897 /* AssetPlayerView.swift in Sources */,
+				21F8C58E2342005200D0B897 /* NowPlayableCommand.swift in Sources */,
 				FC94D5DE23371FF700C54873 /* AppDelegate.swift in Sources */,
+				21F8C5872342005200D0B897 /* ConfigCommand.swift in Sources */,
 				FC94D59723371E4900C54873 /* Utilities.swift in Sources */,
 				FC94D5B123371F0D00C54873 /* SongsCollectionViewController.swift in Sources */,
 				FC94D5C123371F5300C54873 /* TableViewDataSource.swift in Sources */,
@@ -1726,20 +1808,30 @@
 				FC94D5CE23371F7800C54873 /* CaptureSession.swift in Sources */,
 				FC94D5BD23371F3800C54873 /* SongView.swift in Sources */,
 				FC94D3972337076F00C54873 /* ViewController.swift in Sources */,
+				21F8C58F2342005200D0B897 /* AssetPlayer.swift in Sources */,
 				FC94D5BB23371F3800C54873 /* SongTableViewCell.swift in Sources */,
+				21F8C5862342005200D0B897 /* ConfigAsset.swift in Sources */,
 				2117A0EB23386EA9002C1489 /* MusicScannerTool.swift in Sources */,
 				FC94D5C223371F5300C54873 /* CollectionViewDataSource.swift in Sources */,
 				FC94D5AF23371F0D00C54873 /* RegionsTableViewController.swift in Sources */,
 				FC94D5B223371F0D00C54873 /* SongsTableViewController.swift in Sources */,
 				FC94D5C623371F6400C54873 /* SegueHandler.swift in Sources */,
+				21F8C5902342005200D0B897 /* EnabledItemCellViewDelegate.swift in Sources */,
 				FC94D5CF23371F7800C54873 /* IconGenerator.swift in Sources */,
+				21F8C5912342005200D0B897 /* CommandCellViewDelegate.swift in Sources */,
+				21F8C5892342005200D0B897 /* ConfigPath.swift in Sources */,
+				21F8C58A2342005200D0B897 /* ConfigModel.swift in Sources */,
 				FC94D5B923371F3800C54873 /* CameraView.swift in Sources */,
 				FC94D5AD23371F0D00C54873 /* SongDetailViewController.swift in Sources */,
 				FC94D5CD23371F7800C54873 /* SongSource.swift in Sources */,
+				21F8C58B2342005200D0B897 /* NowPlayableMetadata.swift in Sources */,
 				FC94D5C723371F6400C54873 /* SongsPresenter.swift in Sources */,
+				21F8C58D2342005200D0B897 /* NowPlayableError.swift in Sources */,
 				FC94D5B023371F0D00C54873 /* RootViewController.swift in Sources */,
 				FC94D5AE23371F0D00C54873 /* SongsContainerViewController.swift in Sources */,
 				FC94D5D023371F7800C54873 /* GeoLocationController.swift in Sources */,
+				21F8C5882342005200D0B897 /* ConfigCommandCollection.swift in Sources */,
+				21F8C58C2342005200D0B897 /* NowPlayable.swift in Sources */,
 				FC94D5BC23371F3800C54873 /* SongCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

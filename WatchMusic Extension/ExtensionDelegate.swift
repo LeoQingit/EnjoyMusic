@@ -17,7 +17,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     var syncCoordinator: SyncCoordinator!
 
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        
+        // Create the data model.
+        
+//        ConfigModel.shared = ConfigModel(nowPlayableBehavior: IOSNowPlayableBehavior())
+        
         createMusicContainer { container in
             self.persistentContainer = container
             self.syncCoordinator = SyncCoordinator(container: container)
