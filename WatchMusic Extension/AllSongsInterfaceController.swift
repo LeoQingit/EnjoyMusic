@@ -21,7 +21,9 @@ class AllSongsInterfaceController: WKInterfaceController {
 
     var managedContext: NSManagedObjectContext?
     var songs: [Song] = []
-    var player: AVAudioPlayer!
+    
+    // The asset player controlling playback.
+    var assetPlayer: AssetPlayer!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -57,12 +59,12 @@ class AllSongsInterfaceController: WKInterfaceController {
         guard let songData = song.songData else { return }
         
         do {
-            try audioSession.setCategory(AVAudioSession.Category.playback, mode: .default, policy: AVAudioSession.RouteSharingPolicy.longFormAudio, options: [])
-            player = try AVAudioPlayer(data: songData)
-            audioSession.activate(options: []) { (success, error) in
-                
-                self.player.play()
-            }
+//            try audioSession.setCategory(AVAudioSession.Category.playback, mode: .default, policy: AVAudioSession.RouteSharingPolicy.longFormAudio, options: [])
+//            player = try AVAudioPlayer(data: songData)
+//            audioSession.activate(options: []) { (success, error) in
+//                
+//                self.player.play()
+//            }
             
         } catch {
             
@@ -70,6 +72,32 @@ class AllSongsInterfaceController: WKInterfaceController {
         
         pushController(withName: "MusicPlayerInterfaceController", context: nil)
         
+    }
+    
+    func optIn(_ sender: Any?) {
+        
+        guard assetPlayer == nil else { return }
+        
+        // Create the asset player, if possible.
+        
+        do {
+            assetPlayer = try AssetPlayer()
+        }
+            
+            // Otherwise, display an error.
+            
+        catch {
+        }
+    }
+    
+    // Action method: opt out of now-playability.
+    
+    func optOut(_ sender: Any?) {
+        
+        guard assetPlayer != nil else { return }
+        
+        assetPlayer.optOut()
+        assetPlayer = nil
     }
 
 }

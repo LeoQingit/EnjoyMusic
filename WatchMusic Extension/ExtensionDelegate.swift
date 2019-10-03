@@ -20,7 +20,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         
         // Create the data model.
         
-//        ConfigModel.shared = ConfigModel(nowPlayableBehavior: IOSNowPlayableBehavior())
+        ConfigModel.shared = ConfigModel(nowPlayableBehavior: WatchOSNowPlayableBehavior())
         
         createMusicContainer { container in
             self.persistentContainer = container

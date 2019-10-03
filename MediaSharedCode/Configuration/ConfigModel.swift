@@ -54,7 +54,6 @@ extension ConfigModel {
         let song1URL = Bundle.main.url(forResource: "Song 1", withExtension: ".m4a")!
         let song2URL = Bundle.main.url(forResource: "Song 2", withExtension: ".m4a")!
         let song3URL = Bundle.main.url(forResource: "Song 3", withExtension: ".m4a")!
-        let videoURL = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8")!
         
         // Create metadata.
         
@@ -69,14 +68,6 @@ extension ConfigModel {
                                 albumArtist: "Singer of Songs",
                                 albumTitle: "Songs to Sing"),
             
-            NowPlayableStaticMetadata(assetURL: videoURL,
-                                mediaType: .video,
-                                isLiveStream: false,
-                                title: "Bip Bop, The Movie",
-                                artist: nil,
-                                artwork: nil,
-                                albumArtist: nil,
-                                albumTitle: nil),
             
             NowPlayableStaticMetadata(assetURL: song2URL,
                                 mediaType: .audio,
@@ -87,14 +78,6 @@ extension ConfigModel {
                                 albumArtist: "Singer of Songs",
                                 albumTitle: "Songs to Sing"),
             
-            NowPlayableStaticMetadata(assetURL: videoURL,
-                                mediaType: .video,
-                                isLiveStream: false,
-                                title: "Bip Bop, The Sequel",
-                                artist: nil,
-                                artwork: nil,
-                                albumArtist: nil,
-                                albumTitle: nil),
             
             NowPlayableStaticMetadata(assetURL: song3URL,
                                 mediaType: .audio,
