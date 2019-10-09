@@ -51,43 +51,42 @@ extension ConfigModel {
         
         // Find the audio files in the app bundle.
         
-        let song1URL = Bundle.main.url(forResource: "Song 1", withExtension: ".m4a")!
-        let song2URL = Bundle.main.url(forResource: "Song 2", withExtension: ".m4a")!
-        let song3URL = Bundle.main.url(forResource: "Song 3", withExtension: ".m4a")!
         
         // Create metadata.
         
-        let metadatas: [NowPlayableStaticMetadata] = [
+        let metadatas: [NowPlayableStaticMetadata] = []
             
-            NowPlayableStaticMetadata(assetURL: song1URL,
-                                mediaType: .audio,
-                                isLiveStream: false,
-                                title: "First Song",
-                                artist: "Singer of Songs",
-                                artwork: artworkNamed("Song 1"),
-                                albumArtist: "Singer of Songs",
-                                albumTitle: "Songs to Sing"),
-            
-            
-            NowPlayableStaticMetadata(assetURL: song2URL,
-                                mediaType: .audio,
-                                isLiveStream: false,
-                                title: "Second Song",
-                                artist: "Other Singer",
-                                artwork: artworkNamed("Song 2"),
-                                albumArtist: "Singer of Songs",
-                                albumTitle: "Songs to Sing"),
-            
-            
-            NowPlayableStaticMetadata(assetURL: song3URL,
-                                mediaType: .audio,
-                                isLiveStream: false,
-                                title: "Third Song",
-                                artist: "Singer of Songs",
-                                artwork: artworkNamed("Song 3"),
-                                albumArtist: "Singer of Songs",
-                                albumTitle: "Songs to Sing")
-        ]
+//            [
+//            
+//            NowPlayableStaticMetadata(assetURL: song1URL,
+//                                mediaType: .audio,
+//                                isLiveStream: false,
+//                                title: "First Song",
+//                                artist: "Singer of Songs",
+//                                artwork: artworkNamed("Song 1"),
+//                                albumArtist: "Singer of Songs",
+//                                albumTitle: "Songs to Sing"),
+//            
+//            
+//            NowPlayableStaticMetadata(assetURL: song2URL,
+//                                mediaType: .audio,
+//                                isLiveStream: false,
+//                                title: "Second Song",
+//                                artist: "Other Singer",
+//                                artwork: artworkNamed("Song 2"),
+//                                albumArtist: "Singer of Songs",
+//                                albumTitle: "Songs to Sing"),
+//            
+//            
+//            NowPlayableStaticMetadata(assetURL: song3URL,
+//                                mediaType: .audio,
+//                                isLiveStream: false,
+//                                title: "Third Song",
+//                                artist: "Singer of Songs",
+//                                artwork: artworkNamed("Song 3"),
+//                                albumArtist: "Singer of Songs",
+//                                albumTitle: "Songs to Sing")
+//        ]
         
         return metadatas.map { ConfigAsset(metadata: $0) }
     }
