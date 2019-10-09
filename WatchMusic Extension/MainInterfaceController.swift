@@ -74,8 +74,17 @@ extension MainInterfaceController: WCSessionDelegate {
             let asset = AVURLAsset(url: file.fileURL)
             
             for format in asset.availableMetadataFormats {
-                let metaItem = asset.metadata(forFormat: format)
-                print(metaItem)
+                let metaItems = asset.metadata(forFormat: format)
+                for item in metaItems where item.commonKey != nil {
+                    switch item.commonKey! {
+                    case .commonKeyAlbumName:
+                        break
+                    default:
+                        <#code#>
+                    }
+            
+                    print(item.value)
+                }
             }
             
             /*
