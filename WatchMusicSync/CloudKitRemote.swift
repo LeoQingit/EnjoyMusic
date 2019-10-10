@@ -114,12 +114,12 @@ extension RemoteSong {
     fileprivate init?(record: CKRecord) {
         guard record.recordType == RemoteSong.remoteRecordName else { fatalError("wrong record type") }
         guard let date = record.object(forKey: "date") as? Date,
-            let songData = record.object(forKey: "songURL") as? Data,
+            let songURL = record.object(forKey: "songURL") as? String,
             let creatorID = record.creatorUserRecordID?.recordName
             else { return nil }
         
         
-        self.init(id: record.recordID.recordName, creatorID: creatorID, date: date, songData: songData)
+        self.init(id: record.recordID.recordName, creatorID: creatorID, date: date, songURL: songURL)
         
     }
 }

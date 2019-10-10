@@ -35,7 +35,6 @@ struct ConfigModel {
         
         self.nowPlayableBehavior = nowPlayableBehavior
         self.allowsExternalPlayback = nowPlayableBehavior.defaultAllowsExternalPlayback
-        self.assets = defaultAssets
         self.commandCollections = defaultCommandCollections
         
         ConfigModel.shared = self
@@ -44,52 +43,6 @@ struct ConfigModel {
 }
 
 extension ConfigModel {
-    
-    // Create the assets with synthesized metadata.
-    
-    fileprivate var defaultAssets: [ConfigAsset] {
-        
-        // Find the audio files in the app bundle.
-        
-        
-        // Create metadata.
-        
-        let metadatas: [NowPlayableStaticMetadata] = []
-            
-//            [
-//            
-//            NowPlayableStaticMetadata(assetURL: song1URL,
-//                                mediaType: .audio,
-//                                isLiveStream: false,
-//                                title: "First Song",
-//                                artist: "Singer of Songs",
-//                                artwork: artworkNamed("Song 1"),
-//                                albumArtist: "Singer of Songs",
-//                                albumTitle: "Songs to Sing"),
-//            
-//            
-//            NowPlayableStaticMetadata(assetURL: song2URL,
-//                                mediaType: .audio,
-//                                isLiveStream: false,
-//                                title: "Second Song",
-//                                artist: "Other Singer",
-//                                artwork: artworkNamed("Song 2"),
-//                                albumArtist: "Singer of Songs",
-//                                albumTitle: "Songs to Sing"),
-//            
-//            
-//            NowPlayableStaticMetadata(assetURL: song3URL,
-//                                mediaType: .audio,
-//                                isLiveStream: false,
-//                                title: "Third Song",
-//                                artist: "Singer of Songs",
-//                                artwork: artworkNamed("Song 3"),
-//                                albumArtist: "Singer of Songs",
-//                                albumTitle: "Songs to Sing")
-//        ]
-        
-        return metadatas.map { ConfigAsset(metadata: $0) }
-    }
     
     // Create the command collections, and enable a default set of commands.
     

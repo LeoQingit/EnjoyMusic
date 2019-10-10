@@ -12,7 +12,7 @@ import CoreData
 
 extension RemoteSong {
     func insert(into context: NSManagedObjectContext) -> Song? {
-        let song = Song.insert(into: context, songData: songData, remoteIdentifier: id, date: date, creatorID: creatorID)
+        let song = Song.insert(into: context, songURL: songURL, remoteIdentifier: id, date: date, creatorID: creatorID)
         return song
     }
 }

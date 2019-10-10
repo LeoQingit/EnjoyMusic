@@ -49,7 +49,7 @@ final class ConsoleRemote: MusicRemote {
 extension RemoteSong {
 
     fileprivate init?(song: Song) {
-        self.init(id: "__dummyId__", creatorID: nil, date: song.date, songData: song.songData)
+        self.init(id: "__dummyId__", creatorID: nil, date: song.date, songURL: song.songURL)
     }
 }
 

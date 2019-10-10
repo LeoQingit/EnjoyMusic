@@ -55,16 +55,22 @@ class AllSongsInterfaceController: WKInterfaceController {
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
-        let song = songs[rowIndex]
-        guard let songData = song.songData else { return }
+//        let song = songs[rowIndex]
+        
+        let assets = songs.map {
+            return NowPlayableStaticMetadata(assetURL: URL(fileURLWithPath: $0.songURL!),
+            mediaType: .audio,
+            isLiveStream: false,
+            title: $0.name ?? "",
+            artist: "Singer of Songs",
+            artwork: nil,
+            albumArtist: "Singer of Songs",
+            albumTitle: "Songs to Sing")
+        }.map { ConfigAsset(metadata: $0) }
         
         do {
-//            try audioSession.setCategory(AVAudioSession.Category.playback, mode: .default, policy: AVAudioSession.RouteSharingPolicy.longFormAudio, options: [])
-//            player = try AVAudioPlayer(data: songData)
-//            audioSession.activate(options: []) { (success, error) in
-//                
-//                self.player.play()
-//            }
+            
+            assetPlayer = try AssetPlayer.init(assets: assets)
             
         } catch {
             
@@ -74,25 +80,10 @@ class AllSongsInterfaceController: WKInterfaceController {
         
     }
     
-    func optIn(_ sender: Any?) {
-        
-        guard assetPlayer == nil else { return }
-        
-        // Create the asset player, if possible.
-        
-        do {
-            assetPlayer = try AssetPlayer()
-        }
-            
-            // Otherwise, display an error.
-            
-        catch {
-        }
-    }
     
     // Action method: opt out of now-playability.
     
-    func optOut(_ sender: Any?) {
+    func optOut() {
         
         guard assetPlayer != nil else { return }
         

@@ -17,6 +17,7 @@
 		2117A1062338B1DB002C1489 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A1052338B1DB002C1489 /* NotificationController.swift */; };
 		2117A1082338B1DB002C1489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2117A1072338B1DB002C1489 /* Assets.xcassets */; };
 		2117A10D2338B1DB002C1489 /* WatchMusic.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2117A0F02338B1D8002C1489 /* WatchMusic.app */; };
+		2164116D234ED3A300F80B6A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2164116C234ED3A300F80B6A /* Utilities.swift */; };
 		21A66F3C2340626C0011A4FC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F2C2340626C0011A4FC /* Utilities.swift */; };
 		21A66F4D234063F00011A4FC /* ConsoleRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F49234063F00011A4FC /* ConsoleRemote.swift */; };
 		21A66F4E234063F00011A4FC /* MusicRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F4A234063F00011A4FC /* MusicRemote.swift */; };
@@ -392,6 +393,7 @@
 		2117A1092338B1DB002C1489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2117A10A2338B1DB002C1489 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		2117A11D2338C696002C1489 /* MainTableRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableRowController.swift; sourceTree = "<group>"; };
+		2164116C234ED3A300F80B6A /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = SharedCode/Utilities.swift; sourceTree = SOURCE_ROOT; };
 		21A66F2C2340626C0011A4FC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		21A66F49234063F00011A4FC /* ConsoleRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleRemote.swift; sourceTree = "<group>"; };
 		21A66F4A234063F00011A4FC /* MusicRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicRemote.swift; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 		2117A1002338B1DB002C1489 /* WatchMusic Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2164116C234ED3A300F80B6A /* Utilities.swift */,
 				21F8C5552341FC3B00D0B897 /* MediaSharedCode */,
 				21D398C8234196A000EB781B /* WatchMusic Extension.entitlements */,
 				2117A1012338B1DB002C1489 /* MainInterfaceController.swift */,
@@ -1718,6 +1721,7 @@
 				FCA6492423410B4B00F884EA /* SongTableRowController.swift in Sources */,
 				FC75C614233907CB00D99C93 /* AllSongsInterfaceController.swift in Sources */,
 				21F8C5712341FC3B00D0B897 /* EnabledItemCellViewDelegate.swift in Sources */,
+				2164116D234ED3A300F80B6A /* Utilities.swift in Sources */,
 				21F8C56E2341FC3B00D0B897 /* NowPlayableError.swift in Sources */,
 				21A66FF623418AB80011A4FC /* MainTableRowController.swift in Sources */,
 				21F8C56B2341FC3B00D0B897 /* ConfigModel.swift in Sources */,
@@ -2188,7 +2192,7 @@
 		21A66FC723406D090011A4FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2218,7 +2222,7 @@
 		21A66FC823406D090011A4FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

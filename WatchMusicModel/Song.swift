@@ -23,7 +23,7 @@ public class Song: NSManagedObject {
     @NSManaged public fileprivate(set) var favorite: Int16
     @NSManaged public var name: String?
     
-    @NSManaged public var songData: Data?
+    @NSManaged public var songURL: String?
 
 
     public override func awakeFromInsert() {
@@ -31,17 +31,17 @@ public class Song: NSManagedObject {
         primitiveDate = Date()
     }
 
-    public static func insert(into moc: NSManagedObjectContext, songName: String?, songData: Data?) -> Song {
+    public static func insert(into moc: NSManagedObjectContext, songName: String?, songURL: String?) -> Song {
         let song: Song = moc.insertObject()
         song.name = songName
-        song.songData = songData
+        song.songURL = songURL
         song.date = Date()
         return song
     }
 
-    public static func insert(into moc: NSManagedObjectContext, songData: Data?, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
+    public static func insert(into moc: NSManagedObjectContext, songURL: String?, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
         let song: Song = moc.insertObject()
-        song.songData = songData
+        song.songURL = songURL
         song.album = Album.findOrCreate(for: "未知", in: moc)
         song.remoteIdentifier = remoteIdentifier
         if let d = date {

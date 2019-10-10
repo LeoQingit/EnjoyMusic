@@ -66,14 +66,14 @@ class AssetPlayer {
     
     // Initialize a new `AssetPlayer` object.
     
-    init() throws {
+    init(assets: [ConfigAsset]) throws {
         
         self.nowPlayableBehavior = ConfigModel.shared.nowPlayableBehavior
         
         // Get the subset of assets that the configuration actually wants to play,
         // and use it to construct the playlist.
         
-        let playableAssets = ConfigModel.shared.assets.compactMap { $0.shouldPlay ? $0 : nil }
+        let playableAssets = assets.compactMap { $0.shouldPlay ? $0 : nil }
         
         self.staticMetadatas = playableAssets.map { $0.metadata }
         self.playerItems = playableAssets.map {
@@ -139,6 +139,7 @@ class AssetPlayer {
             play()
         }
     }
+    
     
     // Stop the playback session.
     

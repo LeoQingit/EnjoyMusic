@@ -17,13 +17,13 @@ public struct RemoteSong: RemoteRecord {
     public var id: RemoteRecordID?
     public var creatorID: RemoteRecordID?
     public var date: Date
-    public var songData: Data?
+    public var songURL: String?
 
-    public init(id: RemoteRecordID?, creatorID: RemoteRecordID?, date: Date, songData: Data?) {
+    public init(id: RemoteRecordID?, creatorID: RemoteRecordID?, date: Date, songURL: String?) {
         self.id = id
         self.creatorID = creatorID
         self.date = date
-        self.songData = songData
+        self.songURL = songURL
     }
 }
 
