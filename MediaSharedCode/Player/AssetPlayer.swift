@@ -27,7 +27,7 @@ class AssetPlayer {
     // player, or may play content in any way that is wishes, provided that it uses
     // the NowPlayable behavior correctly.
     
-    let player: AVQueuePlayer
+    let player: AVPlayer
     
     // A playlist of items to play.
     
@@ -66,16 +66,18 @@ class AssetPlayer {
     
     // Initialize a new `AssetPlayer` object.
     
-    init(assets: [ConfigAsset]) throws {
+    init() throws {
         
         self.nowPlayableBehavior = ConfigModel.shared.nowPlayableBehavior
         
         // Get the subset of assets that the configuration actually wants to play,
         // and use it to construct the playlist.
         
-        let playableAssets = assets.compactMap { $0.shouldPlay ? $0 : nil }
-        
+        let playableAssets = ConfigModel.shared.assets.compactMap { $0.shouldPlay ? $0 : nil }
+        //
         self.staticMetadatas = playableAssets.map { $0.metadata }
+        
+        //
         self.playerItems = playableAssets.map {
             AVPlayerItem(asset: $0.urlAsset, automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
         }
@@ -83,12 +85,9 @@ class AssetPlayer {
         // Create a player, and configure it for external playback, if the
         // configuration requires.
         
-        self.player = AVQueuePlayer(items: playerItems)
-        #if os(watchOS)
-        #else
+        self.player = AVPlayer(playerItem: self.playerItems.first)
         player.allowsExternalPlayback = ConfigModel.shared.allowsExternalPlayback
-        #endif
-
+        
         // Construct lists of commands to be registered or disabled.
         
         var registeredCommands = [] as [NowPlayableCommand]
@@ -124,14 +123,21 @@ class AssetPlayer {
                 }
                 
                 rateObserver = player.observe(\.rate, options: .initial) {
-                    [unowned self] _, _ in
-                    self.handlePlaybackChange()
+                    [unowned self] _, value in
+                    print(value.newValue)
+                    print(value.oldValue)
                 }
                 
                 statusObserver = player.observe(\.currentItem?.status, options: .initial) {
-                    [unowned self] _, _ in
+                    [unowned self] _, value in
+                    print(value.newValue)
+                    print(value.oldValue)
                     self.handlePlaybackChange()
+                    
                 }
+                
+                
+                
             }
             
             // Start the player.
@@ -139,7 +145,6 @@ class AssetPlayer {
             play()
         }
     }
-    
     
     // Stop the playback session.
     
@@ -150,7 +155,6 @@ class AssetPlayer {
         statusObserver = nil
         
         player.pause()
-        player.removeAllItems()
         playerState = .stopped
         
         nowPlayableBehavior.handleNowPlayableSessionEnd()
@@ -301,31 +305,23 @@ class AssetPlayer {
         
         if case .stopped = playerState { return }
         
-        player.advanceToNextItem()
+        guard let currentItem = player.currentItem else { return }
+        guard let index = playerItems.firstIndex(of: currentItem) else { return }
+        
+        guard index + 1 < playerItems.count else { return }
+        player.replaceCurrentItem(with: playerItems[index + 1])
+        
     }
     
     private func previousTrack() {
         
         if case .stopped = playerState { return }
         
-        let currentTime = player.currentTime().seconds
-        let currentItems = player.items()
-        let previousIndex = playerItems.count - currentItems.count - 1
+        guard let currentItem = player.currentItem else { return }
+        guard let index = playerItems.firstIndex(of: currentItem) else { return }
         
-        guard currentTime < 3, previousIndex > 0, previousIndex < playerItems.count else { seek(to: .zero); return }
-        
-        player.removeAllItems()
-        
-        for playerItem in playerItems[(previousIndex - 1)...] {
-            
-            if player.canInsert(playerItem, after: nil) {
-                player.insert(playerItem, after: nil)
-            }
-        }
-        
-        if case .playing = playerState {
-            player.play()
-        }
+        guard index - 1 >= 0 else { return }
+        player.replaceCurrentItem(with: playerItems[index - 1])
     }
     
     private func seek(to time: CMTime) {

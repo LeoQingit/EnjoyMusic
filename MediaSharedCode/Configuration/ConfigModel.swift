@@ -22,9 +22,11 @@ struct ConfigModel {
     let nowPlayableBehavior: NowPlayable
     
     // The data model describing the configuration to use for playback.
-    
+    /// Airplay 功能支持
     var allowsExternalPlayback: Bool
+    
     var assets: [ConfigAsset] = []
+    
     var commandCollections: [ConfigCommandCollection] = []
     
     // Initialize a new configuration data model.
@@ -50,20 +52,24 @@ extension ConfigModel {
         
         // Arrange the commands into collections.
         
+        /// 暂停/播放/停止
         let collection1 = [ConfigCommand(.pause, "Pause"),
                            ConfigCommand(.play, "Play"),
                            ConfigCommand(.stop, "Stop"),
                            ConfigCommand(.togglePausePlay, "Play/Pause")]
+        /// 上一首/下一首/重复模式/随机播放
         let collection2 = [ConfigCommand(.nextTrack, "Next Track"),
                            ConfigCommand(.previousTrack, "Previous Track"),
                            ConfigCommand(.changeRepeatMode, "Repeat Mode"),
                            ConfigCommand(.changeShuffleMode, "Shuffle Mode")]
+        /// 播放速率
         let collection3 = [ConfigCommand(.changePlaybackRate, "Playback Rate"),
                            ConfigCommand(.seekBackward, "Seek Backward"),
                            ConfigCommand(.seekForward, "Seek Forward"),
                            ConfigCommand(.skipBackward, "Skip Backward"),
                            ConfigCommand(.skipForward, "Skip Forward"),
                            ConfigCommand(.changePlaybackPosition, "Playback Position")]
+        /// 速率/喜欢/不喜欢/收藏
         let collection4 = [ConfigCommand(.rating, "Rating"),
                            ConfigCommand(.like, "Like"),
                            ConfigCommand(.dislike, "Dislike")]
