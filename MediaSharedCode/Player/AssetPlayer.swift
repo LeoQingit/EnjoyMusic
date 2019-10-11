@@ -117,18 +117,19 @@ class AssetPlayer {
             
             if player.currentItem != nil {
                 
-                itemObserver = player.observe(\.currentItem, options: .initial) {
+                itemObserver = player.observe(\.currentItem, options: [.initial, .new, .old]) {
                     [unowned self] _, _ in
                     self.handlePlayerItemChange()
                 }
                 
-                rateObserver = player.observe(\.rate, options: .initial) {
+                rateObserver = player.observe(\.rate, options: [.initial, .new, .old]) {
                     [unowned self] _, value in
                     print(value.newValue)
                     print(value.oldValue)
+                    self.handlePlaybackChange()
                 }
                 
-                statusObserver = player.observe(\.currentItem?.status, options: .initial) {
+                statusObserver = player.observe(\.currentItem?.status, options: [.initial, .new, .old]) {
                     [unowned self] _, value in
                     print(value.newValue)
                     print(value.oldValue)
