@@ -23,6 +23,8 @@ class MainInterfaceController: WKInterfaceController {
     
     var session: WCSession!
     
+    var concurrentQueue: DispatchQueue = DispatchQueue(label: "com.musics.www", qos: .background, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -68,64 +70,63 @@ extension MainInterfaceController: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         
-        do {
-            /// 切换到子线程操作
-            let sourceData = try Data(contentsOf: file.fileURL)
-            
-            if let enumerator = FileManager.default.enumerator(at: URL.library.appendingPathComponent("Musics"), includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles, errorHandler: nil) {
-                for case let fileURL as URL in enumerator {
-                    let resourceValues = try fileURL.resourceValues(forKeys: Set<URLResourceKey>(arrayLiteral: .isDirectoryKey))
-                    guard let isDirectory = resourceValues.isDirectory else { continue }
-                    if !isDirectory {
-                        let localData = try Data(contentsOf: fileURL)
-                        guard localData != sourceData else {
-                            return
+        concurrentQueue.async { [unowned self] in
+            do {
+                /// 切换到子线程操作
+                let sourceData = try Data(contentsOf: file.fileURL)
+                
+                if let enumerator = FileManager.default.enumerator(at: URL.library.appendingPathComponent("Musics"), includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles, errorHandler: nil) {
+                    for case let fileURL as URL in enumerator {
+                        let resourceValues = try fileURL.resourceValues(forKeys: Set<URLResourceKey>(arrayLiteral: .isDirectoryKey))
+                        guard let isDirectory = resourceValues.isDirectory else { continue }
+                        if !isDirectory {
+                            let localData = try Data(contentsOf: fileURL)
+                            guard localData != sourceData else {
+                                return
+                            }
                         }
                     }
                 }
-            }
-            
-            let fromPath = file.fileURL
-            
-            if !FileManager.default.fileExists(atPath: URL.library.appendingPathComponent("Musics").path) {
-                try FileManager.default.createDirectory(at: URL.library.appendingPathComponent("Musics", isDirectory: true), withIntermediateDirectories: true, attributes: nil)
-            }
-            
-            let toPath = URL.library.appendingPathComponent("Musics").appendingPathComponent(file.fileURL.lastPathComponent)
-            
-            try FileManager.default.moveItem(at: fromPath, to: toPath)
-            
-            let asset = AVURLAsset(url: toPath)
-            
-            var title: String?
-            
-            for format in asset.availableMetadataFormats {
-                let metaItems = asset.metadata(forFormat: format)
-                for item in metaItems where item.commonKey != nil {
-                    switch item.commonKey! {
-                    case .commonKeyAlbumName:
-                        break
-                    case .commonKeyTitle:
-                        title = item.value as? String
-                    case .commonKeyArtist:
-                        break
-                    case .commonKeyCreationDate:
-                        break
-                    default:
-                        break
+                
+                let fromPath = file.fileURL
+                
+                if !FileManager.default.fileExists(atPath: URL.library.appendingPathComponent("Musics").path) {
+                    try FileManager.default.createDirectory(at: URL.library.appendingPathComponent("Musics", isDirectory: true), withIntermediateDirectories: true, attributes: nil)
+                }
+                
+                let toPath = URL.library.appendingPathComponent("Musics").appendingPathComponent(file.fileURL.lastPathComponent)
+                
+                try FileManager.default.moveItem(at: fromPath, to: toPath)
+                
+                let asset = AVURLAsset(url: toPath)
+                
+                var title: String?
+                
+                for format in asset.availableMetadataFormats {
+                    let metaItems = asset.metadata(forFormat: format)
+                    for item in metaItems where item.commonKey != nil {
+                        switch item.commonKey! {
+                        case .commonKeyAlbumName:
+                            break
+                        case .commonKeyTitle:
+                            title = item.value as? String
+                        case .commonKeyArtist:
+                            break
+                        case .commonKeyCreationDate:
+                            break
+                        default:
+                            break
+                        }
                     }
                 }
+                
+                self.managedObjectContext.performChanges {[unowned self] in
+                    let _ = Song.insert(into: self.managedObjectContext, songName: title ?? file.fileURL.lastPathComponent, songURL: toPath.path)
+                }
+            } catch {
+                fatalError(error.localizedDescription)
             }
-            
-            managedObjectContext.performChanges {[unowned self] in
-                let _ = Song.insert(into: self.managedObjectContext, songName: title ?? file.fileURL.lastPathComponent, songURL: toPath.path)
-            }
-            
-        } catch {
-
         }
-        
-        
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
