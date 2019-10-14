@@ -46,6 +46,10 @@ class WatchOSNowPlayableBehavior: NowPlayable {
             self?.handleAudioSesionInterruption(notification: notification)
         })
         
+        NotificationCenter.default.addObserver(forName: AVAudioSession.routeChangeNotification, object: audioSession, queue: .main) { [weak self] notification in
+            self?.handleAudioSesionRouteChange(notification: notification)
+        }
+        
         try audioSession.setCategory(.playback, mode: .default)
         
         try audioSession.setActive(true)
@@ -97,6 +101,28 @@ class WatchOSNowPlayableBehavior: NowPlayable {
                 interruptionHandler(.failed(error))
             }
             
+        default:
+            break
+        }
+    }
+    
+    /// 处理AudioSession 路线切换
+    private func handleAudioSesionRouteChange(notification: Notification) {
+        guard let userInfo = notification.userInfo, let reasonTypeUInt = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt, let resaonType = AVAudioSession.RouteChangeReason(rawValue: reasonTypeUInt) else {
+            return
+        }
+        
+        switch resaonType {
+        case .oldDeviceUnavailable:
+            let previousRoute = userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription
+            let previousOutput = previousRoute?.outputs.first
+            if let type = previousOutput?.portType, type == AVAudioSession.Port.headphones {
+                // 拔掉耳机得暂停
+                
+            }
+            
+        case .newDeviceAvailable:
+            break
         default:
             break
         }
