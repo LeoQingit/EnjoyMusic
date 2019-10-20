@@ -115,10 +115,8 @@ extension NowPlayable {
     // will typically invoke this method.
     
     func setNowPlayingMetadata(_ metadata: NowPlayableStaticMetadata) {
-       
-        let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
         
-        NSLog("%@", "**** Set track metadata: title \(metadata.title)")
+//        NSLog("%@", "**** Set track metadata: title \(metadata.title)")
         nowPlayingInfo[MPNowPlayingInfoPropertyAssetURL] = metadata.assetURL
         nowPlayingInfo[MPNowPlayingInfoPropertyMediaType] = metadata.mediaType.rawValue
         nowPlayingInfo[MPNowPlayingInfoPropertyIsLiveStream] = metadata.isLiveStream
@@ -128,7 +126,7 @@ extension NowPlayable {
         nowPlayingInfo[MPMediaItemPropertyAlbumArtist] = metadata.albumArtist
         nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = metadata.albumTitle
         
-        nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
     // Set playback info. Implementations of `handleNowPlayablePlaybackChange(playing:rate:position:duration:)`
@@ -136,9 +134,7 @@ extension NowPlayable {
     
     func setNowPlayingPlaybackInfo(_ metadata: NowPlayableDynamicMetadata) {
         
-        let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
-        
-        NSLog("%@", "**** Set playback info: rate \(metadata.rate), position \(metadata.position), duration \(metadata.duration)")
+//        NSLog("%@", "**** Set playback info: rate \(metadata.rate), position \(metadata.position), duration \(metadata.duration)")
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = metadata.duration
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = metadata.position
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = metadata.rate
@@ -146,7 +142,7 @@ extension NowPlayable {
         nowPlayingInfo[MPNowPlayingInfoPropertyCurrentLanguageOptions] = metadata.currentLanguageOptions
         nowPlayingInfo[MPNowPlayingInfoPropertyAvailableLanguageOptions] = metadata.availableLanguageOptionGroups
         
-        nowPlayingInfoCenter.nowPlayingInfo = nowPlayingInfo
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
 }

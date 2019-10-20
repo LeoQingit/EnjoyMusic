@@ -305,8 +305,12 @@ class AssetPlayer {
         guard let index = playerItems.firstIndex(of: currentItem) else { return }
         
         guard index + 1 < playerItems.count else { return }
-        player.replaceCurrentItem(with: playerItems[index + 1])
         
+        let nextTrac = playerItems[index + 1]
+        
+        nextTrac.seek(to: CMTime.init(value: 0, timescale: 1)) { [weak self] (isCompleted) in
+            self?.player.replaceCurrentItem(with: nextTrac)
+        }
     }
     
     private func previousTrack() {
@@ -317,7 +321,13 @@ class AssetPlayer {
         guard let index = playerItems.firstIndex(of: currentItem) else { return }
         
         guard index - 1 >= 0 else { return }
-        player.replaceCurrentItem(with: playerItems[index - 1])
+        
+        let previousTrac = playerItems[index - 1]
+        
+        previousTrac.seek(to: CMTime.init(value: 0, timescale: 1)) { [weak self] (isCompleted) in
+            self?.player.replaceCurrentItem(with: previousTrac)
+        }
+        
     }
     
     private func seek(to time: CMTime) {
