@@ -21,6 +21,10 @@ enum NowPlayableInterruption {
 
 protocol NowPlayable: AnyObject {
     
+    // 一张自己维护的nowPlayingInfo表
+    
+    var nowPlayingInfo: [String: Any] { set get }
+    
     // Customization point: default external playability.
     
     var defaultAllowsExternalPlayback: Bool { get }
@@ -113,7 +117,6 @@ extension NowPlayable {
     func setNowPlayingMetadata(_ metadata: NowPlayableStaticMetadata) {
        
         let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
-        var nowPlayingInfo = [String: Any]()
         
         NSLog("%@", "**** Set track metadata: title \(metadata.title)")
         nowPlayingInfo[MPNowPlayingInfoPropertyAssetURL] = metadata.assetURL
@@ -134,7 +137,6 @@ extension NowPlayable {
     func setNowPlayingPlaybackInfo(_ metadata: NowPlayableDynamicMetadata) {
         
         let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
-        var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
         
         NSLog("%@", "**** Set playback info: rate \(metadata.rate), position \(metadata.position), duration \(metadata.duration)")
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = metadata.duration

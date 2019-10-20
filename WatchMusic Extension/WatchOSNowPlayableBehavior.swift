@@ -10,7 +10,10 @@ import Foundation
 import MediaPlayer
 
 class WatchOSNowPlayableBehavior: NowPlayable {
-    /// 允许外部播放
+    
+    var nowPlayingInfo: [String : Any] = [:]
+    
+    /// 允许Airplay
     var defaultAllowsExternalPlayback: Bool { return true}
     /// 默认注册的指令集合
     var defaultRegisteredCommands: [NowPlayableCommand] = [

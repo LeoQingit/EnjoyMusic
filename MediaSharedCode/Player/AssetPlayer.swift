@@ -86,7 +86,10 @@ class AssetPlayer {
         // configuration requires.
         
         self.player = AVPlayer(playerItem: self.playerItems.first)
+        #if os(watchOS)
+        #else
         player.allowsExternalPlayback = ConfigModel.shared.allowsExternalPlayback
+        #endif
         
         // Construct lists of commands to be registered or disabled.
         
@@ -124,21 +127,13 @@ class AssetPlayer {
                 
                 rateObserver = player.observe(\.rate, options: [.initial, .new, .old]) {
                     [unowned self] _, value in
-                    print(value.newValue)
-                    print(value.oldValue)
                     self.handlePlaybackChange()
                 }
                 
                 statusObserver = player.observe(\.currentItem?.status, options: [.initial, .new, .old]) {
                     [unowned self] _, value in
-                    print(value.newValue)
-                    print(value.oldValue)
                     self.handlePlaybackChange()
-                    
                 }
-                
-                
-                
             }
             
             // Start the player.
