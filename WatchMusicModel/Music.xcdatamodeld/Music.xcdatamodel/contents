@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A583" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Album" representedClassName=".Album" parentEntity="Region" syncable="YES">
+        <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="albums" inverseEntity="Artlist"/>
+        <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song"/>
+    </entity>
+    <entity name="Artlist" representedClassName=".Artlist" parentEntity="Region" syncable="YES">
+        <attribute name="numberOfAlbums" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
+        <relationship name="albums" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artlist" inverseEntity="Album"/>
+    </entity>
+    <entity name="Region" representedClassName=".Region" isAbstract="YES" syncable="YES">
+        <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="numberOfSongs" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="uniqueId" attributeType="String"/>
+        <attribute name="uniquenessDummy" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO"/>
+        <fetchIndex name="compoundIndex">
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+            <fetchIndexElement property="updatedAt" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="uniqueId"/>
+                <constraint value="uniquenessDummy"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Song" representedClassName=".Song" syncable="YES">
+        <attribute name="coverURL" optional="YES" attributeType="String"/>
+        <attribute name="creatorID" optional="YES" attributeType="String"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="favorite" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="remoteIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="songURL" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album"/>
+        <fetchIndex name="byMarkedForDeletionDateIndex">
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byRemoteIdentifierIndex">
+            <fetchIndexElement property="remoteIdentifier" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="compoundIndex">
+            <fetchIndexElement property="markedForRemoteDeletion" type="Binary" order="ascending"/>
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+            <fetchIndexElement property="date" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <elements>
+        <element name="Album" positionX="0" positionY="0" width="128" height="73"/>
+        <element name="Artlist" positionX="0" positionY="0" width="128" height="73"/>
+        <element name="Region" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="Song" positionX="0" positionY="0" width="128" height="208"/>
+    </elements>
+</model>
