@@ -23,12 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.syncCoordinator = SyncCoordinator(container: container)
             MusicScannerTool.shared.scanMusicPath(completion: { fileNames in
                 guard !fileNames.isEmpty else { return }
-                let temp = Song.fetch(in: container.viewContext) { (request) in
-                    request.predicate = NSPredicate.init(value: true)
-                }
                 container.viewContext.performChanges {
                     for name in fileNames {
-                        let tp = Song.findOrCreate(in: container.viewContext, matching:  NSPredicate(format: "%K = %@", SongNameKey, name)) { song in
+                        _ = Song.findOrCreate(in: container.viewContext, matching:  NSPredicate(format: "%K = %@", SongNameKey, name)) { song in
                             song.name = name
                         }
                     }

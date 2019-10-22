@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eKG-Pf-tIL">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eKG-Pf-tIL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,52 +14,54 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="X1u-w0-s3O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="SongCell" id="b6G-sn-wdb" customClass="SongTableViewCell" customModule="Music" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6G-sn-wdb" id="5TP-qf-XaZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-xN-vBF">
-                                            <rect key="frame" x="15" y="26" width="93" height="38"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="&lt;&lt;LABEL&gt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Eq-Hpz" userLabel="Album">
-                                                    <rect key="frame" x="0.0" y="28" width="93" height="10"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="&lt;&lt;LABEL&gt;&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYv-bT-GCC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="93" height="20"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <progressView opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="jij-Mw-yD6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91"/>
+                                            <color key="tintColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="&lt;&lt;LABEL&gt;&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Eq-Hpz" userLabel="Album">
+                                            <rect key="frame" x="15" y="58" width="384" height="15"/>
                                             <constraints>
-                                                <constraint firstItem="wQE-Eq-Hpz" firstAttribute="top" secondItem="qYv-bT-GCC" secondAttribute="bottom" constant="8" id="JsE-pp-2ea"/>
-                                                <constraint firstItem="wQE-Eq-Hpz" firstAttribute="leading" secondItem="KLV-xN-vBF" secondAttribute="leading" id="Ogs-ZG-keO"/>
-                                                <constraint firstAttribute="trailing" secondItem="qYv-bT-GCC" secondAttribute="trailing" id="PSQ-FY-eQG"/>
-                                                <constraint firstAttribute="bottom" secondItem="wQE-Eq-Hpz" secondAttribute="bottom" id="R4v-Kr-qN5"/>
-                                                <constraint firstItem="qYv-bT-GCC" firstAttribute="leading" secondItem="KLV-xN-vBF" secondAttribute="leading" id="ppa-iE-1X4"/>
-                                                <constraint firstAttribute="trailing" secondItem="wQE-Eq-Hpz" secondAttribute="trailing" id="sUQ-ac-rUf"/>
-                                                <constraint firstItem="qYv-bT-GCC" firstAttribute="top" secondItem="KLV-xN-vBF" secondAttribute="top" id="zVo-X9-uj4"/>
+                                                <constraint firstAttribute="height" constant="15" id="IaB-Zf-KJI"/>
                                             </constraints>
-                                        </view>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <color key="textColor" systemColor="placeholderTextColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="&lt;&lt;LABEL&gt;&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYv-bT-GCC">
+                                            <rect key="frame" x="15" y="15" width="384" height="38"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="KLV-xN-vBF" firstAttribute="top" secondItem="5TP-qf-XaZ" secondAttribute="topMargin" constant="15" id="0rp-Uc-WBx"/>
-                                        <constraint firstItem="KLV-xN-vBF" firstAttribute="leading" secondItem="5TP-qf-XaZ" secondAttribute="leading" constant="15" id="3Xr-JO-FPA"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="KLV-xN-vBF" secondAttribute="bottom" constant="15" id="yCj-wt-yk7"/>
+                                        <constraint firstAttribute="trailing" secondItem="jij-Mw-yD6" secondAttribute="trailing" id="2Y1-v4-cZy"/>
+                                        <constraint firstAttribute="trailing" secondItem="qYv-bT-GCC" secondAttribute="trailing" constant="15" id="3eO-k0-zRv"/>
+                                        <constraint firstAttribute="trailing" secondItem="wQE-Eq-Hpz" secondAttribute="trailing" constant="15" id="4JE-Om-cqC"/>
+                                        <constraint firstItem="wQE-Eq-Hpz" firstAttribute="top" secondItem="qYv-bT-GCC" secondAttribute="bottom" constant="5" id="GyF-48-uyu"/>
+                                        <constraint firstItem="wQE-Eq-Hpz" firstAttribute="leading" secondItem="5TP-qf-XaZ" secondAttribute="leading" constant="15" id="KYX-0j-68M"/>
+                                        <constraint firstItem="qYv-bT-GCC" firstAttribute="leading" secondItem="5TP-qf-XaZ" secondAttribute="leading" constant="15" id="Ymh-iz-72g"/>
+                                        <constraint firstAttribute="bottom" secondItem="wQE-Eq-Hpz" secondAttribute="bottom" constant="17" id="eYn-Wx-83W"/>
+                                        <constraint firstItem="jij-Mw-yD6" firstAttribute="leading" secondItem="5TP-qf-XaZ" secondAttribute="leading" id="kse-4h-Tlk"/>
+                                        <constraint firstItem="qYv-bT-GCC" firstAttribute="top" secondItem="5TP-qf-XaZ" secondAttribute="top" constant="15" id="lXC-uX-fSQ"/>
+                                        <constraint firstItem="jij-Mw-yD6" firstAttribute="top" secondItem="5TP-qf-XaZ" secondAttribute="top" id="pqI-ma-EQc"/>
+                                        <constraint firstAttribute="bottom" secondItem="jij-Mw-yD6" secondAttribute="bottom" id="py7-8y-IfA"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="album" destination="wQE-Eq-Hpz" id="hzj-RN-2Ij"/>
                                     <outlet property="label" destination="qYv-bT-GCC" id="UUd-2N-IOF"/>
+                                    <outlet property="transferProgress" destination="jij-Mw-yD6" id="g2E-EZ-1tT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

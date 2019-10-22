@@ -4,7 +4,7 @@
 //
 
 import Foundation
-
+import AVFoundation
 
 extension Sequence {
     /// Similar to
@@ -90,4 +90,21 @@ extension String {
     }
 }
 
+private var lastItemKey: Void?
 
+extension AVPlayer {
+    
+    // 上一次的Item
+     @objc var lastItem: AVPlayerItem? {
+        
+        get{
+            return objc_getAssociatedObject(self, &lastItemKey) as? AVPlayerItem
+        }
+        
+        set(newValue) {
+            objc_setAssociatedObject(self, &lastItemKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        
+    }
+
+}

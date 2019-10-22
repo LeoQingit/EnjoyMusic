@@ -25,6 +25,8 @@ public class Song: NSManagedObject {
     @NSManaged public var name: String?
     
     @NSManaged public var songURL: String?
+    
+    public var progress: Progress?
 
 
     public override func awakeFromInsert() {

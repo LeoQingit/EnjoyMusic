@@ -70,7 +70,7 @@ class AllSongsInterfaceController: WKInterfaceController {
         
         do {
             
-            assetPlayer = try AssetPlayer.init()
+//            assetPlayer = try AssetPlayer.init(playerI)
             
         } catch {
             

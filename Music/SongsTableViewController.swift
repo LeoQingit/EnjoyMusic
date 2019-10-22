@@ -57,6 +57,41 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
         let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         dataSource = TableViewDataSource(tableView: tableView, cellIdentifier: "SongCell", fetchedResultsController: frc, delegate: self)
     }
+    
+    private func alertTitle(_ title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    
+    private func transferSpecificItem(indexPath: IndexPath) {
+        let song = dataSource.objectAtIndexPath(indexPath)
+        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        if let urlStr = song.name, let filePath = filePath {
+            do {
+                print(urlStr)
+//                let data = try NSData(contentsOfFile: filePath + "/" + urlStr) as Data
+
+//                session.sendMessageData(data, replyHandler: { data in
+//                    print(data)
+//                }) { error in
+//                    print(error)
+//                }
+                let url = URL(fileURLWithPath: filePath + "/" + urlStr)
+                
+                if session.isPaired && session.isWatchAppInstalled {
+                    let transfer = session.transferFile(url, metadata: nil)
+                    
+//                    song.progress = transfer.progress
+//                    tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                }
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
 
 }
 
@@ -70,36 +105,83 @@ extension SongsTableViewController: TableViewDataSourceDelegate {
 
 extension SongsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let song = dataSource.selectedObject else { fatalError("Showing detail, but no selected row?") }
-        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-        if let urlStr = song.name, let filePath = filePath {
-            do {
-                print(urlStr)
-                let data = try NSData.init(contentsOfFile: filePath + "/" + urlStr) as Data
-//                let avplayer = try AVAudioPlayer(data: data)
-//                self.player = avplayer
-//                avplayer.volume = 0.5
-//                avplayer.play()
-//                avplayer.delegate = self
-                session.sendMessageData(data, replyHandler: { data in
-                    print(data)
-                }) { error in
-                    print(error)
-                }
-                let url = URL.init(fileURLWithPath: filePath + "/" + urlStr)
-                    
-                if session.isPaired && session.isWatchAppInstalled {
-                    let transfer = session.transferFile(url, metadata: nil)
-                    
-                    let progress = transfer.progress
-                }
-                
-                
-            } catch {
-                print(error)
-            }
-        }
+        /*
+         let metadatas: [NowPlayableStaticMetadata] = [
+         
+         NowPlayableStaticMetadata(assetURL: song1URL,
+         mediaType: .audio,
+         isLiveStream: false,
+         title: "First Song",
+         artist: "Singer of Songs",
+         artwork: artworkNamed("Song 1"),
+         albumArtist: "Singer of Songs",
+         albumTitle: "Songs to Sing"),
+         
+         NowPlayableStaticMetadata(assetURL: videoURL,
+         mediaType: .video,
+         isLiveStream: false,
+         title: "Bip Bop, The Movie",
+         artist: nil,
+         artwork: nil,
+         albumArtist: nil,
+         albumTitle: nil),
+         
+         NowPlayableStaticMetadata(assetURL: song2URL,
+         mediaType: .audio,
+         isLiveStream: false,
+         title: "Second Song",
+         artist: "Other Singer",
+         artwork: artworkNamed("Song 2"),
+         albumArtist: "Singer of Songs",
+         albumTitle: "Songs to Sing"),
+         
+         NowPlayableStaticMetadata(assetURL: videoURL,
+         mediaType: .video,
+         isLiveStream: false,
+         title: "Bip Bop, The Sequel",
+         artist: nil,
+         artwork: nil,
+         albumArtist: nil,
+         albumTitle: nil),
+         
+         NowPlayableStaticMetadata(assetURL: song3URL,
+         mediaType: .audio,
+         isLiveStream: false,
+         title: "Third Song",
+         artist: "Singer of Songs",
+         artwork: artworkNamed("Song 3"),
+         albumArtist: "Singer of Songs",
+         albumTitle: "Songs to Sing")
+         ]
+         
+         */
+        
+        //                let avplayer = try AVAudioPlayer(data: data)
+        //                self.player = avplayer
+        //                avplayer.volume = 0.5
+        //                avplayer.play()
+        //                avplayer.delegate = self
+        
     }
+    
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let collectAction = UITableViewRowAction(style: .default, title: "Collect")     { (action, indexPath) in
+            self.alertTitle("Default action at \(indexPath)")
+        }
+        collectAction.backgroundColor = UIColor.systemOrange
+        
+        let transferAction = UITableViewRowAction(style: .normal, title: "Transfer") { (action, indexPath) in
+            self.transferSpecificItem(indexPath: indexPath)
+        }
+        transferAction.backgroundColor = UIColor.systemBlue
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.alertTitle("Delete action at \(indexPath)")
+        }
+        return [collectAction, transferAction, deleteAction]
+    }
+    
 }
 
 extension SongsTableViewController: AVAudioPlayerDelegate {
@@ -116,15 +198,17 @@ extension SongsTableViewController: AVAudioPlayerDelegate {
 extension SongsTableViewController: WCSessionDelegate {
     
     func sessionDidBecomeInactive(_ session: WCSession) {
-        
+        print(#function)
     }
     
     func sessionDidDeactivate(_ session: WCSession) {
-        
+        print(#function)
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
+        print(#function)
+        print(activationState.rawValue)
+        print(error)
     }
     
     

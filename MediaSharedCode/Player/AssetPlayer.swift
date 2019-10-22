@@ -60,13 +60,15 @@ class AssetPlayer {
     private var rateObserver: NSKeyValueObservation!
     private var statusObserver: NSObjectProtocol!
     
+    private var playerItemHandleQueue = DispatchQueue(label: "com.assetPlayer.www", qos: .default, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
+    
     // A shorter name for a very long property name.
     
     private static let mediaSelectionKey = "availableMediaCharacteristicsWithMediaSelectionOptions"
     
     // Initialize a new `AssetPlayer` object.
     
-    init() throws {
+    init(playerItem: AVPlayerItem) throws {
         
         self.nowPlayableBehavior = ConfigModel.shared.nowPlayableBehavior
         
@@ -120,8 +122,10 @@ class AssetPlayer {
             
             if player.currentItem != nil {
                 
+                addObserver()
+                
                 itemObserver = player.observe(\.currentItem, options: [.initial, .new, .old]) {
-                    [unowned self] _, _ in
+                    [unowned self] _, value in
                     self.handlePlayerItemChange()
                 }
                 
@@ -130,10 +134,16 @@ class AssetPlayer {
                     self.handlePlaybackChange()
                 }
                 
-                statusObserver = player.observe(\.currentItem?.status, options: [.initial, .new, .old]) {
-                    [unowned self] _, value in
+                statusObserver = player.observe(\.currentItem!.status, options: []) {
+                    [unowned self] (avplayer, value) in
+                    
+                    guard avplayer.lastItem != avplayer.currentItem || avplayer.lastItem?.status != avplayer.currentItem?.status else { return }
+                    
+                    avplayer.lastItem = avplayer.currentItem
+                    
                     self.handlePlaybackChange()
                 }
+
             }
             
             // Start the player.
@@ -154,6 +164,16 @@ class AssetPlayer {
         playerState = .stopped
         
         nowPlayableBehavior.handleNowPlayableSessionEnd()
+    }
+    
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(respondPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
+    @objc func respondPlayToEndTime(notification: Notification) {
+        if let objct = notification.object as? AVPlayerItem, self.playerItems.contains(objct) {
+            nextTrack()
+        }
     }
     
     // MARK: Now Playing Info
@@ -306,10 +326,11 @@ class AssetPlayer {
         
         guard index + 1 < playerItems.count else { return }
         
-        let nextTrac = playerItems[index + 1]
+        player.replaceCurrentItem(with: playerItems[index + 1])
         
-        nextTrac.seek(to: CMTime.init(value: 0, timescale: 1)) { [weak self] (isCompleted) in
-            self?.player.replaceCurrentItem(with: nextTrac)
+        playerItemHandleQueue.async {[unowned self] in
+            let lastItem = self.playerItems[index]
+            lastItem.seek(to: CMTime.zero, completionHandler: nil)
         }
     }
     
@@ -322,12 +343,12 @@ class AssetPlayer {
         
         guard index - 1 >= 0 else { return }
         
-        let previousTrac = playerItems[index - 1]
+        player.replaceCurrentItem(with: playerItems[index - 1])
         
-        previousTrac.seek(to: CMTime.init(value: 0, timescale: 1)) { [weak self] (isCompleted) in
-            self?.player.replaceCurrentItem(with: previousTrac)
+        playerItemHandleQueue.async {
+            let lastItem = self.playerItems[index]
+            lastItem.seek(to: CMTime.zero, completionHandler: nil)
         }
-        
     }
     
     private func seek(to time: CMTime) {
