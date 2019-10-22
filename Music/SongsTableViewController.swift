@@ -69,26 +69,17 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
         let song = dataSource.objectAtIndexPath(indexPath)
         let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
         if let urlStr = song.name, let filePath = filePath {
-            do {
-                print(urlStr)
-//                let data = try NSData(contentsOfFile: filePath + "/" + urlStr) as Data
-
-//                session.sendMessageData(data, replyHandler: { data in
-//                    print(data)
-//                }) { error in
-//                    print(error)
-//                }
-                let url = URL(fileURLWithPath: filePath + "/" + urlStr)
-                
-                if session.isPaired && session.isWatchAppInstalled {
-                    let transfer = session.transferFile(url, metadata: nil)
-                    
-//                    song.progress = transfer.progress
-//                    tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+            let url = URL(fileURLWithPath: filePath + "/" + urlStr)
+            
+            if session.isPaired && session.isWatchAppInstalled {
+                let transfer = session.transferFile(url, metadata: nil)
+                session.sendMessage(["hello":"world"], replyHandler: { (value) in
+                    print(value)
+                }) { (error) in
+                    print(error)
                 }
-                
-            } catch {
-                print(error)
+                song.progress = transfer.progress
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
             }
         }
     }
@@ -207,8 +198,6 @@ extension SongsTableViewController: WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print(#function)
-        print(activationState.rawValue)
-        print(error)
     }
     
     

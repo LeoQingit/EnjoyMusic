@@ -68,6 +68,14 @@ extension MainInterfaceController: WCSessionDelegate {
         
     }
     
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        print(message)
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        print(message)
+    }
+    
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         
         concurrentQueue.async { [unowned self] in
