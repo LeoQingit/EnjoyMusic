@@ -67,14 +67,9 @@ class AllSongsInterfaceController: WKInterfaceController {
             albumArtist: "Singer of Songs",
             albumTitle: "Songs to Sing")
         }.map { ConfigAsset(metadata: $0) }
-        
-        do {
             
 //            assetPlayer = try AssetPlayer.init(playerI)
             
-        } catch {
-            
-        }
         
         pushController(withName: "MusicPlayerInterfaceController", context: nil)
         

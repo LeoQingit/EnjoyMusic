@@ -9,6 +9,12 @@ Abstract:
 import AVFoundation
 import MediaPlayer
 
+protocol AssetPlayerDelegate: class {
+    func assetPlayer(_ player: AssetPlayer, staticMetaDataWith currentItem: AVPlayerItem) -> NowPlayableStaticMetadata
+    func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem
+    func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem
+}
+
 class AssetPlayer {
     
     // Possible values of the `playerState` property.
@@ -29,9 +35,11 @@ class AssetPlayer {
     
     let player: AVPlayer
     
+    weak var delegate: AssetPlayerDelegate?
+    
     // A playlist of items to play.
     
-    private let playerItems: [AVPlayerItem]
+//    private let playerItems: [AVPlayerItem]
     
     // Metadata for each item.
     
@@ -64,11 +72,13 @@ class AssetPlayer {
     
     // A shorter name for a very long property name.
     
-    private static let mediaSelectionKey = "availableMediaCharacteristicsWithMediaSelectionOptions"
+    static let mediaSelectionKey = "availableMediaCharacteristicsWithMediaSelectionOptions"
     
     // Initialize a new `AssetPlayer` object.
     
-    init(playerItem: AVPlayerItem) throws {
+    init(_ currentItem: AVPlayerItem, delegate: AssetPlayerDelegate) throws {
+        
+        self.delegate = delegate
         
         self.nowPlayableBehavior = ConfigModel.shared.nowPlayableBehavior
         
@@ -80,14 +90,16 @@ class AssetPlayer {
         self.staticMetadatas = playableAssets.map { $0.metadata }
         
         //
-        self.playerItems = playableAssets.map {
-            AVPlayerItem(asset: $0.urlAsset, automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
-        }
+//        self.playerItems = playableAssets.map {
+//            AVPlayerItem(asset: $0.urlAsset, automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
+//        }
         
         // Create a player, and configure it for external playback, if the
         // configuration requires.
         
-        self.player = AVPlayer(playerItem: self.playerItems.first)
+        
+        self.player = AVPlayer(playerItem: currentItem)
+        
         #if os(watchOS)
         #else
         player.allowsExternalPlayback = ConfigModel.shared.allowsExternalPlayback
@@ -109,10 +121,6 @@ class AssetPlayer {
                                                                disabledCommands: enabledCommands,
                                                                commandHandler: handleCommand(command:event:),
                                                                interruptionHandler: handleInterrupt(with:))
-        
-        // Start playing, if there is something to play.
-        
-        if !playerItems.isEmpty {
             
             // Start a playback session.
             
@@ -149,7 +157,6 @@ class AssetPlayer {
             // Start the player.
             
             play()
-        }
     }
     
     // Stop the playback session.
@@ -171,9 +178,7 @@ class AssetPlayer {
     }
     
     @objc func respondPlayToEndTime(notification: Notification) {
-        if let objct = notification.object as? AVPlayerItem, self.playerItems.contains(objct) {
-            nextTrack()
-        }
+        nextTrack()
     }
     
     // MARK: Now Playing Info
@@ -187,11 +192,7 @@ class AssetPlayer {
         // Find the current item.
         
         guard let currentItem = player.currentItem else { optOut(); return }
-        guard let currentIndex = playerItems.firstIndex (where: { $0 == currentItem }) else { return }
-        
-        // Set the Now Playing Info from static item metadata.
-        
-        let metadata = staticMetadatas[currentIndex]
+        guard let metadata = delegate?.assetPlayer(self, staticMetaDataWith: currentItem) else { return }
         
         nowPlayableBehavior.handleNowPlayableItemChange(metadata: metadata)
     }
@@ -322,15 +323,13 @@ class AssetPlayer {
         if case .stopped = playerState { return }
         
         guard let currentItem = player.currentItem else { return }
-        guard let index = playerItems.firstIndex(of: currentItem) else { return }
         
-        guard index + 1 < playerItems.count else { return }
+        guard let nextItem = delegate?.assetPlayer(self, playNextTrac: currentItem) else { return }
         
-        player.replaceCurrentItem(with: playerItems[index + 1])
+        player.replaceCurrentItem(with: nextItem)
         
-        playerItemHandleQueue.async {[unowned self] in
-            let lastItem = self.playerItems[index]
-            lastItem.seek(to: CMTime.zero, completionHandler: nil)
+        playerItemHandleQueue.async {
+            currentItem.seek(to: CMTime.zero, completionHandler: nil)
         }
     }
     
@@ -339,15 +338,13 @@ class AssetPlayer {
         if case .stopped = playerState { return }
         
         guard let currentItem = player.currentItem else { return }
-        guard let index = playerItems.firstIndex(of: currentItem) else { return }
         
-        guard index - 1 >= 0 else { return }
+        guard let previousItem = delegate?.assetPlayer(self, playPreviousTrac: currentItem) else { return }
         
-        player.replaceCurrentItem(with: playerItems[index - 1])
+        player.replaceCurrentItem(with: previousItem)
         
         playerItemHandleQueue.async {
-            let lastItem = self.playerItems[index]
-            lastItem.seek(to: CMTime.zero, completionHandler: nil)
+            currentItem.seek(to: CMTime.zero, completionHandler: nil)
         }
     }
     

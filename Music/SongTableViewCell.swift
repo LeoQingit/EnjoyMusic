@@ -11,10 +11,12 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var album: UILabel!
     @IBOutlet weak var transferProgress: UIProgressView!
-    var observation: NSKeyValueObservation?
+    private var progressObservation: NSKeyValueObservation?
+    private var progressViObservation: NSKeyValueObservation?
     
     deinit {
-        observation = nil
+        progressObservation = nil
+        progressViObservation = nil
     }
 }
 
@@ -33,11 +35,13 @@ extension SongTableViewCell {
     func configure(for song: Song) {
         label.text = song.name
         album.text = dateFormatter.string(from: song.date)
-        observation = song.progress?.observe(\.fractionCompleted, options: [.initial, .new, .old], changeHandler: { [unowned self] (progress, value) in
-            print(progress.totalUnitCount, value.newValue)
+        progressObservation = song.progress?.observe(\.completedUnitCount, options: [.initial, .new], changeHandler: { [unowned self] (progress, value) in
+            print(progress.localizedDescription ?? "")
             let total = Double(progress.totalUnitCount)
             guard let currentValue = value.newValue else { return }
-            self.transferProgress.setProgress(Float(currentValue / total), animated: true)
+            DispatchQueue.main.async {
+                self.transferProgress.setProgress(Float(Double(currentValue) / total), animated: true)
+            }
         })
     }
 }

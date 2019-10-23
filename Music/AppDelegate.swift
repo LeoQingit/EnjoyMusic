@@ -32,10 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let vc = storyboard.instantiateViewController(withIdentifier: "SongsTableViewController") as? SongsTableViewController
-                else { fatalError("Wrong view controller type") }
+            guard let navigationVC = storyboard.instantiateViewController(withIdentifier: "ItemScene") as? UINavigationController else { fatalError("Wrong view controller type") }
+            guard let vc = navigationVC.topViewController as? SongsTableViewController else
+                { fatalError("Wrong view controller type") }
             vc.managedObjectContext = container.viewContext
-            self.window?.rootViewController = vc
+            self.window?.rootViewController = navigationVC
         }
         return true
     }

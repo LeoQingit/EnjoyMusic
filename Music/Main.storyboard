@@ -62,6 +62,7 @@
                                     <outlet property="album" destination="wQE-Eq-Hpz" id="hzj-RN-2Ij"/>
                                     <outlet property="label" destination="qYv-bT-GCC" id="UUd-2N-IOF"/>
                                     <outlet property="transferProgress" destination="jij-Mw-yD6" id="g2E-EZ-1tT"/>
+                                    <segue destination="mIE-fa-WO4" kind="presentation" id="uZC-ce-OeH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -77,10 +78,20 @@
             </objects>
             <point key="canvasLocation" x="5530.434782608696" y="-562.5"/>
         </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="Kk5-D2-3cL">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="mIE-fa-WO4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Rs9-SM-9Cd"/>
+                </avPlayerViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="foM-qc-HV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6383" y="-563"/>
+        </scene>
         <!--Song Detail-->
         <scene sceneID="Jfk-eE-9x5">
             <objects>
-                <viewController title="Song Detail" id="fKz-xX-5Pg" customClass="SongDetailViewController" customModule="Music" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SongDetailScene" title="Song Detail" id="fKz-xX-5Pg" customClass="SongDetailViewController" customModule="Music" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qrQ-12-TQn"/>
                         <viewControllerLayoutGuide type="bottom" id="IMC-XN-0mE"/>
@@ -126,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUK-p5-t4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6368.115942028986" y="-263.16964285714283"/>
+            <point key="canvasLocation" x="7088" y="-550"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="DHt-hD-6ke">
@@ -149,7 +160,7 @@
         <!--Item-->
         <scene sceneID="QOH-AH-OEF">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LcM-fG-zLe" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ItemScene" automaticallyAdjustsScrollViewInsets="NO" id="LcM-fG-zLe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="OSK-J7-zjg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dXB-lq-Ta5">

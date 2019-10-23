@@ -116,7 +116,7 @@ extension Data {
         rgbValues.withUnsafeMutableBufferPointer { buffer in
             let voidPointer = UnsafeMutableRawPointer(buffer.baseAddress)
             let _ = withUnsafeBytes { bytes in
-                memcpy(voidPointer, bytes, count)
+                memcpy(voidPointer, bytes.baseAddress, count)
             }
         }
         let rgbSlices = rgbValues.sliced(size: 3)

@@ -68,8 +68,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         cameraView?.authorized = readyToSnap
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             delegate.didCapture(image)
         }
         dismiss(animated: true, completion: nil)

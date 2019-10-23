@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Album" representedClassName=".Album" parentEntity="Region" syncable="YES">
         <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="albums" inverseEntity="Artlist"/>
         <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song"/>
@@ -36,7 +36,7 @@
         <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="remoteIdentifier" optional="YES" attributeType="String"/>
-        <attribute name="songURL" optional="YES" attributeType="String" storedInTruthFile="YES"/>
+        <attribute name="songURL" optional="YES" attributeType="String"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album"/>
         <fetchIndex name="byMarkedForDeletionDateIndex">
             <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>

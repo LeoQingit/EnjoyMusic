@@ -78,7 +78,7 @@ extension MainInterfaceController: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceive file: WCSessionFile) {
         
-        concurrentQueue.async { [unowned self] in
+//        concurrentQueue.async { [unowned self] in
             do {
                 /// 切换到子线程操作
                 let sourceData = try Data(contentsOf: file.fileURL)
@@ -132,9 +132,9 @@ extension MainInterfaceController: WCSessionDelegate {
                     let _ = Song.insert(into: self.managedObjectContext, songName: title ?? file.fileURL.lastPathComponent, songURL: toPath.path)
                 }
             } catch {
-                fatalError(error.localizedDescription)
+//                fatalError(error.localizedDescription)
             }
-        }
+//        }
     }
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {

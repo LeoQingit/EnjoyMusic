@@ -15,7 +15,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
     enum SegueIdentifier: String {
         case showSongDetail = "showSongDetail"
     }
-    var player: AVAudioPlayer!
+    var player: AssetPlayer!
     var session: WCSession!
 
     var managedObjectContext: NSManagedObjectContext!
@@ -73,13 +73,8 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
             
             if session.isPaired && session.isWatchAppInstalled {
                 let transfer = session.transferFile(url, metadata: nil)
-                session.sendMessage(["hello":"world"], replyHandler: { (value) in
-                    print(value)
-                }) { (error) in
-                    print(error)
-                }
                 song.progress = transfer.progress
-                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
             }
         }
     }
@@ -96,62 +91,13 @@ extension SongsTableViewController: TableViewDataSourceDelegate {
 
 extension SongsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-         let metadatas: [NowPlayableStaticMetadata] = [
-         
-         NowPlayableStaticMetadata(assetURL: song1URL,
-         mediaType: .audio,
-         isLiveStream: false,
-         title: "First Song",
-         artist: "Singer of Songs",
-         artwork: artworkNamed("Song 1"),
-         albumArtist: "Singer of Songs",
-         albumTitle: "Songs to Sing"),
-         
-         NowPlayableStaticMetadata(assetURL: videoURL,
-         mediaType: .video,
-         isLiveStream: false,
-         title: "Bip Bop, The Movie",
-         artist: nil,
-         artwork: nil,
-         albumArtist: nil,
-         albumTitle: nil),
-         
-         NowPlayableStaticMetadata(assetURL: song2URL,
-         mediaType: .audio,
-         isLiveStream: false,
-         title: "Second Song",
-         artist: "Other Singer",
-         artwork: artworkNamed("Song 2"),
-         albumArtist: "Singer of Songs",
-         albumTitle: "Songs to Sing"),
-         
-         NowPlayableStaticMetadata(assetURL: videoURL,
-         mediaType: .video,
-         isLiveStream: false,
-         title: "Bip Bop, The Sequel",
-         artist: nil,
-         artwork: nil,
-         albumArtist: nil,
-         albumTitle: nil),
-         
-         NowPlayableStaticMetadata(assetURL: song3URL,
-         mediaType: .audio,
-         isLiveStream: false,
-         title: "Third Song",
-         artist: "Singer of Songs",
-         artwork: artworkNamed("Song 3"),
-         albumArtist: "Singer of Songs",
-         albumTitle: "Songs to Sing")
-         ]
-         
-         */
-        
-        //                let avplayer = try AVAudioPlayer(data: data)
-        //                self.player = avplayer
-        //                avplayer.volume = 0.5
-        //                avplayer.play()
-        //                avplayer.delegate = self
+        guard let song = dataSource.selectedObject, let urlString = song.songURL else { return }
+        let item = AVPlayerItem(asset: AVAsset(url: URL(fileURLWithPath: urlString)), automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
+        do {
+            player = try AssetPlayer(item, delegate: self)
+        } catch {
+            print(error)
+        }
         
     }
     
@@ -198,6 +144,85 @@ extension SongsTableViewController: WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print(#function)
+    }
+    
+    
+}
+/*
+ let metadatas: [NowPlayableStaticMetadata] = [
+ 
+ NowPlayableStaticMetadata(assetURL: song1URL,
+ mediaType: .audio,
+ isLiveStream: false,
+ title: "First Song",
+ artist: "Singer of Songs",
+ artwork: artworkNamed("Song 1"),
+ albumArtist: "Singer of Songs",
+ albumTitle: "Songs to Sing"),
+ 
+ NowPlayableStaticMetadata(assetURL: videoURL,
+ mediaType: .video,
+ isLiveStream: false,
+ title: "Bip Bop, The Movie",
+ artist: nil,
+ artwork: nil,
+ albumArtist: nil,
+ albumTitle: nil),
+ 
+ NowPlayableStaticMetadata(assetURL: song2URL,
+ mediaType: .audio,
+ isLiveStream: false,
+ title: "Second Song",
+ artist: "Other Singer",
+ artwork: artworkNamed("Song 2"),
+ albumArtist: "Singer of Songs",
+ albumTitle: "Songs to Sing"),
+ 
+ NowPlayableStaticMetadata(assetURL: videoURL,
+ mediaType: .video,
+ isLiveStream: false,
+ title: "Bip Bop, The Sequel",
+ artist: nil,
+ artwork: nil,
+ albumArtist: nil,
+ albumTitle: nil),
+ 
+ NowPlayableStaticMetadata(assetURL: song3URL,
+ mediaType: .audio,
+ isLiveStream: false,
+ title: "Third Song",
+ artist: "Singer of Songs",
+ artwork: artworkNamed("Song 3"),
+ albumArtist: "Singer of Songs",
+ albumTitle: "Songs to Sing")
+ ]
+ 
+ */
+
+extension SongsTableViewController: AssetPlayerDelegate {
+    func assetPlayer(_ player: AssetPlayer, staticMetaDataWith currentItem: AVPlayerItem) -> NowPlayableStaticMetadata {
+        
+//        return NowPlayableStaticMetadata(assetURL: song3URL,
+//                                         mediaType: .audio,
+//                                         isLiveStream: false,
+//                                         title: "Third Song",
+//                                         artist: "Singer of Songs",
+//                                         artwork: artworkNamed("Song 3"),
+//                                         albumArtist: "Singer of Songs",
+//                                         albumTitle: "Songs to Sing")
+        
+    }
+    
+    func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem {
+        if player === self.player {
+            
+        }
+    }
+    
+    func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem {
+        if player === self.player {
+            
+        }
     }
     
     
