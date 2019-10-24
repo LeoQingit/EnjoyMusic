@@ -297,9 +297,7 @@ class AssetPlayer {
         
         player.replaceCurrentItem(with: nextItem)
         
-        playerItemHandleQueue.async {
-            currentItem.seek(to: CMTime.zero, completionHandler: nil)
-        }
+        seek(to: CMTime.zero)
     }
     
     private func previousTrack() {
@@ -312,9 +310,7 @@ class AssetPlayer {
         
         player.replaceCurrentItem(with: previousItem)
         
-        playerItemHandleQueue.async {
-            currentItem.seek(to: CMTime.zero, completionHandler: nil)
-        }
+        seek(to: CMTime.zero)
     }
     
     private func seek(to time: CMTime) {
