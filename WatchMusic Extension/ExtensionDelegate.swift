@@ -18,16 +18,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         
-        // Create the data model.
-        
-        ConfigModel.shared = ConfigModel(nowPlayableBehavior: WatchOSNowPlayableBehavior())
+        do {
+            ConfigModel.shared = try ConfigModel(nowPlayableBehavior: WatchOSNowPlayableBehavior())
+        } catch {
+            print(error)
+        }
         
         createMusicContainer { container in
             self.persistentContainer = container
             self.syncCoordinator = SyncCoordinator(container: container)
-            
-            
-            
+        
             guard let vc = WKExtension.shared().rootInterfaceController as? MainInterfaceController
                 else { fatalError("Wrong view controller type") }
             vc.managedObjectContext = container.viewContext

@@ -20,7 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         application.registerForRemoteNotifications()
         
-        ConfigModel.shared = ConfigModel(nowPlayableBehavior: WatchOSNowPlayableBehavior())
+        do {
+            try ConfigModel.shared = ConfigModel(nowPlayableBehavior: WatchOSNowPlayableBehavior())
+        } catch {
+            print(error)
+        }
         
         createMusicContainer { container in
             self.persistentContainer = container
@@ -86,6 +90,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         persistentContainer.viewContext.batchDeleteObjectsMarkedForLocalDeletion()
         persistentContainer.viewContext.refreshAllObjects()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        ConfigModel.shared.nowPlayableBehavior.handleNowPlayableSessionEnd()
     }
 
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {

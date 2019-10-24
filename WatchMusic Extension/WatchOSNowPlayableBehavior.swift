@@ -34,6 +34,10 @@ class WatchOSNowPlayableBehavior: NowPlayable {
     /// audioSession中断通知监听
     private var interruptionObserver: NSObjectProtocol!
     
+    init() throws {
+        try handleNowPlayableSessionStart()
+    }
+    
     func handleNowPlayableConfiguration(commands: [NowPlayableCommand], disabledCommands: [NowPlayableCommand], commandHandler: @escaping (NowPlayableCommand, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus, interruptionHandler: @escaping (NowPlayableInterruption) -> Void) throws {
         
         self.interruptionHandler = interruptionHandler

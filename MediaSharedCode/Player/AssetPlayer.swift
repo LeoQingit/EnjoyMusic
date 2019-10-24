@@ -93,28 +93,24 @@ class AssetPlayer {
                                                                commandHandler: handleCommand(command:event:),
                                                                interruptionHandler: handleInterrupt(with:))
         
-        // Start a playback session.
-        
-        try nowPlayableBehavior.handleNowPlayableSessionStart()
-        
         addObserver()
         
-        itemObserver = player.observe(\.currentItem, options: [.initial, .new, .old]) {
+        itemObserver = player.observe(\.currentItem, options: [.new, .old]) {
             [unowned self] _, value in
             self.handlePlayerItemChange()
         }
         
-        rateObserver = player.observe(\.rate, options: [.initial, .new, .old]) {
+        rateObserver = player.observe(\.rate, options: [.new, .old]) {
             [unowned self] _, value in
             self.handlePlaybackChange()
         }
         
-        statusObserver = player.observe(\.currentItem!.status, options: []) {
+        statusObserver = player.observe(\.currentItem!.status) {
             [unowned self] (avplayer, value) in
             
-            guard avplayer.lastItem != avplayer.currentItem || avplayer.lastItem?.status != avplayer.currentItem?.status else { return }
-            
-            avplayer.lastItem = avplayer.currentItem
+//            guard avplayer.lastItem != avplayer.currentItem || avplayer.lastItem?.status != avplayer.currentItem?.status else { return }
+//
+//            avplayer.lastItem = avplayer.currentItem
             
             self.handlePlaybackChange()
         }
@@ -124,20 +120,18 @@ class AssetPlayer {
     
     deinit {
         delegate = nil
+        itemObserver = nil
+        rateObserver = nil
+        statusObserver = nil
     }
     
     // Stop the playback session.
     
-    func optOut() {
-        
-        itemObserver = nil
-        rateObserver = nil
-        statusObserver = nil
+    func playerStop() {
         
         player.pause()
         playerState = .stopped
         
-        nowPlayableBehavior.handleNowPlayableSessionEnd()
     }
     
     func addObserver() {
@@ -158,7 +152,7 @@ class AssetPlayer {
         
         // Find the current item.
         
-        guard let currentItem = player.currentItem else { optOut(); return }
+        guard let currentItem = player.currentItem else { playerStop(); return }
         guard let metadata = delegate?.assetPlayer(self, staticMetaDataWith: currentItem) else { return }
         
         nowPlayableBehavior.handleNowPlayableItemChange(metadata: metadata)
@@ -172,7 +166,7 @@ class AssetPlayer {
         
         // Find the current item.
         
-        guard let currentItem = player.currentItem else { optOut(); return }
+        guard let currentItem = player.currentItem else { playerStop(); return }
         guard currentItem.status == .readyToPlay else { return }
         
         // Create language option groups for the asset's media selection,
@@ -228,15 +222,13 @@ class AssetPlayer {
     // MARK: Playback Control
     
     func play(_ currentItem: AVPlayerItem) {
-        currentItem.seek(to: CMTime.zero) {[unowned self] (isCompleted) in
-            self.player.replaceCurrentItem(with: currentItem)
-            if self.playerState != .playing {
-                self.player.play()
-            } else {
-            }
-            self.playerState = .playing
-            self.handlePlayerItemChange()
-        }
+        player.replaceCurrentItem(with: currentItem)
+        if playerState != .playing {
+            playerState = .playing
+            player.play()
+        } else { }
+        seek(to: CMTime.zero)
+        handlePlayerItemChange()
     }
     
     private func play() {
@@ -428,7 +420,7 @@ class AssetPlayer {
             play()
             
         case .stop:
-            optOut()
+            playerStop()
             
         case .togglePausePlay:
             togglePlayPause()
@@ -509,7 +501,7 @@ class AssetPlayer {
             
         case .failed(let error):
             print(error.localizedDescription)
-            optOut()
+            playerStop()
         }
     }
     
