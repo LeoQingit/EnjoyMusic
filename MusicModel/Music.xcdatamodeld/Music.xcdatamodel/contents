@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Album" representedClassName=".Album" parentEntity="Region" syncable="YES">
+    <entity name="Album" representedClassName=".Album" parentEntity="SongMetadata" syncable="YES">
         <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="albums" inverseEntity="Artlist"/>
         <relationship name="songs" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="album" inverseEntity="Song"/>
     </entity>
-    <entity name="Artlist" representedClassName=".Artlist" parentEntity="Region" syncable="YES">
+    <entity name="Artlist" representedClassName=".Artlist" parentEntity="SongMetadata" syncable="YES">
         <attribute name="numberOfAlbums" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
         <relationship name="albums" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artlist" inverseEntity="Album"/>
+        <relationship name="songs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Song" inverseName="artlist" inverseEntity="Song"/>
     </entity>
-    <entity name="Region" representedClassName=".Region" isAbstract="YES" syncable="YES">
+    <entity name="Song" representedClassName=".Song" syncable="YES">
+        <attribute name="artworkURL" optional="YES" attributeType="String"/>
+        <attribute name="colors" optional="YES" attributeType="Transformable" valueTransformerName="ColorsTransformer"/>
+        <attribute name="creatorID" optional="YES" attributeType="String"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
+        <attribute name="favorite" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="remoteIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="songURL" optional="YES" attributeType="String"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album"/>
+        <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="songs" inverseEntity="Artlist"/>
+        <fetchIndex name="byMarkedForDeletionDateIndex">
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="byRemoteIdentifierIndex">
+            <fetchIndexElement property="remoteIdentifier" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <fetchIndex name="compoundIndex">
+            <fetchIndexElement property="markedForRemoteDeletion" type="Binary" order="ascending"/>
+            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
+            <fetchIndexElement property="date" type="Binary" order="ascending"/>
+        </fetchIndex>
+    </entity>
+    <entity name="SongMetadata" representedClassName=".SongMetadata" isAbstract="YES" syncable="YES">
+        <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="####"/>
         <attribute name="numberOfSongs" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="uniqueId" attributeType="String"/>
         <attribute name="uniquenessDummy" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
@@ -25,35 +53,10 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="Song" representedClassName=".Song" syncable="YES">
-        <attribute name="colors" optional="YES" attributeType="Transformable" valueTransformerName="ColorsTransformer"/>
-        <attribute name="coverURL" optional="YES" attributeType="String"/>
-        <attribute name="creatorID" optional="YES" attributeType="String"/>
-        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="duration" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO"/>
-        <attribute name="favorite" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
-        <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="markedForRemoteDeletion" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="remoteIdentifier" optional="YES" attributeType="String"/>
-        <attribute name="songURL" optional="YES" attributeType="String"/>
-        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album"/>
-        <fetchIndex name="byMarkedForDeletionDateIndex">
-            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
-        </fetchIndex>
-        <fetchIndex name="byRemoteIdentifierIndex">
-            <fetchIndexElement property="remoteIdentifier" type="Binary" order="ascending"/>
-        </fetchIndex>
-        <fetchIndex name="compoundIndex">
-            <fetchIndexElement property="markedForRemoteDeletion" type="Binary" order="ascending"/>
-            <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
-            <fetchIndexElement property="date" type="Binary" order="ascending"/>
-        </fetchIndex>
-    </entity>
     <elements>
         <element name="Album" positionX="0" positionY="0" width="128" height="73"/>
-        <element name="Artlist" positionX="0" positionY="0" width="128" height="73"/>
-        <element name="Region" positionX="0" positionY="0" width="128" height="118"/>
-        <element name="Song" positionX="0" positionY="0" width="128" height="223"/>
+        <element name="Artlist" positionX="0" positionY="0" width="128" height="88"/>
+        <element name="SongMetadata" positionX="0" positionY="0" width="128" height="133"/>
+        <element name="Song" positionX="0" positionY="0" width="128" height="238"/>
     </elements>
 </model>

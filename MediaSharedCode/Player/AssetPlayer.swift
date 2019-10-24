@@ -11,8 +11,8 @@ import MediaPlayer
 
 protocol AssetPlayerDelegate: class {
     func assetPlayer(_ player: AssetPlayer, staticMetaDataWith currentItem: AVPlayerItem) -> NowPlayableStaticMetadata
-    func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem
-    func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem
+    func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem?
+    func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem?
 }
 
 class AssetPlayer {
@@ -36,17 +36,6 @@ class AssetPlayer {
     let player: AVPlayer
     
     weak var delegate: AssetPlayerDelegate?
-    
-    // A playlist of items to play.
-    
-//    private let playerItems: [AVPlayerItem]
-    
-    // Metadata for each item.
-    
-    private let staticMetadatas: [NowPlayableStaticMetadata]
-    
-    // The internal state of this AssetPlayer separate from the state
-    // of its AVQueuePlayer.
     
     private var playerState: PlayerState = .stopped {
         didSet {
@@ -76,29 +65,11 @@ class AssetPlayer {
     
     // Initialize a new `AssetPlayer` object.
     
-    init(_ currentItem: AVPlayerItem, delegate: AssetPlayerDelegate) throws {
-        
-        self.delegate = delegate
+    init() throws {
         
         self.nowPlayableBehavior = ConfigModel.shared.nowPlayableBehavior
         
-        // Get the subset of assets that the configuration actually wants to play,
-        // and use it to construct the playlist.
-        
-        let playableAssets = ConfigModel.shared.assets.compactMap { $0.shouldPlay ? $0 : nil }
-        //
-        self.staticMetadatas = playableAssets.map { $0.metadata }
-        
-        //
-//        self.playerItems = playableAssets.map {
-//            AVPlayerItem(asset: $0.urlAsset, automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
-//        }
-        
-        // Create a player, and configure it for external playback, if the
-        // configuration requires.
-        
-        
-        self.player = AVPlayer(playerItem: currentItem)
+        self.player = AVPlayer(playerItem: nil)
         
         #if os(watchOS)
         #else
@@ -121,42 +92,38 @@ class AssetPlayer {
                                                                disabledCommands: enabledCommands,
                                                                commandHandler: handleCommand(command:event:),
                                                                interruptionHandler: handleInterrupt(with:))
+        
+        // Start a playback session.
+        
+        try nowPlayableBehavior.handleNowPlayableSessionStart()
+        
+        addObserver()
+        
+        itemObserver = player.observe(\.currentItem, options: [.initial, .new, .old]) {
+            [unowned self] _, value in
+            self.handlePlayerItemChange()
+        }
+        
+        rateObserver = player.observe(\.rate, options: [.initial, .new, .old]) {
+            [unowned self] _, value in
+            self.handlePlaybackChange()
+        }
+        
+        statusObserver = player.observe(\.currentItem!.status, options: []) {
+            [unowned self] (avplayer, value) in
             
-            // Start a playback session.
+            guard avplayer.lastItem != avplayer.currentItem || avplayer.lastItem?.status != avplayer.currentItem?.status else { return }
             
-            try nowPlayableBehavior.handleNowPlayableSessionStart()
+            avplayer.lastItem = avplayer.currentItem
             
-            // Observe changes to the current item and playback rate.
-            
-            if player.currentItem != nil {
-                
-                addObserver()
-                
-                itemObserver = player.observe(\.currentItem, options: [.initial, .new, .old]) {
-                    [unowned self] _, value in
-                    self.handlePlayerItemChange()
-                }
-                
-                rateObserver = player.observe(\.rate, options: [.initial, .new, .old]) {
-                    [unowned self] _, value in
-                    self.handlePlaybackChange()
-                }
-                
-                statusObserver = player.observe(\.currentItem!.status, options: []) {
-                    [unowned self] (avplayer, value) in
-                    
-                    guard avplayer.lastItem != avplayer.currentItem || avplayer.lastItem?.status != avplayer.currentItem?.status else { return }
-                    
-                    avplayer.lastItem = avplayer.currentItem
-                    
-                    self.handlePlaybackChange()
-                }
-
-            }
-            
-            // Start the player.
-            
-            play()
+            self.handlePlaybackChange()
+        }
+        
+    }
+    
+    
+    deinit {
+        delegate = nil
     }
     
     // Stop the playback session.
@@ -260,7 +227,17 @@ class AssetPlayer {
     
     // MARK: Playback Control
     
-    // The following methods handle various playback conditions triggered by remote commands.
+    func play(_ currentItem: AVPlayerItem) {
+        currentItem.seek(to: CMTime.zero) {[unowned self] (isCompleted) in
+            self.player.replaceCurrentItem(with: currentItem)
+            if self.playerState != .playing {
+                self.player.play()
+            } else {
+            }
+            self.playerState = .playing
+            self.handlePlayerItemChange()
+        }
+    }
     
     private func play() {
         

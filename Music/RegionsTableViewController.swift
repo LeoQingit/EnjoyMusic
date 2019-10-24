@@ -40,10 +40,10 @@ class RegionsTableViewController: UITableViewController, SegueHandler {
         case .showYourSongs:
             vc.songSource = .yours(managedObjectContext.userID)
         case .showAlbumSongs:
-            guard let album = dataSource?.selectedObject as? Album else { fatalError("Must be a album") }
+            guard let album = dataSource?.selectedPackageObject as? Album else { fatalError("Must be a album") }
             vc.songSource = .album(album)
         case .showArtlistSongs:
-            guard let artlist = dataSource?.selectedObject as? Artlist else { fatalError("Must be a artlist") }
+            guard let artlist = dataSource?.selectedPackageObject as? Artlist else { fatalError("Must be a artlist") }
             vc.songSource = .artlist(artlist)
         }
     }
@@ -90,13 +90,18 @@ class RegionsTableViewController: UITableViewController, SegueHandler {
 
 extension RegionsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let region = dataSource.objectAtIndexPath(indexPath)
+//        let region = dataSource.objectAtIndexPath(indexPath)
 //        performSegue(withIdentifier: region.segue)
     }
 }
 
 
 extension RegionsTableViewController: TableViewDataSourceDelegate {
+    func object(_ packageObject: String) -> String {
+        return ""
+    }
+    
+    
     func supplementaryObject(at indexPath: IndexPath) -> String? {
         switch indexPath.row {
         case 0: return "UserRegion.all"
@@ -107,6 +112,10 @@ extension RegionsTableViewController: TableViewDataSourceDelegate {
 
     func configure(_ cell: RegionTableViewCell, for object: String) {
         cell.configure(for: object)
+    }
+    
+    func packObject(_ object: String) -> String {
+        return ""
     }
 
     var numberOfAdditionalRows: Int {
@@ -128,7 +137,7 @@ extension RegionsTableViewController: TableViewDataSourceDelegate {
 extension UISegmentedControl {
     fileprivate var regionType: Managed.Type {
         switch selectedSegmentIndex {
-        case 0: return Region.self
+        case 0: return SongMetadata.self
         case 1: return Album.self
         case 2: return Artlist.self
         default: fatalError("Invalid filter index")

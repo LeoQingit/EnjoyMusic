@@ -11,9 +11,11 @@ import CoreDataHelpers
 
 public class Artlist: NSManagedObject {
 
+    @NSManaged public var name: String
     @NSManaged public internal(set) var numberOfAlbums: Int64
     @NSManaged public internal(set) var numberOfSongs: Int64
     @NSManaged public fileprivate(set) var albums: Set<Album>
+    @NSManaged public fileprivate(set) var songs: Set<Song>
     @NSManaged internal var updatedAt: Date
 
     public override func awakeFromInsert() {

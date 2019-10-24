@@ -62,7 +62,6 @@
                                     <outlet property="album" destination="wQE-Eq-Hpz" id="hzj-RN-2Ij"/>
                                     <outlet property="label" destination="qYv-bT-GCC" id="UUd-2N-IOF"/>
                                     <outlet property="transferProgress" destination="jij-Mw-yD6" id="g2E-EZ-1tT"/>
-                                    <segue destination="mIE-fa-WO4" kind="presentation" id="uZC-ce-OeH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -77,16 +76,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ix-7f-WX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5530.434782608696" y="-562.5"/>
-        </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="Kk5-D2-3cL">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="mIE-fa-WO4" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Rs9-SM-9Cd"/>
-                </avPlayerViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="foM-qc-HV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6383" y="-563"/>
         </scene>
         <!--Song Detail-->
         <scene sceneID="Jfk-eE-9x5">

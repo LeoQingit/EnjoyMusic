@@ -11,6 +11,7 @@ import CoreDataHelpers
 
 public class Album: NSManagedObject {
 
+    @NSManaged public var name: String
     @NSManaged fileprivate(set) var songs: Set<Song>
     @NSManaged fileprivate(set) var artlist: Artlist?
     @NSManaged public internal(set) var numberOfSongs: Int64

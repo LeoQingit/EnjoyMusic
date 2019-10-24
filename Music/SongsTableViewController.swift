@@ -15,9 +15,20 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
     enum SegueIdentifier: String {
         case showSongDetail = "showSongDetail"
     }
-    var player: AssetPlayer!
+    
+    var player: AssetPlayer = { () -> AssetPlayer in
+        var player: AssetPlayer
+        do {
+            player = try AssetPlayer()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+        return player
+    }()
+    
     var session: WCSession!
 
+    var songItemMap: [Song: AVPlayerItem] = [:]
     var managedObjectContext: NSManagedObjectContext!
     var albums: [Album]?
     var songSource: SongSource! = .all {
@@ -39,6 +50,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
         }
         albums = songSource.prefetch(in: managedObjectContext)
         setupTableView()
+        player.delegate = self
     }
 
 
@@ -70,7 +82,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
         let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
         if let urlStr = song.name, let filePath = filePath {
             let url = URL(fileURLWithPath: filePath + "/" + urlStr)
-            
+
             if session.isPaired && session.isWatchAppInstalled {
                 let transfer = session.transferFile(url, metadata: nil)
                 song.progress = transfer.progress
@@ -78,7 +90,6 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
             }
         }
     }
-
 }
 
 
@@ -86,19 +97,35 @@ extension SongsTableViewController: TableViewDataSourceDelegate {
     func configure(_ cell: SongTableViewCell, for object: Song) {
         cell.configure(for: object)
     }
+    
+    func packObject(_ object: Song) -> AVPlayerItem {
+        guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { fatalError() }
+        guard let urlString = object.songURL else { fatalError() }
+        let url = URL(fileURLWithPath: filePath + "/" + urlString)
+        if let item = songItemMap[object] {
+            return item
+        } else {
+           let item = AVPlayerItem(asset: AVAsset(url: url), automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
+            songItemMap[object] = item
+            return item
+        }
+    }
+    
+    func object(_ packageObject: AVPlayerItem) -> Song {
+        guard let song = songItemMap.filter({
+            $0.value === packageObject
+        }).first else {
+            fatalError()
+        }
+        return song.key
+    }
 }
 
 
 extension SongsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let song = dataSource.selectedObject, let urlString = song.songURL else { return }
-        let item = AVPlayerItem(asset: AVAsset(url: URL(fileURLWithPath: urlString)), automaticallyLoadedAssetKeys: [AssetPlayer.mediaSelectionKey])
-        do {
-            player = try AssetPlayer(item, delegate: self)
-        } catch {
-            print(error)
-        }
-        
+        guard let item = dataSource.selectedPackageObject else { return }
+        player.play(item)
     }
     
     
@@ -145,85 +172,33 @@ extension SongsTableViewController: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print(#function)
     }
-    
-    
 }
-/*
- let metadatas: [NowPlayableStaticMetadata] = [
- 
- NowPlayableStaticMetadata(assetURL: song1URL,
- mediaType: .audio,
- isLiveStream: false,
- title: "First Song",
- artist: "Singer of Songs",
- artwork: artworkNamed("Song 1"),
- albumArtist: "Singer of Songs",
- albumTitle: "Songs to Sing"),
- 
- NowPlayableStaticMetadata(assetURL: videoURL,
- mediaType: .video,
- isLiveStream: false,
- title: "Bip Bop, The Movie",
- artist: nil,
- artwork: nil,
- albumArtist: nil,
- albumTitle: nil),
- 
- NowPlayableStaticMetadata(assetURL: song2URL,
- mediaType: .audio,
- isLiveStream: false,
- title: "Second Song",
- artist: "Other Singer",
- artwork: artworkNamed("Song 2"),
- albumArtist: "Singer of Songs",
- albumTitle: "Songs to Sing"),
- 
- NowPlayableStaticMetadata(assetURL: videoURL,
- mediaType: .video,
- isLiveStream: false,
- title: "Bip Bop, The Sequel",
- artist: nil,
- artwork: nil,
- albumArtist: nil,
- albumTitle: nil),
- 
- NowPlayableStaticMetadata(assetURL: song3URL,
- mediaType: .audio,
- isLiveStream: false,
- title: "Third Song",
- artist: "Singer of Songs",
- artwork: artworkNamed("Song 3"),
- albumArtist: "Singer of Songs",
- albumTitle: "Songs to Sing")
- ]
- 
- */
 
 extension SongsTableViewController: AssetPlayerDelegate {
     func assetPlayer(_ player: AssetPlayer, staticMetaDataWith currentItem: AVPlayerItem) -> NowPlayableStaticMetadata {
-        
-//        return NowPlayableStaticMetadata(assetURL: song3URL,
-//                                         mediaType: .audio,
-//                                         isLiveStream: false,
-//                                         title: "Third Song",
-//                                         artist: "Singer of Songs",
-//                                         artwork: artworkNamed("Song 3"),
-//                                         albumArtist: "Singer of Songs",
-//                                         albumTitle: "Songs to Sing")
-        
-    }
-    
-    func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem {
-        if player === self.player {
-            
+        guard let item = songItemMap.filter({
+            $0.value === currentItem
+        }).first, let url = item.key.songURL else {
+            fatalError()
         }
+        guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { fatalError() }
+        let assetURL = URL(fileURLWithPath: filePath + "/" + url)
+        return NowPlayableStaticMetadata(assetURL: assetURL,
+                                         mediaType: .audio,
+                                         isLiveStream: false,
+                                         title: item.key.name ?? "###",
+                                         artist: item.key.artlist?.name ?? "###",
+                                         artwork: nil,
+                                         albumArtist: item.key.artlist?.name ?? "###",
+                                         albumTitle: item.key.album?.name ?? "###")
+        
     }
     
-    func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem {
-        if player === self.player {
-            
-        }
+    func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem? {
+        return dataSource.next(for: currentItem)
     }
     
-    
+    func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem? {
+        return dataSource.previous(for: currentItem)
+    }
 }

@@ -9,20 +9,28 @@ import CoreData
 import CoreDataHelpers
 
 
+protocol ModelInsertModel { }
+
+protocol SongInsertable: ModelInsertModel {
+    
+}
+
 public class Song: NSManagedObject {
 
     @NSManaged public fileprivate(set) var date: Date
     @NSManaged public fileprivate(set) var colors: [UIColor]
 
+    @NSManaged public var name: String?
     @NSManaged public var creatorID: String?
     @NSManaged public var remoteIdentifier: RemoteRecordID?
 
     @NSManaged public fileprivate(set) var album___: Album
     @NSManaged public fileprivate(set) var album: Album?
-    @NSManaged public fileprivate(set) var coverURL: String?
+    @NSManaged public fileprivate(set) var artlist___: Artlist
+    @NSManaged public fileprivate(set) var artlist: Artlist?
+    @NSManaged public fileprivate(set) var artworkURL: String?
     @NSManaged public fileprivate(set) var duration: Double
     @NSManaged public fileprivate(set) var favorite: Int16
-    @NSManaged public var name: String?
     
     @NSManaged public var songURL: String?
     
@@ -37,9 +45,17 @@ public class Song: NSManagedObject {
     public static func insert(into moc: NSManagedObjectContext, songURL: String?) -> Song {
         let song: Song = moc.insertObject()
         song.songURL = songURL
+        song.name = songURL
         song.date = Date()
         return song
     }
+    
+//    public static func insert(into moc: NSManagedObjectContext, model: SongInsertable) -> Song {
+//        let song: Song = moc.insertObject()
+//        song.artworkURL
+//        
+//        return song
+//    }
 
     public static func insert(into moc: NSManagedObjectContext, songURL: String?, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
         let song: Song = moc.insertObject()

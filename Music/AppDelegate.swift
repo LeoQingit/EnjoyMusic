@@ -7,6 +7,7 @@ import UIKit
 import MusicSync
 import MusicModel
 import CoreData
+import AVFoundation
 
 private let SongNameKey = "name"
 
@@ -18,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         application.registerForRemoteNotifications()
+        
+        ConfigModel.shared = ConfigModel(nowPlayableBehavior: WatchOSNowPlayableBehavior())
+        
         createMusicContainer { container in
             self.persistentContainer = container
             self.syncCoordinator = SyncCoordinator(container: container)
@@ -25,12 +29,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 guard !fileNames.isEmpty else { return }
                 container.viewContext.performChanges {
                     for name in fileNames {
-                        _ = Song.findOrCreate(in: container.viewContext, matching:  NSPredicate(format: "%K = %@", SongNameKey, name)) { song in
-                            song.name = name
+                        
+                        
+                        let currentCount = Song.count(in: container.viewContext) {
+                            $0.predicate = NSPredicate(format: "%K = %@", SongNameKey, name)
                         }
+                        
+                        if currentCount == 0 {
+                            guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { return }
+                            let url = URL(fileURLWithPath: filePath + "/" + name)
+                            let asset = AVURLAsset(url: url)
+                            
+                            
+                            for format in asset.availableMetadataFormats {
+                                let metaItems = asset.metadata(forFormat: format)
+                                for item in metaItems where item.commonKey != nil {
+                                    switch item.commonKey! {
+                                    case .commonKeyAlbumName:
+                                        break
+                                    case .commonKeyTitle:
+                                        break
+                                    case .commonKeyArtist:
+                                        break
+                                    case .commonKeyCreationDate:
+                                        break
+                                    default:
+                                        break
+                                    }
+                                }
+                            }
+                            
+                            let _ = Song.insert(into: container.viewContext, songURL: name)
+                            
+                        }
+                        
+                        
                     }
                 }
             })
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let navigationVC = storyboard.instantiateViewController(withIdentifier: "ItemScene") as? UINavigationController else { fatalError("Wrong view controller type") }
             guard let vc = navigationVC.topViewController as? SongsTableViewController else

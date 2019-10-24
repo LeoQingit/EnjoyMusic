@@ -9,9 +9,12 @@ import CoreData
 
 protocol TableViewDataSourceDelegate: class {
     associatedtype Object
+    associatedtype PackageObject
     associatedtype Cell: UITableViewCell
     func configure(_ cell: Cell, for object: Object)
     var numberOfAdditionalRows: Int { get }
+    func packObject(_ object: Object) -> PackageObject
+    func object(_ packageObject: PackageObject) -> Object
     func supplementaryObject(at indexPath: IndexPath) -> Object?
     func presentedIndexPath(for fetchedIndexPath: IndexPath) -> IndexPath
     func fetchedIndexPath(for presentedIndexPath: IndexPath) -> IndexPath?
@@ -40,6 +43,7 @@ extension TableViewDataSourceDelegate {
 class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataSourceDelegate>: NSObject, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     typealias Object = Delegate.Object
+    typealias PackageObject = Delegate.PackageObject
     typealias Cell = Delegate.Cell
 
     required init(tableView: UITableView, cellIdentifier: String, fetchedResultsController: NSFetchedResultsController<Result>, delegate: Delegate) {
@@ -54,16 +58,55 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
         tableView.reloadData()
     }
 
+    var selectedPackageObject: PackageObject? {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+        return packageObjectAtIndexPath(indexPath)
+    }
+    
     var selectedObject: Object? {
         guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
         return objectAtIndexPath(indexPath)
     }
 
+    func packageObjectAtIndexPath(_ indexPath: IndexPath) -> PackageObject {
+        guard let fetchedIndexPath = delegate.fetchedIndexPath(for: indexPath) else {
+            let originalObject = delegate.supplementaryObject(at: indexPath)!
+            return delegate.packObject(originalObject)
+        }
+        
+        let originalObject = (fetchedResultsController.object(at: fetchedIndexPath) as! Object)
+        return delegate.packObject(originalObject)
+    }
+    
     func objectAtIndexPath(_ indexPath: IndexPath) -> Object {
         guard let fetchedIndexPath = delegate.fetchedIndexPath(for: indexPath) else {
             return delegate.supplementaryObject(at: indexPath)!
         }
         return (fetchedResultsController.object(at: fetchedIndexPath) as! Object)
+    }
+
+    func previous(for packageObject: PackageObject) -> PackageObject? {
+        let object = delegate.object(packageObject)
+        let indexPath = fetchedResultsController.indexPath(forObject: object as! Result)
+        
+        guard let row = indexPath?.row, let section = indexPath?.section else { fatalError() }
+        if row - 1 >= 0 {
+            return delegate.packObject((fetchedResultsController.object(at: IndexPath(row: row - 1, section: section)) as! Object))
+        } else {
+            return nil
+        }
+    }
+    
+    func next(for packageObject: PackageObject) -> PackageObject? {
+        let object = delegate.object(packageObject)
+        let indexPath = fetchedResultsController.indexPath(forObject: object as! Result)
+        
+        guard let row = indexPath?.row, let section = indexPath?.section else { fatalError() }
+        if row + 1 < tableView.numberOfRows(inSection: section) {
+            return delegate.packObject((fetchedResultsController.object(at: IndexPath(row: row + 1, section: section)) as! Object))
+        } else {
+            return nil
+        }
     }
 
     func reconfigureFetchRequest(_ configure: (NSFetchRequest<Result>) -> ()) {
