@@ -1,10 +1,3 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-`AssetPlayer` uses an AVQueuePlayer for playback of `ConfigAsset` items,
- with a `NowPlayable` delegate for handling platform-specific behavior.
-*/
 
 import AVFoundation
 import MediaPlayer
@@ -17,21 +10,13 @@ protocol AssetPlayerDelegate: class {
 
 class AssetPlayer {
     
-    // Possible values of the `playerState` property.
-    
     enum PlayerState {
         case stopped
         case playing
         case paused
     }
-    
-    // The app-supplied object that provides `NowPlayable`-conformant behavior.
-    
+
     unowned let nowPlayableBehavior: NowPlayable
-    
-    // The player actually being used for playback. An app may use any system-provided
-    // player, or may play content in any way that is wishes, provided that it uses
-    // the NowPlayable behavior correctly.
     
     let player: AVPlayer
     
@@ -44,15 +29,40 @@ class AssetPlayer {
             #else
             NSLog("%@", "**** Set player state \(playerState)")
             #endif
+            
+            switch (oldValue, playerState) {
+            case (.stopped, .stopped):
+                break
+            case (.stopped, .playing):
+                if !isInterrupted {
+                    player.play()
+                }
+            case (.stopped, .paused):
+                break
+            case (.playing, .stopped):
+                player.pause()
+                seek(to: CMTime.zero)
+            case (.playing, .playing):
+                break
+            case (.playing, .paused):
+                if !isInterrupted {
+                    player.pause()
+                }
+            case (.paused, .stopped):
+                seek(to: CMTime.zero)
+            case (.paused, .playing):
+                if !isInterrupted {
+                    player.play()
+                }
+            case (.paused, .paused):
+                break
+            }
         }
     }
     
-    // `true` if the current session has been interrupted by another app.
-    
+    /// 外部中断
     private var isInterrupted: Bool = false
-    
-    // Private observers of notifications and property changes.
-    
+
     private var itemObserver: NSKeyValueObservation!
     private var rateObserver: NSKeyValueObservation!
     private var statusObserver: NSObjectProtocol!
@@ -60,10 +70,7 @@ class AssetPlayer {
     private var playerItemHandleQueue = DispatchQueue(label: "com.assetPlayer.www", qos: .default, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
     
     // A shorter name for a very long property name.
-    
     static let mediaSelectionKey = "availableMediaCharacteristicsWithMediaSelectionOptions"
-    
-    // Initialize a new `AssetPlayer` object.
     
     init() throws {
         
@@ -125,15 +132,6 @@ class AssetPlayer {
         statusObserver = nil
     }
     
-    // Stop the playback session.
-    
-    func playerStop() {
-        
-        player.pause()
-        playerState = .stopped
-        
-    }
-    
     func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(respondPlayToEndTime(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
     }
@@ -147,26 +145,15 @@ class AssetPlayer {
     // Helper method: update Now Playing Info when the current item changes.
     
     private func handlePlayerItemChange() {
-        
-        guard playerState != .stopped else { return }
-        
-        // Find the current item.
-        
-        guard let currentItem = player.currentItem else { playerStop(); return }
+        guard let currentItem = player.currentItem else { playerState = .stopped; return }
         guard let metadata = delegate?.assetPlayer(self, staticMetaDataWith: currentItem) else { return }
-        
         nowPlayableBehavior.handleNowPlayableItemChange(metadata: metadata)
     }
     
     // Helper method: update Now Playing Info when playback rate or position changes.
     
     private func handlePlaybackChange() {
-        
-        guard playerState != .stopped else { return }
-        
-        // Find the current item.
-        
-        guard let currentItem = player.currentItem else { playerStop(); return }
+        guard let currentItem = player.currentItem else { playerState = .stopped; return }
         guard currentItem.status == .readyToPlay else { return }
         
         // Create language option groups for the asset's media selection,
@@ -211,7 +198,7 @@ class AssetPlayer {
         
         let isPlaying = playerState == .playing
         let metadata = NowPlayableDynamicMetadata(rate: player.rate,
-                                                  position: Float(currentItem.currentTime().seconds),
+                                                  position: playerState == .stopped ?  0.0 : Float(currentItem.currentTime().seconds),
                                                   duration: Float(currentItem.duration.seconds),
                                                   currentLanguageOptions: currentLanguageOptions,
                                                   availableLanguageOptionGroups: languageOptionGroups)
@@ -222,68 +209,20 @@ class AssetPlayer {
     // MARK: Playback Control
     
     func play(_ currentItem: AVPlayerItem) {
-        player.replaceCurrentItem(with: currentItem)
-        if playerState != .playing {
-            playerState = .playing
-            player.play()
-        } else { }
         seek(to: CMTime.zero)
-        handlePlayerItemChange()
-    }
-    
-    private func play() {
-        
-        switch playerState {
-            
-        case .stopped:
-            playerState = .playing
-            player.play()
-            
-            handlePlayerItemChange()
-
-        case .playing:
-            break
-            
-        case .paused where isInterrupted:
-            playerState = .playing
-            
-        case .paused:
-            playerState = .playing
-            player.play()
-        }
-    }
-    
-    private func pause() {
-        
-        switch playerState {
-            
-        case .stopped:
-            break
-            
-        case .playing where isInterrupted:
-            playerState = .paused
-            
-        case .playing:
-            playerState = .paused
-            player.pause()
-            
-        case .paused:
-            break
-        }
+        player.replaceCurrentItem(with: currentItem)
+        playerState = .playing
     }
     
     private func togglePlayPause() {
-
         switch playerState {
-            
         case .stopped:
-            play()
-            
+            seek(to: CMTime.zero)
+            playerState = .playing
         case .playing:
-            pause()
-            
+            playerState = .paused
         case .paused:
-            play()
+            playerState = .playing
         }
     }
     
@@ -293,11 +232,15 @@ class AssetPlayer {
         
         guard let currentItem = player.currentItem else { return }
         
-        guard let nextItem = delegate?.assetPlayer(self, playNextTrac: currentItem) else { return }
+        guard let nextItem = delegate?.assetPlayer(self, playNextTrac: currentItem) else {
+            playerState = .stopped
+            return
+        }
+        seek(to: CMTime.zero)
         
         player.replaceCurrentItem(with: nextItem)
         
-        seek(to: CMTime.zero)
+        playerState = .playing
     }
     
     private func previousTrack() {
@@ -306,23 +249,20 @@ class AssetPlayer {
         
         guard let currentItem = player.currentItem else { return }
         
-        guard let previousItem = delegate?.assetPlayer(self, playPreviousTrac: currentItem) else { return }
+        guard let previousItem = delegate?.assetPlayer(self, playPreviousTrac: currentItem) else {
+            playerState = .stopped
+            return
+        }
+        
+        seek(to: CMTime.zero)
         
         player.replaceCurrentItem(with: previousItem)
         
-        seek(to: CMTime.zero)
+        playerState = .playing
     }
     
     private func seek(to time: CMTime) {
-        
-        if case .stopped = playerState { return }
-        
-        player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) {
-            isFinished in
-            if isFinished {
-                self.handlePlaybackChange()
-            }
-        }
+        player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
     private func seek(to position: TimeInterval) {
@@ -410,13 +350,13 @@ class AssetPlayer {
         switch command {
             
         case .pause:
-            pause()
+            playerState = .paused
             
         case .play:
-            play()
+            playerState = .playing
             
         case .stop:
-            playerStop()
+            playerState = .stopped
             
         case .togglePausePlay:
             togglePlayPause()
@@ -480,24 +420,17 @@ class AssetPlayer {
         case .ended(let shouldPlay):
             isInterrupted = false
             
-            switch playerState {
-                
-            case .stopped:
-                break
-                
-            case .playing where shouldPlay:
-                player.play()
-                
-            case .playing:
-                playerState = .paused
-                
-            case .paused:
-                break
+            if playerState == .playing {
+                if !shouldPlay {
+                    playerState = .paused
+                } else {
+                    player.play()
+                }
             }
             
         case .failed(let error):
-            print(error.localizedDescription)
-            playerStop()
+            NSLog("%@", "**** player error infomation \(error.localizedDescription)")
+            playerState = .stopped
         }
     }
     

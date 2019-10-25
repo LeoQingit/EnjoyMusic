@@ -82,7 +82,7 @@ class AllSongsInterfaceController: WKInterfaceController {
         
         guard assetPlayer != nil else { return }
         
-        assetPlayer.playerStop()
+//        assetPlayer.playerStop()
         assetPlayer = nil
     }
 
