@@ -7,13 +7,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import CoreDataHelpers
-
-
-protocol ModelInsertModel { }
-
-protocol SongInsertable: ModelInsertModel {
-    
-}
+import AVFoundation
 
 public class Song: NSManagedObject {
 
@@ -41,26 +35,44 @@ public class Song: NSManagedObject {
         super.awakeFromInsert()
         primitiveDate = Date()
     }
-
-    public static func insert(into moc: NSManagedObjectContext, songURL: String?) -> Song {
+    
+    public static func insert(into moc: NSManagedObjectContext, songURL: String?, infoMap: [AVMetadataKey: Any]) -> Song {
         let song: Song = moc.insertObject()
-        song.songURL = songURL
-        song.name = songURL
+
+        if let name = infoMap[.commonKeyTitle] as? String {
+            song.name = name
+        } else if let nameSub = songURL?.split(separator: ".").first {
+            song.name = String(nameSub)
+        } else {
+            song.name = "unKnown"
+        }
+        
+        if let artworkData = infoMap[.commonKeyArtwork] as? Data {
+            do {
+                if !FileManager.default.fileExists(atPath: URL.library.appendingPathComponent("ArtWorks").path) {
+                    try FileManager.default.createDirectory(at: URL.library.appendingPathComponent("ArtWorks", isDirectory: true), withIntermediateDirectories: true, attributes: nil)
+                }
+                
+                let path = URL.library.appendingPathComponent("ArtWorks").appendingPathComponent(String.uuid)
+                try artworkData.write(to: path, options: [])
+                song.artworkURL = path.path
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
         song.date = Date()
+        song.songURL = songURL
+        song.favorite = 0
+        song.album = Album.findOrCreate(with: infoMap, in: moc)
+        song.artlist = Artlist.findOrCreate(with: infoMap, in: moc)
+        
         return song
     }
-    
-//    public static func insert(into moc: NSManagedObjectContext, model: SongInsertable) -> Song {
-//        let song: Song = moc.insertObject()
-//        song.artworkURL
-//        
-//        return song
-//    }
 
     public static func insert(into moc: NSManagedObjectContext, songURL: String?, remoteIdentifier: RemoteRecordID? = nil, date: Date? = nil, creatorID: String? = nil) -> Song {
         let song: Song = moc.insertObject()
         song.songURL = songURL
-        song.album = Album.findOrCreate(for: "未知", in: moc)
+        song.album = Album.findOrCreate(with: [:], in: moc)
         song.remoteIdentifier = remoteIdentifier
         if let d = date {
             song.date = d

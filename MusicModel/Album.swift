@@ -7,7 +7,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import CoreDataHelpers
-
+import AVFoundation
 
 public class Album: NSManagedObject {
 
@@ -21,12 +21,17 @@ public class Album: NSManagedObject {
         super.awakeFromInsert()
         primitiveUpdatedAt = Date()
     }
-
-    static func findOrCreate(for unique: String, in context: NSManagedObjectContext) -> Album {
+    
+    static func findOrCreate(with infoMap: [AVMetadataKey: Any], in context: NSManagedObjectContext) -> Album {
+        let artlistName = infoMap[.commonKeyArtist] as? String ?? "###"
+        let albumName = infoMap[.commonKeyAlbumName] as? String ?? "####"
+        
+        let unique = albumName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) + artlistName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let predicate = Album.predicate(format: "%K == %@", #keyPath(uniqueId), unique)
         let album = findOrCreate(in: context, matching: predicate) {
             $0.uniqueId = unique
-            $0.artlist = Artlist.findOrCreateArtlist(for: "未知", in: context)
+            $0.name = albumName
+            $0.artlist = Artlist.findOrCreate(with: infoMap, in: context)
         }
         return album
     }

@@ -88,6 +88,11 @@ extension String {
         }
         return String(chars)
     }
+    
+    static var uuid: String {
+        return CFUUIDCreateString(kCFAllocatorDefault, CFUUIDCreate(kCFAllocatorDefault))! as String
+    }
+    
 }
 
 private var lastItemKey: Void?

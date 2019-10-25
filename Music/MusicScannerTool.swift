@@ -24,6 +24,8 @@ class MusicScannerTool {
                 if let documentDir = filePaths.first {
                     let filelist = try manager.contentsOfDirectory(atPath: documentDir)
                     completion(filelist)
+                    
+//                    manager.contentsOfDirectory(at: <#T##URL#>, includingPropertiesForKeys: [URLResourceKey.addedToDirectoryDateKey], options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
                 }
                 
             } catch {

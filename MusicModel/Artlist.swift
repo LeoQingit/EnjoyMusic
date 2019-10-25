@@ -7,6 +7,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import CoreDataHelpers
+import AVFoundation
 
 
 public class Artlist: NSManagedObject {
@@ -22,10 +23,16 @@ public class Artlist: NSManagedObject {
         super.awakeFromInsert()
         primitiveUpdatedAt = Date()
     }
-
-    static func findOrCreateArtlist(for unique: String, in context: NSManagedObjectContext) -> Artlist? {
+    
+    static func findOrCreate(with infoMap: [AVMetadataKey: Any], in context: NSManagedObjectContext) -> Artlist {
+        let artlistName = infoMap[.commonKeyArtist] as? String ?? "###"
+        
+        let unique = artlistName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let predicate = Artlist.predicate(format: "%K == %@", #keyPath(uniqueId), unique)
-        let artlist = findOrCreate(in: context, matching: predicate) { $0.uniqueId = unique }
+        let artlist = findOrCreate(in: context, matching: predicate) {
+            $0.name = artlistName
+            $0.uniqueId = unique
+        }
         return artlist
     }
 

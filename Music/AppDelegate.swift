@@ -34,9 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 container.viewContext.performChanges {
                     for name in fileNames {
                         
-                        
+                        var compareName: String
+                        if let compareNameSub = name.split(separator: ".").first {
+                            compareName = String(compareNameSub)
+                        } else {
+                            compareName = name
+                        }
+
                         let currentCount = Song.count(in: container.viewContext) {
-                            $0.predicate = NSPredicate(format: "%K = %@", SongNameKey, name)
+                            $0.predicate = NSPredicate(format: "%K = %@", SongNameKey, compareName)
                         }
                         
                         if currentCount == 0 {
@@ -44,30 +50,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let url = URL(fileURLWithPath: filePath + "/" + name)
                             let asset = AVURLAsset(url: url)
                             
-                            
+                            var commonDic: [AVMetadataKey: Any] = [:]
                             for format in asset.availableMetadataFormats {
                                 let metaItems = asset.metadata(forFormat: format)
                                 for item in metaItems where item.commonKey != nil {
-                                    switch item.commonKey! {
-                                    case .commonKeyAlbumName:
-                                        break
-                                    case .commonKeyTitle:
-                                        break
-                                    case .commonKeyArtist:
-                                        break
-                                    case .commonKeyCreationDate:
-                                        break
-                                    default:
-                                        break
-                                    }
+                                    commonDic[item.commonKey!] = item.value
                                 }
                             }
                             
-                            let _ = Song.insert(into: container.viewContext, songURL: name)
+                            let _ = Song.insert(into: container.viewContext, songURL: name, infoMap: commonDic)
                             
                         }
-                        
-                        
                     }
                 }
             })

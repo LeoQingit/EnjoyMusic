@@ -137,6 +137,7 @@ class AssetPlayer {
     }
     
     @objc func respondPlayToEndTime(notification: Notification) {
+        playerState = .paused
         nextTrack()
     }
     

@@ -8,6 +8,7 @@ import CoreData
 import MusicModel
 import CoreDataHelpers
 import AVFoundation
+import MediaPlayer
 import WatchConnectivity
 
 class SongsTableViewController: UITableViewController, SongsPresenter, SegueHandler {
@@ -183,14 +184,22 @@ extension SongsTableViewController: AssetPlayerDelegate {
         }
         guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { fatalError() }
         let assetURL = URL(fileURLWithPath: filePath + "/" + url)
+        
+        
+        var itemArtwork: MPMediaItemArtwork?
+        if let artwork = item.key.artworkURL, let artworkImage = UIImage(contentsOfFile: artwork) {
+            itemArtwork = MPMediaItemArtwork(boundsSize: artworkImage.size) { _ in artworkImage }
+            
+        }
+        
         return NowPlayableStaticMetadata(assetURL: assetURL,
                                          mediaType: .audio,
                                          isLiveStream: false,
-                                         title: item.key.name ?? "###",
+                                         title: item.key.name ?? "####",
                                          artist: item.key.artlist?.name ?? "###",
-                                         artwork: nil,
+                                         artwork: itemArtwork,
                                          albumArtist: item.key.artlist?.name ?? "###",
-                                         albumTitle: item.key.album?.name ?? "###")
+                                         albumTitle: item.key.album?.name ?? "####")
         
     }
     
