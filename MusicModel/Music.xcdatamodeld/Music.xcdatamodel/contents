@@ -56,7 +56,7 @@
     <elements>
         <element name="Album" positionX="0" positionY="0" width="128" height="73"/>
         <element name="Artlist" positionX="0" positionY="0" width="128" height="88"/>
-        <element name="SongMetadata" positionX="0" positionY="0" width="128" height="133"/>
         <element name="Song" positionX="0" positionY="0" width="128" height="238"/>
+        <element name="SongMetadata" positionX="0" positionY="0" width="128" height="133"/>
     </elements>
 </model>

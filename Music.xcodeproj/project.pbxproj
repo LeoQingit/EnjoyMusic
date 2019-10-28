@@ -44,7 +44,7 @@
 		21A66F8423406C2B0011A4FC /* RemoteUploadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7E23406C2B0011A4FC /* RemoteUploadable.swift */; };
 		21A66F8523406C2B0011A4FC /* RemoteDeletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F7F23406C2B0011A4FC /* RemoteDeletable.swift */; };
 		21A66F8A23406C4C0011A4FC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8623406C4C0011A4FC /* Song.swift */; };
-		21A66F8B23406C4C0011A4FC /* GeographicRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8723406C4C0011A4FC /* GeographicRegion.swift */; };
+		21A66F8B23406C4C0011A4FC /* SongMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8723406C4C0011A4FC /* SongMetadata.swift */; };
 		21A66F8C23406C4C0011A4FC /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8823406C4C0011A4FC /* Album.swift */; };
 		21A66F8D23406C4C0011A4FC /* Artlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F8923406C4C0011A4FC /* Artlist.swift */; };
 		21A66FA223406C6A0011A4FC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66F9223406C6A0011A4FC /* Utilities.swift */; };
@@ -75,6 +75,7 @@
 		21A66FF623418AB80011A4FC /* MainTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2117A11D2338C696002C1489 /* MainTableRowController.swift */; };
 		21D398CA234196BE00EB781B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21D398C9234196BE00EB781B /* CloudKit.framework */; };
 		21F31D372361830F00CC3AAC /* WatchOSNowPlayableBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F31D362361830F00CC3AAC /* WatchOSNowPlayableBehavior.swift */; };
+		21F31D3B2366D6A600CC3AAC /* WatchSongSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F31D3A2366D6A600CC3AAC /* WatchSongSource.swift */; };
 		21F8C5672341FC3B00D0B897 /* ConfigAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5572341FC3B00D0B897 /* ConfigAsset.swift */; };
 		21F8C5682341FC3B00D0B897 /* ConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5582341FC3B00D0B897 /* ConfigCommand.swift */; };
 		21F8C5692341FC3B00D0B897 /* ConfigCommandCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F8C5592341FC3B00D0B897 /* ConfigCommandCollection.swift */; };
@@ -420,7 +421,7 @@
 		21A66F7E23406C2B0011A4FC /* RemoteUploadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteUploadable.swift; sourceTree = "<group>"; };
 		21A66F7F23406C2B0011A4FC /* RemoteDeletable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDeletable.swift; sourceTree = "<group>"; };
 		21A66F8623406C4C0011A4FC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
-		21A66F8723406C4C0011A4FC /* GeographicRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeographicRegion.swift; sourceTree = "<group>"; };
+		21A66F8723406C4C0011A4FC /* SongMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongMetadata.swift; sourceTree = "<group>"; };
 		21A66F8823406C4C0011A4FC /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		21A66F8923406C4C0011A4FC /* Artlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artlist.swift; sourceTree = "<group>"; };
 		21A66F9223406C6A0011A4FC /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -447,6 +448,7 @@
 		21D398C8234196A000EB781B /* WatchMusic Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchMusic Extension.entitlements"; sourceTree = "<group>"; };
 		21D398C9234196BE00EB781B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		21F31D362361830F00CC3AAC /* WatchOSNowPlayableBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchOSNowPlayableBehavior.swift; path = "WatchMusic Extension/WatchOSNowPlayableBehavior.swift"; sourceTree = SOURCE_ROOT; };
+		21F31D3A2366D6A600CC3AAC /* WatchSongSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchSongSource.swift; path = Music/WatchSongSource.swift; sourceTree = SOURCE_ROOT; };
 		21F8C5572341FC3B00D0B897 /* ConfigAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigAsset.swift; sourceTree = "<group>"; };
 		21F8C5582341FC3B00D0B897 /* ConfigCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigCommand.swift; sourceTree = "<group>"; };
 		21F8C5592341FC3B00D0B897 /* ConfigCommandCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigCommandCollection.swift; sourceTree = "<group>"; };
@@ -681,6 +683,8 @@
 		2117A1002338B1DB002C1489 /* WatchMusic Extension */ = {
 			isa = PBXGroup;
 			children = (
+				21F31D3E2366DAA800CC3AAC /* DataSource */,
+				21F31D392366D68E00CC3AAC /* Helpers */,
 				2164116C234ED3A300F80B6A /* Utilities.swift */,
 				21F8C5552341FC3B00D0B897 /* MediaSharedCode */,
 				21D398C8234196A000EB781B /* WatchMusic Extension.entitlements */,
@@ -784,7 +788,7 @@
 			children = (
 				21A66F8823406C4C0011A4FC /* Album.swift */,
 				21A66F8923406C4C0011A4FC /* Artlist.swift */,
-				21A66F8723406C4C0011A4FC /* GeographicRegion.swift */,
+				21A66F8723406C4C0011A4FC /* SongMetadata.swift */,
 				21A66F8623406C4C0011A4FC /* Song.swift */,
 			);
 			name = Model;
@@ -826,6 +830,21 @@
 			);
 			path = SharedCode;
 			sourceTree = SOURCE_ROOT;
+		};
+		21F31D392366D68E00CC3AAC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				21F31D3A2366D6A600CC3AAC /* WatchSongSource.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		21F31D3E2366DAA800CC3AAC /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DataSource;
+			sourceTree = "<group>";
 		};
 		21F8C5552341FC3B00D0B897 /* MediaSharedCode */ = {
 			isa = PBXGroup;
@@ -1714,6 +1733,7 @@
 				21F8C56F2341FC3B00D0B897 /* NowPlayableCommand.swift in Sources */,
 				2117A1062338B1DB002C1489 /* NotificationController.swift in Sources */,
 				21F8C5682341FC3B00D0B897 /* ConfigCommand.swift in Sources */,
+				21F31D3B2366D6A600CC3AAC /* WatchSongSource.swift in Sources */,
 				2117A1042338B1DB002C1489 /* ExtensionDelegate.swift in Sources */,
 				21F8C5672341FC3B00D0B897 /* ConfigAsset.swift in Sources */,
 				21F8C56D2341FC3B00D0B897 /* NowPlayable.swift in Sources */,
@@ -1754,7 +1774,7 @@
 				21A66F8C23406C4C0011A4FC /* Album.swift in Sources */,
 				21A66FB323406CD70011A4FC /* MusicModelVersion.swift in Sources */,
 				21A66F8123406C2B0011A4FC /* DelayedDeletable.swift in Sources */,
-				21A66F8B23406C4C0011A4FC /* GeographicRegion.swift in Sources */,
+				21A66F8B23406C4C0011A4FC /* SongMetadata.swift in Sources */,
 				21A66F8323406C2B0011A4FC /* UserOwnable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

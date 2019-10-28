@@ -7,6 +7,7 @@
     <entity name="Artlist" representedClassName=".Artlist" parentEntity="SongMetadata" syncable="YES">
         <attribute name="numberOfAlbums" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
         <relationship name="albums" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artlist" inverseEntity="Album"/>
+        <relationship name="songs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Song" inverseName="artlist" inverseEntity="Song"/>
     </entity>
     <entity name="Song" representedClassName=".Song" syncable="YES">
         <attribute name="artworkURL" optional="YES" attributeType="String"/>
@@ -20,6 +21,7 @@
         <attribute name="remoteIdentifier" optional="YES" attributeType="String"/>
         <attribute name="songURL" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album"/>
+        <relationship name="artlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artlist" inverseName="songs" inverseEntity="Artlist"/>
         <fetchIndex name="byMarkedForDeletionDateIndex">
             <fetchIndexElement property="markedForDeletionDate" type="Binary" order="ascending"/>
         </fetchIndex>
@@ -34,6 +36,7 @@
     </entity>
     <entity name="SongMetadata" representedClassName=".SongMetadata" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="####"/>
         <attribute name="numberOfSongs" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO"/>
         <attribute name="uniqueId" attributeType="String"/>
         <attribute name="uniquenessDummy" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
@@ -51,8 +54,8 @@
     </entity>
     <elements>
         <element name="Album" positionX="0" positionY="0" width="128" height="73"/>
-        <element name="Artlist" positionX="0" positionY="0" width="128" height="73"/>
-        <element name="SongMetadata" positionX="160" positionY="192" width="128" height="118"/>
-        <element name="Song" positionX="0" positionY="0" width="128" height="208"/>
+        <element name="Artlist" positionX="0" positionY="0" width="128" height="28"/>
+        <element name="Song" positionX="0" positionY="0" width="128" height="28"/>
+        <element name="SongMetadata" positionX="160" positionY="192" width="128" height="28"/>
     </elements>
 </model>

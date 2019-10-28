@@ -108,28 +108,16 @@ extension MainInterfaceController: WCSessionDelegate {
                 
                 let asset = AVURLAsset(url: toPath)
                 
-                var title: String?
-                
+                var commonDic: [AVMetadataKey: Any] = [:]
                 for format in asset.availableMetadataFormats {
                     let metaItems = asset.metadata(forFormat: format)
                     for item in metaItems where item.commonKey != nil {
-                        switch item.commonKey! {
-                        case .commonKeyAlbumName:
-                            break
-                        case .commonKeyTitle:
-                            title = item.value as? String
-                        case .commonKeyArtist:
-                            break
-                        case .commonKeyCreationDate:
-                            break
-                        default:
-                            break
-                        }
+                        commonDic[item.commonKey!] = item.value
                     }
                 }
                 
                 self.managedObjectContext.performChanges {[unowned self] in
-                    let _ = Song.insert(into: self.managedObjectContext, songName: title ?? file.fileURL.lastPathComponent, songURL: toPath.path)
+                    let _ = Song.insert(into: self.managedObjectContext, songURL: toPath.lastPathComponent, infoMap: commonDic)
                 }
             } catch {
 //                fatalError(error.localizedDescription)

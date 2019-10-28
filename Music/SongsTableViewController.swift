@@ -81,7 +81,7 @@ class SongsTableViewController: UITableViewController, SongsPresenter, SegueHand
     private func transferSpecificItem(indexPath: IndexPath) {
         let song = dataSource.objectAtIndexPath(indexPath)
         let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-        if let urlStr = song.name, let filePath = filePath {
+        if let urlStr = song.songURL, let filePath = filePath {
             let url = URL(fileURLWithPath: filePath + "/" + urlStr)
 
             if session.isPaired && session.isWatchAppInstalled {
@@ -129,22 +129,28 @@ extension SongsTableViewController {
         player.play(item)
     }
     
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction.init(style: UIContextualAction.Style.normal, title: "Transfer") { (action, view, block) in
+            self.transferSpecificItem(indexPath: indexPath)
+            block(false)
+        }
+        action.backgroundColor = UIColor.systemBlue
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let collectAction = UITableViewRowAction(style: .default, title: "Collect")     { (action, indexPath) in
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction.init(style: UIContextualAction.Style.destructive, title: "Delete") { (action, view, block) in
             self.alertTitle("Default action at \(indexPath)")
         }
-        collectAction.backgroundColor = UIColor.systemOrange
         
-        let transferAction = UITableViewRowAction(style: .normal, title: "Transfer") { (action, indexPath) in
-            self.transferSpecificItem(indexPath: indexPath)
+        let collect = UIContextualAction.init(style: UIContextualAction.Style.normal, title: "collect") { (action, view, block) in
+            self.alertTitle("Default action at \(indexPath)")
         }
-        transferAction.backgroundColor = UIColor.systemBlue
+        collect.backgroundColor = UIColor.systemOrange
         
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.alertTitle("Delete action at \(indexPath)")
-        }
-        return [collectAction, transferAction, deleteAction]
+        return UISwipeActionsConfiguration(actions: [delete, collect])
     }
     
 }
