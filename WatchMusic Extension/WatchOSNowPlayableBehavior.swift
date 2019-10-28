@@ -17,13 +17,16 @@ class WatchOSNowPlayableBehavior: NowPlayable {
     var defaultAllowsExternalPlayback: Bool { return true}
     /// 默认注册的指令集合
     var defaultRegisteredCommands: [NowPlayableCommand] = [
+        .changeShuffleMode,
             .togglePausePlay,
             .play,
             .pause,
             .nextTrack,
             .previousTrack,
-            .changePlaybackPosition,
-            .changePlaybackRate
+//            .changePlaybackPosition,
+//            .changePlaybackRate,
+        .dislike,
+            .changeShuffleMode
     ]
     /// 默认禁用的指令集合
     var defaultDisabledCommands: [NowPlayableCommand] = []

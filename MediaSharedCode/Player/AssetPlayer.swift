@@ -348,6 +348,8 @@ class AssetPlayer {
     
     private func handleCommand(command: NowPlayableCommand, event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         
+        isInterrupted = false
+        
         switch command {
             
         case .pause:
