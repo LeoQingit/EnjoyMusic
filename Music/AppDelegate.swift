@@ -74,6 +74,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if let value = options[.openInPlace] as? Bool, value == true { } else {
+            
+            let fileName = url.lastPathComponent
+            guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { return false }
+            let toPath = filePath + "/" + fileName
+            var trimmingValue: Int = 0
+            guard let toURL = checkNameDuplicate(toPath: URL(fileURLWithPath: toPath), trimmingValue: &trimmingValue) else { return false }
+            do {
+                try FileManager.default.copyItem(at: url, to: toURL)
+                
+                self.persistentContainer.viewContext.performChanges {
+                    let asset = AVURLAsset(url: url)
+                      
+                      var commonDic: [AVMetadataKey: Any] = [:]
+                      for format in asset.availableMetadataFormats {
+                          let metaItems = asset.metadata(forFormat: format)
+                          for item in metaItems where item.commonKey != nil {
+                              commonDic[item.commonKey!] = item.value
+                          }
+                      }
+                      
+                      let _ = Song.insert(into: self.persistentContainer.viewContext, songURL: fileName, infoMap: commonDic)
+                }
+            } catch {
+                print(error)
+            }
+        }
+        print(url)
+        print(options)
+        return true
+    }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         guard let info = userInfo as? [String: NSObject] else { return }

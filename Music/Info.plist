@@ -8,9 +8,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>ShareImage.png</string>
-			</array>
+			<array/>
 			<key>CFBundleTypeName</key>
 			<string>Music</string>
 			<key>LSHandlerRank</key>

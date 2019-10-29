@@ -22,8 +22,10 @@ class WatchOSNowPlayableBehavior: NowPlayable {
             .pause,
             .nextTrack,
             .previousTrack,
-            .changePlaybackPosition,
-            .changePlaybackRate
+//            .changePlaybackPosition,
+//            .changePlaybackRate
+        .changeRepeatMode,
+        .changeShuffleMode
     ]
     /// 默认禁用的指令集合
     var defaultDisabledCommands: [NowPlayableCommand] = []

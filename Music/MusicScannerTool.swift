@@ -26,7 +26,13 @@ class MusicScannerTool {
                 if let documentDir = filePaths.first {
                     
                     let url = URL(fileURLWithPath: documentDir)
-                    let urls = try manager.contentsOfDirectory(at: url, includingPropertiesForKeys: [URLResourceKey.addedToDirectoryDateKey], options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles)
+                    let urls = try manager.contentsOfDirectory(at: url, includingPropertiesForKeys: [URLResourceKey.addedToDirectoryDateKey], options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles).filter({
+                        if FileManager.directoryIsExists(path: $0.path) {
+                            return false
+                        }
+                        return true
+                    })
+
                     var newURLs = [URL]()
                     for item in urls {
                         let temp = try item.resourceValues(forKeys: [URLResourceKey.addedToDirectoryDateKey])

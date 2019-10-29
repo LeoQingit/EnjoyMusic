@@ -70,6 +70,8 @@ class AllSongsInterfaceController: WKInterfaceController {
 
         fetchedResultsController = frc
         
+        player.delegate = self
+        
         guard let rowsNum = frc.sections?.first?.numberOfObjects, rowsNum > 0 else {
             return
         }
@@ -77,9 +79,7 @@ class AllSongsInterfaceController: WKInterfaceController {
         mainTable.setNumberOfRows(rowsNum, withRowType: kSongTableRowType)
         
         for idx in 0...max(0, rowsNum - 1) {
-            let song = frc.object(at: IndexPath(row: idx, section: 0))
-            let cell = mainTable.rowController(at: idx) as! SongTableRowController
-            cell.nameLabel.setText(song.name)
+            configureTableRow(index: idx)
         }
     }
 
@@ -114,6 +114,12 @@ class AllSongsInterfaceController: WKInterfaceController {
         return song.key
     }
     
+    private func configureTableRow(index: Int) {
+        let row = mainTable.rowController(at: index) as! SongTableRowController
+        let object = fetchedResultsController.object(at: IndexPath(row: index, section: 0))
+        row.nameLabel.setText(object.name)
+    }
+    
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         let item = fetchedResultsController.object(at: IndexPath(row: rowIndex, section: 0))
         player.play(getPlayerItem(item))
@@ -132,18 +138,12 @@ extension AllSongsInterfaceController: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             guard let indexPath = newIndexPath else { fatalError("Index path should be not nil") }
-            guard let song = anObject as? Song else { fatalError("Wrong Type") }
             mainTable.insertRows(at: IndexSet(integer: indexPath.row), withRowType: kSongTableRowType)
-            let rowController = mainTable.rowController(at: indexPath.row) as! SongTableRowController
-            rowController.nameLabel.setText(song.name)
+            configureTableRow(index: indexPath.row)
             
         case .update:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
-            guard let song = anObject as? Song else { fatalError("Wrong Type") }
-            mainTable.removeRows(at: IndexSet(integer: indexPath.row))
-            mainTable.insertRows(at: IndexSet(integer: indexPath.row), withRowType: kSongTableRowType)
-            let rowController = mainTable.rowController(at: indexPath.row) as! SongTableRowController
-            rowController.nameLabel.setText(song.name)
+            configureTableRow(index: indexPath.row)
         case .move:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
             guard let newIndexPath = newIndexPath else { fatalError("New index path should be not nil") }

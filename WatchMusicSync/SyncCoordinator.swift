@@ -50,7 +50,7 @@ public final class SyncCoordinator {
         syncContext = container.newBackgroundContext()
         syncContext.name = "SyncCoordinator"
         syncContext.mergePolicy = MusicMergePolicy(mode: .remote)
-        changeProcessors = [SongUploader(), SongDownloader(), SongRemover()]
+        changeProcessors = [SongDownloader(), SongRemover()]
         setup()
     }
 

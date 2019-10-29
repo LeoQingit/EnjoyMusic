@@ -152,17 +152,17 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
             tableView.insertRows(at: [indexPath], with: .fade)
         case .update:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
-            let object = objectAtIndexPath(indexPath)
-            guard let cell = tableView.cellForRow(at: indexPath) as? Cell else { break }
-            delegate.configure(cell, for: object)
+            tableView.reloadRows(at: [indexPath], with: .fade)
         case .move:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
             guard let newIndexPath = newIndexPath else { fatalError("New index path should be not nil") }
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.insertRows(at: [newIndexPath], with: .fade)
+            print("move", indexPath, anObject)
         case .delete:
             guard let indexPath = indexPath else { fatalError("Index path should be not nil") }
             tableView.deleteRows(at: [indexPath], with: .fade)
+            print("delete", indexPath, anObject)
         @unknown default:
             break
         }

@@ -62,6 +62,17 @@ extension Array {
     }
 }
 
+extension FileManager {
+    /// 判断是否是文件夹的方法
+    static func directoryIsExists (path: String) -> Bool {
+        /// 是否是文件夹
+        var directoryExists = ObjCBool(false)
+        /// 文件路径是否存在
+        let fileExists = FileManager.default.fileExists(atPath: path, isDirectory: &directoryExists)
+        return fileExists && directoryExists.boolValue
+    }
+}
+
 
 extension URL {
     static var temporary: URL {
@@ -93,6 +104,40 @@ extension String {
         return CFUUIDCreateString(kCFAllocatorDefault, CFUUIDCreate(kCFAllocatorDefault))! as String
     }
     
+}
+
+/// 确保重名文件的存储
+func checkNameDuplicate(toPath: URL, trimmingValue: inout Int) -> URL? {
+    trimmingValue = trimmingValue + 1
+    if FileManager.default.fileExists(atPath: toPath.path) {
+        guard let fileName = toPath.lastPathComponent.split(separator: ".").first else { return nil }
+        var suffix: String = ""
+        if toPath.lastPathComponent.split(separator: ".").count > 1 {
+            var components = toPath.lastPathComponent.split(separator: ".")
+            components.removeFirst()
+            suffix = components.joined(separator: ".")
+        }
+        let newFileName: String
+        if trimmingValue == 0 {
+            newFileName = String(fileName) + " " + String(trimmingValue) + "." + suffix
+        } else {
+            var components = fileName.split(separator: " ")
+            components.removeLast()
+            let newFileNamePre = components.joined(separator: " ")
+            newFileName = newFileNamePre + " " + String(trimmingValue) + "." + suffix
+        }
+        
+        var allComponents = toPath.pathComponents
+        if allComponents.count > 0 {
+            allComponents.removeLast()
+        }
+        allComponents.append(newFileName)
+        let newPathString = allComponents.joined(separator: "/")
+        let newURL = URL(fileURLWithPath: newPathString)
+        return checkNameDuplicate(toPath: newURL, trimmingValue: &trimmingValue)
+    } else {
+        return toPath
+    }
 }
 
 private var lastItemKey: Void?
