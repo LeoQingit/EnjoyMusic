@@ -124,6 +124,11 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
             return nil
         }
     }
+    
+    func random() {
+        guard let count = fetchedResultsController.fetchedObjects?.count, count > 0 else { return }
+        let list = [Int](Set<Int>(0...(count - 1)))
+    }
 
     func reconfigureFetchRequest(_ configure: (NSFetchRequest<Result>) -> ()) {
         NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: fetchedResultsController.cacheName)
@@ -139,6 +144,8 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
     fileprivate let fetchedResultsController: NSFetchedResultsController<Result>
     fileprivate weak var delegate: Delegate!
     fileprivate let cellIdentifier: String
+    
+    fileprivate var playList = [Int]()
 
     // MARK: UITableViewDataSource
 

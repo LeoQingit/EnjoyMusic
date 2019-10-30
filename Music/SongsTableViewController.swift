@@ -236,9 +236,5 @@ extension SongsTableViewController: AssetPlayerDelegate {
         case .one:
             return currentItem
         }
-        
-        var i = [AVPlayerItem]()
-        var s = Set<AVPlayerItem>.init(i)
-        i.append(contentsOf: s)
     }
 }
