@@ -55,7 +55,7 @@ public class Song: NSManagedObject {
                 
                 let path = URL.library.appendingPathComponent("ArtWorks").appendingPathComponent(String.uuid)
                 try artworkData.write(to: path, options: [])
-                song.artworkURL = path.path
+                song.artworkURL = path.lastPathComponent
             } catch {
                 fatalError(error.localizedDescription)
             }

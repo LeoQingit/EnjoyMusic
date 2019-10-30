@@ -188,12 +188,10 @@ extension SongsTableViewController: AssetPlayerDelegate {
         }).first, let url = item.key.songURL else {
             fatalError()
         }
-        guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { fatalError() }
-        let assetURL = URL(fileURLWithPath: filePath + "/" + url)
-        
+        let assetURL = URL.documents.appendingPathComponent(url)
         
         var itemArtwork: MPMediaItemArtwork?
-        if let artwork = item.key.artworkURL, let artworkImage = UIImage(contentsOfFile: artwork) {
+        if let artwork = item.key.artworkURL,  let artworkImage = UIImage(contentsOfFile: URL.library.appendingPathComponent("ArtWorks").appendingPathComponent(artwork).path) {
             itemArtwork = MPMediaItemArtwork(boundsSize: artworkImage.size) { _ in artworkImage }
             
         }
@@ -210,10 +208,37 @@ extension SongsTableViewController: AssetPlayerDelegate {
     }
     
     func assetPlayer(_ player: AssetPlayer, playNextTrac currentItem: AVPlayerItem) -> AVPlayerItem? {
-        return dataSource.next(for: currentItem)
+        
+        switch player.playerRepeatMode {
+        case .off:
+            return dataSource.next(for: currentItem)
+        case .all:
+            if let item = dataSource.next(for: currentItem) {
+                return item
+            } else {
+                return dataSource.firstPackageObject
+            }
+        case .one:
+            return currentItem
+        }
     }
     
     func assetPlayer(_ player: AssetPlayer, playPreviousTrac currentItem: AVPlayerItem) -> AVPlayerItem? {
-        return dataSource.previous(for: currentItem)
+        switch player.playerRepeatMode {
+        case .off:
+            return dataSource.previous(for: currentItem)
+        case .all:
+            if let item = dataSource.previous(for: currentItem) {
+                return item
+            } else {
+                return dataSource.lastPackageObject
+            }
+        case .one:
+            return currentItem
+        }
+        
+        var i = [AVPlayerItem]()
+        var s = Set<AVPlayerItem>.init(i)
+        i.append(contentsOf: s)
     }
 }

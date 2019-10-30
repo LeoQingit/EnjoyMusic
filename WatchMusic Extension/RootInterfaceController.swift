@@ -1,5 +1,5 @@
 //
-//  MainInterfaceController.swift
+//  RootInterfaceController.swift
 //  WatchMusic Extension
 //
 //  Created by Leo Qin on 2019/9/23.
@@ -14,7 +14,7 @@ import AVFoundation
 import Foundation
 import WatchMusicModel
 
-class MainInterfaceController: WKInterfaceController {
+class RootInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var mainTable: WKInterfaceTable!
     var managedObjectContext: NSManagedObjectContext!
@@ -55,7 +55,7 @@ class MainInterfaceController: WKInterfaceController {
 }
 
 
-extension MainInterfaceController: WCSessionDelegate {
+extension RootInterfaceController: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         
     }
@@ -102,7 +102,7 @@ extension MainInterfaceController: WCSessionDelegate {
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         if rowIndex == 1 {
-            pushController(withName: "AllSongsInterfaceController", context: managedObjectContext)
+            pushController(withName: "SongsInterfaceController", context: managedObjectContext)
         }
     }
     

@@ -67,6 +67,22 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
         guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
         return objectAtIndexPath(indexPath)
     }
+    
+    var lastPackageObject: PackageObject? {
+        if let count = fetchedResultsController.fetchedObjects?.count, count > 0 {
+            let originalObject = fetchedResultsController.object(at: IndexPath(row: count - 1, section: 0)) as! Object
+            return delegate.packObject(originalObject)
+        }
+        return nil
+    }
+    
+    var firstPackageObject: PackageObject? {
+        if let count = fetchedResultsController.fetchedObjects?.count, count > 0 {
+            let originalObject = fetchedResultsController.object(at: IndexPath(row: 0, section: 0)) as! Object
+            return delegate.packObject(originalObject)
+        }
+        return nil
+    }
 
     func packageObjectAtIndexPath(_ indexPath: IndexPath) -> PackageObject {
         guard let fetchedIndexPath = delegate.fetchedIndexPath(for: indexPath) else {

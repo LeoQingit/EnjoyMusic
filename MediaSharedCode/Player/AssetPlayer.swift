@@ -15,12 +15,28 @@ class AssetPlayer {
         case playing
         case paused
     }
+    
+    enum PlayerRepeatMode {
+        case one
+        case all
+        case off
+    }
+    
+    enum PlayerShuffleType {
+        case items
+        case collections
+        case off
+    }
 
     unowned let nowPlayableBehavior: NowPlayable
     
     let player: AVPlayer
     
     weak var delegate: AssetPlayerDelegate?
+    
+    
+    private(set) var playerRepeatMode: PlayerRepeatMode = .off
+    private(set) var playerShuffleType: PlayerShuffleType = .off
     
     private var playerState: PlayerState = .stopped {
         didSet {
@@ -397,11 +413,38 @@ class AssetPlayer {
         case .enableLanguageOption:
             guard let event = event as? MPChangeLanguageOptionCommandEvent else { return .commandFailed }
             guard didEnableLanguageOption(event.languageOption) else { return .noActionableNowPlayingItem }
-
+            
         case .disableLanguageOption:
             guard let event = event as? MPChangeLanguageOptionCommandEvent else { return .commandFailed }
             guard didDisableLanguageOption(event.languageOption) else { return .noActionableNowPlayingItem }
-
+        case .changeShuffleMode:
+            guard let event = event as? MPChangeShuffleModeCommandEvent else { return .commandFailed }
+            
+            switch event.shuffleType {
+            case .items:
+                playerShuffleType = .items
+            case .collections:
+                playerShuffleType = .collections
+            case .off:
+                playerShuffleType = .off
+            @unknown default:
+                break
+            }
+            MPRemoteCommandCenter.shared().changeShuffleModeCommand.currentShuffleType = event.shuffleType
+        case .changeRepeatMode:
+            guard let event = event as? MPChangeRepeatModeCommandEvent else { return .commandFailed }
+            
+            switch event.repeatType {
+            case .all:
+                playerRepeatMode = .all
+            case .one:
+                playerRepeatMode = .one
+            case .off:
+                playerRepeatMode = .off
+            @unknown default:
+                break
+            }
+            MPRemoteCommandCenter.shared().changeRepeatModeCommand.currentRepeatType = event.repeatType
         default:
             break
         }

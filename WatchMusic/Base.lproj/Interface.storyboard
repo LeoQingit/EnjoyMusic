@@ -9,7 +9,7 @@
         <!--所有音乐-->
         <scene sceneID="qRH-K7-vd5">
             <objects>
-                <controller identifier="AllSongsInterfaceController" title="所有音乐" id="FSh-LN-cj9" customClass="AllSongsInterfaceController" customModule="WatchMusic_Extension">
+                <controller identifier="SongsInterfaceController" title="所有音乐" id="FSh-LN-cj9" customClass="SongsInterfaceController" customModule="WatchMusic_Extension">
                     <items>
                         <table alignment="left" id="00b-4O-Y3B">
                             <items>
@@ -33,10 +33,10 @@
             </objects>
             <point key="canvasLocation" x="131.64102564102566" y="135.56410256410257"/>
         </scene>
-        <!--Main Interface Controller-->
+        <!--Root Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="MainInterfaceController" customModule="WatchMusic" customModuleProvider="target">
+                <controller id="AgC-eL-Hgc" customClass="RootInterfaceController" customModule="WatchMusic" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="eyH-3n-S0Z">
                             <items>
@@ -91,7 +91,7 @@
             <objects>
                 <controller identifier="MusicPlayerInterfaceController" id="hQL-lu-Gf5" customClass="MusicPlayerInterfaceController" customModule="WatchMusic_Extension">
                     <items>
-                        <nowPlayingView alignment="left" id="kkk-EF-urW"/>
+                        <nowPlayingView alignment="left" semanticContentAttribute="spatial" id="kkk-EF-urW"/>
                     </items>
                 </controller>
             </objects>

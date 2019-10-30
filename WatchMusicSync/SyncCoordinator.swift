@@ -160,7 +160,7 @@ extension SyncCoordinator {
 extension SyncCoordinator: ApplicationActiveStateObserving {
     func applicationDidBecomeActive() {
         fetchLocallyTrackedObjects()
-        fetchRemoteDataForApplicationDidBecomeActive()
+//        fetchRemoteDataForApplicationDidBecomeActive()
     }
 
     func applicationDidEnterBackground() {

@@ -28,7 +28,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             self.persistentContainer = container
             self.syncCoordinator = SyncCoordinator(container: container)
         
-            guard let vc = WKExtension.shared().rootInterfaceController as? MainInterfaceController
+            guard let vc = WKExtension.shared().rootInterfaceController as? RootInterfaceController
                 else { fatalError("Wrong view controller type") }
             vc.managedObjectContext = container.viewContext
         }

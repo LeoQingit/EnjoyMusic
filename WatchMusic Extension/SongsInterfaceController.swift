@@ -1,5 +1,5 @@
 //
-//  AllSongsInterfaceController.swift
+//  SongsInterfaceController.swift
 //  WatchMusic Extension
 //
 //  Created by Qin Leo on 2019/9/23.
@@ -16,7 +16,7 @@ import MediaPlayer
 
 let kSongTableRowType = "SongTableRowController"
 
-class AllSongsInterfaceController: WKInterfaceController {
+class SongsInterfaceController: WKInterfaceController {
 
     @IBOutlet weak var mainTable: WKInterfaceTable!
     
@@ -127,7 +127,7 @@ class AllSongsInterfaceController: WKInterfaceController {
     }
 }
 
-extension AllSongsInterfaceController: NSFetchedResultsControllerDelegate {
+extension SongsInterfaceController: NSFetchedResultsControllerDelegate {
     // MARK: NSFetchedResultsControllerDelegate
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -165,21 +165,21 @@ extension AllSongsInterfaceController: NSFetchedResultsControllerDelegate {
     }
 }
 
-extension AllSongsInterfaceController: AssetPlayerDelegate {
+extension SongsInterfaceController: AssetPlayerDelegate {
     func assetPlayer(_ player: AssetPlayer, staticMetaDataWith currentItem: AVPlayerItem) -> NowPlayableStaticMetadata {
         guard let item = songItemMap.filter({
             $0.value === currentItem
         }).first, let url = item.key.songURL else {
             fatalError()
         }
-        guard let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else { fatalError() }
-        let assetURL = URL(fileURLWithPath: filePath + "/" + url)
-        
+        let assetURL = URL.documents.appendingPathComponent(url)
         
         var itemArtwork: MPMediaItemArtwork?
-        if let artwork = item.key.artworkURL, let artworkImage = UIImage(contentsOfFile: artwork) {
-            itemArtwork = MPMediaItemArtwork(boundsSize: artworkImage.size) { _ in artworkImage }
-            
+        
+        if let artwork = item.key.artworkURL, let data = try? Data(contentsOf: URL.library.appendingPathComponent("ArtWorks").appendingPathComponent(artwork)) {
+            if let artworkImage = UIImage(data: data) {
+                itemArtwork = MPMediaItemArtwork(boundsSize: artworkImage.size) { _ in artworkImage }
+            }
         }
         
         return NowPlayableStaticMetadata(assetURL: assetURL,

@@ -17,13 +17,15 @@ class WatchOSNowPlayableBehavior: NowPlayable {
     var defaultAllowsExternalPlayback: Bool { return true}
     /// 默认注册的指令集合
     var defaultRegisteredCommands: [NowPlayableCommand] = [
-            .togglePausePlay,
-            .play,
-            .pause,
-            .nextTrack,
-            .previousTrack,
-//            .changePlaybackPosition,
-//            .changePlaybackRate
+        .togglePausePlay,
+        .play,
+        .pause,
+        .nextTrack,
+        .previousTrack,
+        .changePlaybackPosition,
+        .changePlaybackRate,
+        .enableLanguageOption,
+        /// iPhone重复、随机模式仅能在AppleWatch上操作 ( Apple真的过分
         .changeRepeatMode,
         .changeShuffleMode
     ]
