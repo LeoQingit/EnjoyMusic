@@ -60,6 +60,8 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
 
     var selectedPackageObject: PackageObject? {
         guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+        
+        
         return packageObjectAtIndexPath(indexPath)
     }
     
@@ -123,11 +125,6 @@ class TableViewDataSource<Result: NSFetchRequestResult, Delegate: TableViewDataS
         } else {
             return nil
         }
-    }
-    
-    func random() {
-        guard let count = fetchedResultsController.fetchedObjects?.count, count > 0 else { return }
-        let list = [Int](Set<Int>(0...(count - 1)))
     }
 
     func reconfigureFetchRequest(_ configure: (NSFetchRequest<Result>) -> ()) {

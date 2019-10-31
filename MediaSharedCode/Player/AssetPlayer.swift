@@ -82,6 +82,7 @@ class AssetPlayer {
     private var itemObserver: NSKeyValueObservation!
     private var rateObserver: NSKeyValueObservation!
     private var statusObserver: NSObjectProtocol!
+    private var historyList = [AVPlayerItem]()
     
     private var playerItemHandleQueue = DispatchQueue(label: "com.assetPlayer.www", qos: .default, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
     
@@ -226,9 +227,20 @@ class AssetPlayer {
     // MARK: Playback Control
     
     func play(_ currentItem: AVPlayerItem) {
-        seek(to: CMTime.zero)
-        player.replaceCurrentItem(with: currentItem)
-        playerState = .playing
+        if let lastItem = player.currentItem, lastItem == currentItem {
+            if .stopped == playerState { // 播放结束此时状态为stopped,重新开始播放
+                seek(to: CMTime.zero)
+                playerState = .playing
+            } else {
+                //重复播放一个媒体不重新播放
+            }
+        } else { // 不是同一个媒体则取代重新播放
+            if let item = player.currentItem {
+                historyList.append(item)
+            }
+            seek(to: CMTime.zero)
+            player.replaceCurrentItem(with: currentItem)
+        }
     }
     
     private func togglePlayPause() {
@@ -253,6 +265,11 @@ class AssetPlayer {
             playerState = .stopped
             return
         }
+        
+        if let item = player.currentItem {
+            historyList.append(item)
+        }
+        
         seek(to: CMTime.zero)
         
         player.replaceCurrentItem(with: nextItem)
@@ -271,9 +288,11 @@ class AssetPlayer {
             return
         }
         
+        let previous = !historyList.isEmpty ? historyList.removeLast() : nil
+        
         seek(to: CMTime.zero)
         
-        player.replaceCurrentItem(with: previousItem)
+        player.replaceCurrentItem(with: previous ?? previousItem)
         
         playerState = .playing
     }
